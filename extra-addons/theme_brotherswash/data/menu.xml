@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="menu_home" model="theme.website.menu">
+            <field name="name">Domovská stránka</field>
+            <field name="url">/#bwd-home</field>
+            <field name="sequence" type="int">10</field>
+        </record>
+
+        <record id="menu_cenik" model="theme.website.menu">
+            <field name="name">Ceník</field>
+            <field name="url">/#bwd-programs</field>
+            <field name="sequence" type="int">20</field>
+        </record>
+
+        <record id="menu_sluzby" model="theme.website.menu">
+            <field name="name">Služby</field>
+            <field name="url">/#bwd-services</field>
+            <field name="sequence" type="int">30</field>
+        </record>
+
+        <record id="menu_galerie" model="theme.website.menu">
+            <field name="name">Galerie</field>
+            <field name="url">/#bwd-gallery</field>
+            <field name="sequence" type="int">40</field>
+        </record>
+
+        <record id="menu_rezervace" model="theme.website.menu">
+            <field name="name">Rezervace</field>
+            <field name="url">/#bwd-booking</field>
+            <field name="sequence" type="int">50</field>
+        </record>
+
+        <record id="menu_kontakt" model="theme.website.menu">
+            <field name="name">Kontakt</field>
+            <field name="url">/#bwd-contact</field>
+            <field name="sequence" type="int">60</field>
+        </record>
+    </data>
+
+</odoo>

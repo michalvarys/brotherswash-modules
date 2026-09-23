@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ===== CATEGORIES ===== -->
+        <record id="cat_premium" model="bw.service.category">
+            <field name="name">Prémiové služby</field>
+            <field name="description">Dlouhodobá ochrana a profesionální péče</field>
+            <field name="category_type">premium</field>
+            <field name="icon">fa-star</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="cat_program" model="bw.service.category">
+            <field name="name">Ceník služeb</field>
+            <field name="description">Vyberte si program, který vám vyhovuje</field>
+            <field name="category_type">program</field>
+            <field name="icon">fa-tint</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="cat_extra" model="bw.service.category">
+            <field name="name">Doplňkové služby</field>
+            <field name="description">Individuální péče podle vašich potřeb</field>
+            <field name="category_type">extra</field>
+            <field name="icon">fa-plus-circle</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <!-- ===== PREMIUM SERVICES ===== -->
+        <record id="svc_keramika" model="bw.service">
+            <field name="name">Keramická ochrana laku</field>
+            <field name="category_id" ref="cat_premium"/>
+            <field name="short_description">Garantovaná ochrana až 3 roky</field>
+            <field name="description"><![CDATA[
+                <p>Profesionální keramický povlak vytvářející tvrdou ochrannou vrstvu. Chrání lak před UV zářením, solí, chemikáliemi, hmyzem i drobnými škrábanci.</p>
+                <p>Součást balíčku je servisní kniha a kontrola každých 6 měsíců:</p>
+                <ul>
+                    <li>Kontrola stavu keramické ochrany</li>
+                    <li>Údržbové mytí vozu zdarma</li>
+                    <li>Případné doplnění ochranné vrstvy</li>
+                </ul>
+            ]]></field>
+            <field name="is_highlighted" eval="True"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="svc_keramika_price_sedan" model="bw.service.price">
+            <field name="service_id" ref="svc_keramika"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">8000</field>
+        </record>
+        <record id="svc_keramika_price_suv" model="bw.service.price">
+            <field name="service_id" ref="svc_keramika"/>
+            <field name="vehicle_type_id" ref="vehicle_type_suv"/>
+            <field name="price">9000</field>
+        </record>
+
+        <record id="svc_lesteni" model="bw.service">
+            <field name="name">Hloubkové leštění karoserie</field>
+            <field name="category_id" ref="cat_premium"/>
+            <field name="short_description">Vícekroková korekce laku</field>
+            <field name="description"><![CDATA[
+                <p>Profesionální strojní leštění odstraňující jemné i střední škrábance, hologramy, oxidaci a stopy po špatném mytí.</p>
+                <ul>
+                    <li>Chemická a mechanická dekontaminace laku</li>
+                    <li>Vícekrokové strojní leštění profesionálními pastami</li>
+                    <li>Závěrečná kontrola kvality</li>
+                </ul>
+            ]]></field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="svc_lesteni_price_sedan" model="bw.service.price">
+            <field name="service_id" ref="svc_lesteni"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">6500</field>
+            <field name="price_prefix">od</field>
+        </record>
+        <record id="svc_lesteni_price_suv" model="bw.service.price">
+            <field name="service_id" ref="svc_lesteni"/>
+            <field name="vehicle_type_id" ref="vehicle_type_suv"/>
+            <field name="price">7500</field>
+            <field name="price_prefix">od</field>
+        </record>
+
+        <record id="svc_fusso" model="bw.service">
+            <field name="name">Soft99 Fusso Coat</field>
+            <field name="category_id" ref="cat_premium"/>
+            <field name="short_description">Dlouhodobý tuhý vosk</field>
+            <field name="description"><![CDATA[
+                <p>Japonský syntetický vosk s výdrží až 12 měsíců. Poskytuje silnou ochranu proti vodě, soli, UV záření a silniční chemii.</p>
+                <p><strong>+ Dekontaminace laku</strong> (odstranění asfaltu, polétavé rzi apod.)</p>
+            ]]></field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="svc_fusso_price_sedan" model="bw.service.price">
+            <field name="service_id" ref="svc_fusso"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">1850</field>
+        </record>
+        <record id="svc_fusso_price_suv" model="bw.service.price">
+            <field name="service_id" ref="svc_fusso"/>
+            <field name="vehicle_type_id" ref="vehicle_type_suv"/>
+            <field name="price">2100</field>
+        </record>
+
+        <!-- ===== PROGRAMS ===== -->
+        <record id="svc_program1" model="bw.service">
+            <field name="name">Program 1</field>
+            <field name="category_id" ref="cat_program"/>
+            <field name="short_description">Ruční mytí vozu</field>
+            <field name="duration_info">15-25 min</field>
+            <field name="description"><![CDATA[
+                <ul>
+                    <li>Ruční mytí vozu</li>
+                    <li>Speciální odstranění zaschlého hmyzu</li>
+                    <li>Mytí vnitřních hran dveří, prahů a podblatníků</li>
+                    <li>Mytí gumových koberečků</li>
+                    <li>Mytí disků kol</li>
+                    <li>Kompletní vysušení karoserie</li>
+                    <li>Vyleštění vnějších oken a zrcátek</li>
+                    <li>Ošetření pneumatik</li>
+                </ul>
+            ]]></field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="svc_program1_price_sedan" model="bw.service.price">
+            <field name="service_id" ref="svc_program1"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">550</field>
+        </record>
+        <record id="svc_program1_price_suv" model="bw.service.price">
+            <field name="service_id" ref="svc_program1"/>
+            <field name="vehicle_type_id" ref="vehicle_type_suv"/>
+            <field name="price">650</field>
+        </record>
+
+        <record id="svc_program2" model="bw.service">
+            <field name="name">Program 2</field>
+            <field name="category_id" ref="cat_program"/>
+            <field name="short_description">Ruční mytí + interiér</field>
+            <field name="duration_info">60-90 min</field>
+            <field name="description"><![CDATA[
+                <ul>
+                    <li>Ruční mytí vozu</li>
+                    <li>Speciální odstranění zaschlého hmyzu</li>
+                    <li>Mytí disků kol</li>
+                    <li>Mytí vnitřních hran dveří, prahů a podblatníků</li>
+                    <li>Kompletní vysušení karoserie</li>
+                    <li>Vyleštění vnitřních i vnějších oken a zrcátek</li>
+                    <li>Kompletní vyluxování interiéru</li>
+                    <li>Očištění a ošetření plastových vnitřních i vnějších dílů</li>
+                    <li>Provonění interiéru</li>
+                    <li>Ošetření pneumatik</li>
+                </ul>
+            ]]></field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="svc_program2_price_sedan" model="bw.service.price">
+            <field name="service_id" ref="svc_program2"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">1300</field>
+        </record>
+        <record id="svc_program2_price_suv" model="bw.service.price">
+            <field name="service_id" ref="svc_program2"/>
+            <field name="vehicle_type_id" ref="vehicle_type_suv"/>
+            <field name="price">1450</field>
+        </record>
+
+        <record id="svc_program3" model="bw.service">
+            <field name="name">Program 3</field>
+            <field name="category_id" ref="cat_program"/>
+            <field name="short_description">Kompletní detailing</field>
+            <field name="duration_info">cca 6 hodin</field>
+            <field name="is_highlighted" eval="True"/>
+            <field name="description"><![CDATA[
+                <ul>
+                    <li>Ruční mytí vozu</li>
+                    <li>Speciální odstranění zaschlého hmyzu</li>
+                    <li>Mytí vnitřních hran dveří, prahů a podblatníků</li>
+                    <li>Mytí disků kol</li>
+                    <li>Kompletní vysušení karoserie</li>
+                    <li>Vyleštění vnitřních i vnějších oken</li>
+                    <li>Kompletní vysátí interiéru</li>
+                    <li>Vyleštění zrcátek</li>
+                    <li>Očištění a ošetření plastových vnitřních i vnějších dílů</li>
+                    <li>Provonění interiéru</li>
+                    <li>Ošetření pneumatik</li>
+                    <li>Kompletní tepování textilního interiéru (mokrou cestou)</li>
+                </ul>
+            ]]></field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="svc_program3_price_sedan" model="bw.service.price">
+            <field name="service_id" ref="svc_program3"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">2500</field>
+        </record>
+        <record id="svc_program3_price_suv" model="bw.service.price">
+            <field name="service_id" ref="svc_program3"/>
+            <field name="vehicle_type_id" ref="vehicle_type_suv"/>
+            <field name="price">2750</field>
+        </record>
+
+        <record id="svc_program4" model="bw.service">
+            <field name="name">Program 4</field>
+            <field name="category_id" ref="cat_program"/>
+            <field name="short_description">Interiér</field>
+            <field name="duration_info">60 min</field>
+            <field name="description"><![CDATA[
+                <ul>
+                    <li>Kompletní vysátí interiéru</li>
+                    <li>Ošetření a konzervace vnitřních plastů</li>
+                    <li>Mytí oken</li>
+                    <li>Provonění interiéru</li>
+                </ul>
+            ]]></field>
+            <field name="sequence">4</field>
+        </record>
+        <record id="svc_program4_price_sedan" model="bw.service.price">
+            <field name="service_id" ref="svc_program4"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">900</field>
+        </record>
+        <record id="svc_program4_price_suv" model="bw.service.price">
+            <field name="service_id" ref="svc_program4"/>
+            <field name="vehicle_type_id" ref="vehicle_type_suv"/>
+            <field name="price">1100</field>
+        </record>
+
+        <!-- ===== EXTRAS ===== -->
+        <record id="svc_extra_koberecky" model="bw.service">
+            <field name="name">Čištění textilních koberečků (tepování) + provonění</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="svc_extra_koberecky_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_koberecky"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">550</field>
+        </record>
+
+        <record id="svc_extra_okna" model="bw.service">
+            <field name="name">Čištění a vyleštění vnějších oken a zrcátek</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="svc_extra_okna_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_okna"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">250</field>
+        </record>
+
+        <record id="svc_extra_vysati" model="bw.service">
+            <field name="name">Kompletní vysátí interiéru</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="svc_extra_vysati_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_vysati"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">450</field>
+        </record>
+
+        <record id="svc_extra_klima" model="bw.service">
+            <field name="name">Čištění klimatizace</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">4</field>
+        </record>
+        <record id="svc_extra_klima_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_klima"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">490</field>
+        </record>
+
+        <record id="svc_extra_strop" model="bw.service">
+            <field name="name">Tepování stropu</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">5</field>
+        </record>
+        <record id="svc_extra_strop_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_strop"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">1000</field>
+        </record>
+
+        <record id="svc_extra_gumove" model="bw.service">
+            <field name="name">Mytí gumových koberečků</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">6</field>
+        </record>
+        <record id="svc_extra_gumove_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_gumove"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">350</field>
+        </record>
+
+        <record id="svc_extra_kuze" model="bw.service">
+            <field name="name">Čištění a impregnace kůže</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">7</field>
+        </record>
+        <record id="svc_extra_kuze_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_kuze"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">1100</field>
+        </record>
+
+        <record id="svc_extra_sterace" model="bw.service">
+            <field name="name">Tekuté stěrače, trvanlivost až 1 rok</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">8</field>
+        </record>
+        <record id="svc_extra_sterace_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_sterace"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">450</field>
+        </record>
+
+        <record id="svc_extra_motor" model="bw.service">
+            <field name="name">Mytí motoru (na vlastní riziko)</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">9</field>
+        </record>
+        <record id="svc_extra_motor_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_motor"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">450</field>
+        </record>
+
+        <record id="svc_extra_sedacky" model="bw.service">
+            <field name="name">Hloubkové čištění (tepování) sedaček</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">10</field>
+        </record>
+        <record id="svc_extra_sedacky_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_sedacky"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">1300</field>
+        </record>
+
+        <record id="svc_extra_pneumatiky" model="bw.service">
+            <field name="name">Ošetření pneumatik</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">11</field>
+        </record>
+        <record id="svc_extra_pneumatiky_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_pneumatiky"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">200</field>
+        </record>
+
+        <record id="svc_extra_voskovani" model="bw.service">
+            <field name="name">Voskování vozu voskem s UV filtrem a teflonem</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">12</field>
+        </record>
+        <record id="svc_extra_voskovani_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_voskovani"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">350</field>
+        </record>
+
+        <record id="svc_extra_vnitrni_plasty" model="bw.service">
+            <field name="name">Očištění a ošetření vnitřních plastových dílů</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">13</field>
+        </record>
+        <record id="svc_extra_vnitrni_plasty_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_vnitrni_plasty"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">500</field>
+        </record>
+
+        <record id="svc_extra_chlupy" model="bw.service">
+            <field name="name">Čištění interiéru od chlupů</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">14</field>
+        </record>
+        <record id="svc_extra_chlupy_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_chlupy"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">400</field>
+            <field name="price_prefix">od</field>
+        </record>
+
+        <record id="svc_extra_lesteni_dil" model="bw.service">
+            <field name="name">Leštění jednotlivého dílu</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">15</field>
+        </record>
+        <record id="svc_extra_lesteni_dil_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_lesteni_dil"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">500</field>
+            <field name="price_prefix">od</field>
+        </record>
+
+        <record id="svc_extra_podlaha" model="bw.service">
+            <field name="name">Tepování podlahy</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">16</field>
+        </record>
+        <record id="svc_extra_podlaha_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_podlaha"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">850</field>
+        </record>
+
+        <record id="svc_extra_venkovni_plasty" model="bw.service">
+            <field name="name">Ošetření a konzervace venkovních plastových dílů</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">17</field>
+        </record>
+        <record id="svc_extra_venkovni_plasty_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_venkovni_plasty"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">300</field>
+        </record>
+
+        <record id="svc_extra_alu" model="bw.service">
+            <field name="name">Mytí a vyčištění ALU disků</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">18</field>
+        </record>
+        <record id="svc_extra_alu_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_alu"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">400</field>
+        </record>
+
+        <record id="svc_extra_asfalt" model="bw.service">
+            <field name="name">Odstranění asfaltu</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">19</field>
+        </record>
+        <record id="svc_extra_asfalt_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_asfalt"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">100</field>
+            <field name="price_prefix">od</field>
+        </record>
+
+        <record id="svc_extra_polepy" model="bw.service">
+            <field name="name">Odstranění polepů</field>
+            <field name="category_id" ref="cat_extra"/>
+            <field name="sequence">20</field>
+        </record>
+        <record id="svc_extra_polepy_price" model="bw.service.price">
+            <field name="service_id" ref="svc_extra_polepy"/>
+            <field name="vehicle_type_id" ref="vehicle_type_sedan"/>
+            <field name="price">500</field>
+            <field name="price_prefix">od</field>
+        </record>
+
+    </data>
+</odoo>

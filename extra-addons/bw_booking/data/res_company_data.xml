@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <function model="res.company" name="write">
+            <value model="res.company" eval="[ref('base.main_company')]"/>
+            <value eval="{
+                'name': 'Brothers Wash Detailing',
+                'phone': '+420 776 253 338',
+                'mobile': '+420 776 253 338',
+                'email': 'info@brotherswash.cz',
+                'website': 'https://brotherswash.cz',
+                'street': 'Vrchlického 1325/25',
+                'city': 'Praha 5',
+                'zip': '150 00',
+                'country_id': ref('base.cz'),
+                'social_facebook': 'https://www.facebook.com/profile.php?id=61588211280466',
+                'social_instagram': 'https://instagram.com/brotherswashdetailing',
+            }"/>
+        </function>
+
+    </data>
+</odoo>

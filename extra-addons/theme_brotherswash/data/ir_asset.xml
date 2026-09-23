@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Primary variables -->
+    <record id="asset_primary_variables" model="theme.ir.asset">
+        <field name="key">theme_brotherswash_primary_variables</field>
+        <field name="name">theme_brotherswash primary variables</field>
+        <field name="bundle">web._assets_primary_variables</field>
+        <field name="path">theme_brotherswash/static/src/scss/primary_variables.scss</field>
+    </record>
+
+    <!-- Bootstrap overrides -->
+    <record id="asset_bootstrap_overridden" model="theme.ir.asset">
+        <field name="key">theme_brotherswash_bootstrap_overridden</field>
+        <field name="name">theme_brotherswash bootstrap overrides</field>
+        <field name="bundle">web._assets_frontend_helpers</field>
+        <field name="path">theme_brotherswash/static/src/scss/bootstrap_overridden.scss</field>
+    </record>
+
+    <!-- Theme styles (consolidated — includes header, footer, responsive) -->
+    <record id="asset_theme" model="theme.ir.asset">
+        <field name="key">theme_brotherswash_theme</field>
+        <field name="name">theme_brotherswash theme styles</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">theme_brotherswash/static/src/scss/theme.scss</field>
+    </record>
+
+
+</odoo>

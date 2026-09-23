@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Color palette preset -->
+    <record id="palette_brotherswash" model="theme.ir.ui.view">
+        <field name="key">theme_brotherswash.palette_brotherswash</field>
+        <field name="name">theme_brotherswash palette</field>
+        <field name="type">qweb</field>
+        <field name="arch" type="xml">
+            <t t-name="theme_brotherswash.palette_brotherswash">
+                <!-- Palette configuration applied via primary_variables -->
+            </t>
+        </field>
+    </record>
+
+</odoo>
