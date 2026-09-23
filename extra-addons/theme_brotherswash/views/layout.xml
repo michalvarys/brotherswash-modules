@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ================================================================ -->
+<!-- Deactivate default Odoo header template                          -->
+<!-- ================================================================ -->
+<template id="disable_default_header" inherit_id="website.template_header_default" active="False"/>
+
+<!-- ================================================================ -->
+<!-- Deactivate default Odoo footer template                          -->
+<!-- ================================================================ -->
+<template id="disable_default_footer" inherit_id="website.footer_custom" active="False"/>
+
+<!-- ================================================================ -->
+<!-- BWD HEADER — replaces the entire <header> element                -->
+<!-- ================================================================ -->
+<template id="bwd_header" inherit_id="website.layout" name="BWD Header">
+    <xpath expr="//header" position="replace">
+        <header t-if="not no_header" id="top" data-anchor="true">
+            <t t-set="bwd_company" t-value="request.env.company.sudo()"/>
+            <t t-set="bwd_phone" t-value="bwd_company.mobile or bwd_company.phone or ''"/>
+            <t t-set="bwd_phone_clean" t-value="bwd_phone.replace(' ', '').replace('-', '')"/>
+            <t t-set="bwd_menu" t-value="request.website.menu_id"/>
+            <t t-set="bwd_languages" t-value="request.website.language_ids"/>
+            <t t-set="bwd_active_lang" t-value="bwd_languages.filtered(lambda l: l.code == request.env.lang)[:1] or bwd_languages[:1]"/>
+
+            <nav class="bwd-header__nav-wrap">
+                <div class="container">
+                    <div class="bwd-header__inner">
+                        <a t-attf-href="tel:{{ bwd_phone_clean }}" class="bwd-header__phone" t-if="bwd_phone">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            <t t-esc="bwd_phone"/>
+                        </a>
+                        <a href="/" class="bwd-header__logo">
+                            <img src="/theme_brotherswash/static/src/img/logo.png" alt="Brothers Wash Detailing" class="bwd-header__logo-img"/>
+                        </a>
+                        <div class="bwd-header__nav d-none d-md-flex">
+                            <t t-foreach="bwd_menu.child_id" t-as="menu_item">
+                                <a t-att-href="menu_item.url or '#'" t-esc="menu_item.name"/>
+                            </t>
+                        </div>
+                        <!-- Language selector -->
+                        <t t-if="len(bwd_languages) &gt; 1">
+                            <div class="bwd-lang-selector">
+                                <button class="bwd-lang-selector__btn" type="button">
+                                    <t t-if="bwd_active_lang.flag_image_url">
+                                        <img class="bwd-lang-selector__flag" t-att-src="bwd_active_lang.flag_image_url + '?height=25'" t-att-alt="bwd_active_lang.name"/>
+                                    </t>
+                                    <span class="bwd-lang-selector__code" t-esc="bwd_active_lang.name.split('/')[0].strip() if '/' in (bwd_active_lang.name or '') else bwd_active_lang.name"/>
+                                </button>
+                                <div class="bwd-lang-selector__dropdown">
+                                    <t t-foreach="bwd_languages" t-as="lg">
+                                        <a t-attf-class="bwd-lang-selector__item #{'bwd-lang-selector__item--active' if lg.code == request.env.lang else ''}" t-att-href="url_localized(lang_code=lg.code, prefetch_langs=True, force_default_lang=True)" t-att-data-lang="lg.code">
+                                            <t t-if="lg.flag_image_url">
+                                                <img class="bwd-lang-selector__item-flag" t-att-src="lg.flag_image_url + '?height=20'" t-att-alt="lg.name"/>
+                                            </t>
+                                            <span t-esc="lg.name.split('/')[1].strip() if '/' in (lg.name or '') else lg.name"/>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                        <!-- User sign in / dropdown (for admin) -->
+                        <ul class="nav navbar-nav bwd-header__user">
+                            <t t-call="portal.placeholder_user_sign_in">
+                                <t t-set="_item_class" t-value="'nav-item'"/>
+                                <t t-set="_link_class" t-value="'nav-link bwd-header__signin'"/>
+                            </t>
+                            <t t-call="portal.user_dropdown">
+                                <t t-set="_user_name" t-value="True"/>
+                                <t t-set="_item_class" t-value="'nav-item dropdown'"/>
+                                <t t-set="_link_class" t-value="'nav-link bwd-header__signin'"/>
+                                <t t-set="_dropdown_menu_class" t-value="'dropdown-menu-end'"/>
+                            </t>
+                        </ul>
+                        <button class="bwd-nav-toggle d-md-none" aria-label="Menu">
+                            <span/><span/><span/>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </xpath>
+</template>
+
+<!-- ================================================================ -->
+<!-- BWD FOOTER — replaces the entire <footer> element                -->
+<!-- ================================================================ -->
+<template id="bwd_footer_layout" inherit_id="website.layout" name="BWD Footer">
+    <xpath expr="//footer" position="replace">
+        <footer t-if="not no_footer" id="bottom" data-anchor="true" class="bwd-footer">
+            <div id="footer">
+                <t t-set="bwd_company" t-value="request.env.company.sudo()"/>
+                <div class="container text-center">
+                    <p>Dopřejte svému vozu nadstandardní péči na úrovni prémiového detailingu.</p>
+                    <p class="bwd-footer__copy">&#169; <t t-esc="datetime.date.today().year"/> <t t-esc="bwd_company.name or 'Brothers Wash Detailing'"/></p>
+                </div>
+            </div>
+        </footer>
+    </xpath>
+</template>
+
+<!-- ================================================================ -->
+<!-- BWD body class — add bwd-car class for global styling            -->
+<!-- ================================================================ -->
+<template id="bwd_body_class" inherit_id="website.layout" name="BWD Body Class">
+    <xpath expr="//div[@id='wrapwrap']" position="attributes">
+        <attribute name="class" add="bwd-car" separator=" "/>
+    </xpath>
+</template>
+
+</odoo>

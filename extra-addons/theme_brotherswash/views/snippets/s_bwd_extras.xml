@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_bwd_extras" name="BWD Extras (Doplňkové služby)">
+    <section class="bwd-extras o_cc o_colored_level" id="bwd-services"
+             data-snippet="s_bwd_extras" data-name="BWD Extras">
+        <div class="container" data-bwd-services="extra"/>
+    </section>
+</template>
+
+</odoo>

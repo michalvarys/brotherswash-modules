@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ================================================================ -->
+<!-- HOMEPAGE — snippets via t-call                                    -->
+<!-- ================================================================ -->
+<template id="bwd_homepage" name="Brothers Wash - Hlavní stránka">
+    <t t-call="website.layout">
+        <t t-set="no_header" t-value="True"/>
+        <t t-set="no_footer" t-value="True"/>
+        <t t-set="additional_title">Brothers Wash Detailing | Prémiový auto detailing Praha 5</t>
+        <t t-set="meta_description">Prémiový auto detailing v Praze 5. Ruční mytí, hloubkové čištění interiéru, renovace laku, keramické ochrany.</t>
+
+        <!-- JSON-LD: LocalBusiness (built from company record) -->
+        <t t-set="bwd_co" t-value="request.env.company.sudo()"/>
+        <t t-set="bwd_phone_ld" t-value="(bwd_co.mobile or bwd_co.phone or '').replace(' ', '').replace('-', '')"/>
+        <t t-set="bwd_country_code" t-value="bwd_co.country_id.code if bwd_co.country_id else 'CZ'"/>
+        <script type="application/ld+json">{
+    &quot;@context&quot;: &quot;https://schema.org&quot;,
+    &quot;@type&quot;: &quot;AutoRepair&quot;,
+    &quot;name&quot;: &quot;<t t-esc="bwd_co.name or ''"/>&quot;,
+    &quot;description&quot;: &quot;Prémiový auto detailing v Praze 5.&quot;,
+    &quot;telephone&quot;: &quot;<t t-esc="bwd_phone_ld"/>&quot;,
+    &quot;address&quot;: {
+        &quot;@type&quot;: &quot;PostalAddress&quot;,
+        &quot;streetAddress&quot;: &quot;<t t-esc="bwd_co.street or ''"/>&quot;,
+        &quot;addressLocality&quot;: &quot;<t t-esc="bwd_co.city or ''"/>&quot;,
+        &quot;postalCode&quot;: &quot;<t t-esc="bwd_co.zip or ''"/>&quot;,
+        &quot;addressCountry&quot;: &quot;<t t-esc="bwd_country_code"/>&quot;
+    },
+    &quot;priceRange&quot;: &quot;550 - 9000 CZK&quot;,
+    &quot;sameAs&quot;: [&quot;<t t-esc="bwd_co.social_instagram or ''"/>&quot;, &quot;<t t-esc="bwd_co.social_facebook or ''"/>&quot;]
+}</script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&amp;family=Rajdhani:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+
+        <!-- PAGE CONTENT -->
+        <div id="wrap" class="oe_structure bwd-car">
+
+            <!-- Company data from DB -->
+            <t t-set="bwd_company" t-value="request.env.company.sudo()"/>
+            <t t-set="bwd_phone" t-value="bwd_company.mobile or bwd_company.phone or ''"/>
+            <t t-set="bwd_phone_clean" t-value="bwd_phone.replace(' ', '').replace('-', '')"/>
+            <t t-set="bwd_email" t-value="bwd_company.email or ''"/>
+
+            <!-- LOADER -->
+            <div class="bwd-loader bwd-loader--done" id="bwdLoader">
+                <div class="bwd-loader__ring"/>
+                <div class="bwd-loader__text">Brothers Wash</div>
+            </div>
+
+            <!-- HEADER (dynamic menu from DB) -->
+            <t t-set="bwd_website" t-value="request.website"/>
+            <t t-set="bwd_menu" t-value="bwd_website.menu_id"/>
+            <t t-set="bwd_languages" t-value="request.website.language_ids"/>
+            <t t-set="bwd_active_lang" t-value="bwd_languages.filtered(lambda l: l.code == request.env.lang)[:1] or bwd_languages[:1]"/>
+            <header class="bwd-header" id="bwdHeader">
+                <div class="container">
+                    <div class="bwd-header__inner">
+                        <a t-attf-href="tel:{{ bwd_phone_clean }}" class="bwd-header__phone" t-if="bwd_phone">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            <t t-esc="bwd_phone"/>
+                        </a>
+                        <a href="#bwd-home" class="bwd-header__logo">
+                            <img src="/theme_brotherswash/static/src/img/logo.png" alt="Brothers Wash Detailing" class="bwd-header__logo-img"/>
+                        </a>
+                        <nav class="bwd-header__nav d-none d-md-flex">
+                            <t t-foreach="bwd_menu.child_id" t-as="menu_item">
+                                <a t-att-href="menu_item.url or '#'" t-esc="menu_item.name"/>
+                            </t>
+                            <!-- Language selector -->
+                            <t t-if="len(bwd_languages) &gt; 1">
+                                <div class="bwd-lang-selector">
+                                    <button class="bwd-lang-selector__btn" type="button">
+                                        <t t-if="bwd_active_lang.flag_image_url">
+                                            <img class="bwd-lang-selector__flag" t-att-src="bwd_active_lang.flag_image_url + '?height=25'" t-att-alt="bwd_active_lang.name"/>
+                                        </t>
+                                    </button>
+                                    <div class="bwd-lang-selector__dropdown">
+                                        <t t-foreach="bwd_languages" t-as="lg">
+                                            <a t-attf-class="p-2 bwd-lang-selector__item #{'bwd-lang-selector__item--active' if lg.code == request.env.lang else ''}" t-att-href="url_localized(lang_code=lg.code, prefetch_langs=True, force_default_lang=True)" t-att-data-lang="lg.code">
+                                                <t t-if="lg.flag_image_url">
+                                                    <img class="bwd-lang-selector__item-flag" t-att-src="lg.flag_image_url + '?height=20'" t-att-alt="lg.name"/>
+                                                </t> 
+                                                <span t-esc="lg.name.split('/')[1].strip() if '/' in (lg.name or '') else lg.name"/>
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </nav>
+                        <button class="bwd-nav-toggle d-md-none" aria-label="Menu">
+                            <span/><span/><span/>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- MOBILE NAV (dynamic menu from DB) -->
+            <div class="bwd-mobile-nav" id="bwdMobileNav">
+                <t t-foreach="bwd_menu.child_id" t-as="menu_item">
+                    <a t-att-href="menu_item.url or '#'" class="bwd-mobile-nav__link" t-esc="menu_item.name"/>
+                </t>
+                <!-- Mobile language selector -->
+                <t t-if="len(bwd_languages) &gt; 1">
+                    <div class="bwd-mobile-nav__lang">
+                        <t t-foreach="bwd_languages" t-as="lg">
+                            <a t-attf-class="bwd-mobile-nav__lang-item #{'bwd-mobile-nav__lang-item--active' if lg.code == request.env.lang else ''}" t-att-href="url_localized(lang_code=lg.code, prefetch_langs=True, force_default_lang=True)">
+                                <t t-if="lg.flag_image_url">
+                                    <img class="bwd-lang-selector__item-flag" t-att-src="lg.flag_image_url + '?height=20'" t-att-alt="lg.name"/>
+                                </t>
+                            </a>
+                        </t>
+                    </div>
+                </t>
+            </div>
+
+            <!-- HERO -->
+            <t t-call="theme_brotherswash.s_bwd_hero"/>
+
+            <!-- ABOUT -->
+            <t t-call="theme_brotherswash.s_bwd_about"/>
+
+            <!-- SERVICE SECTIONS (data loaded client-side via /bw/api/services) -->
+            <t t-call="theme_brotherswash.s_bwd_premium"/>
+            <t t-call="theme_brotherswash.s_bwd_programs"/>
+            <t t-call="theme_brotherswash.s_bwd_extras"/>
+
+            <!-- REVIEWS -->
+            <t t-call="theme_brotherswash.s_bwd_reviews"/>
+
+            <!-- GALLERY -->
+            <t t-call="theme_brotherswash.s_bwd_gallery"/>
+
+            <!-- BOOKING -->
+            <t t-call="theme_brotherswash.s_bwd_booking"/>
+
+            <!-- CONTACT -->
+            <t t-call="theme_brotherswash.s_bwd_contact"/>
+
+            <!-- FOOTER -->
+            <t t-call="theme_brotherswash.s_bwd_footer"/>
+
+        </div>
+    </t>
+</template>
+
+<record id="bwd_homepage_page" model="theme.website.page">
+    <field name="url">/</field>
+    <field name="view_id" ref="bwd_homepage"/>
+    <field name="is_published" eval="True"/>
+</record>
+
+</odoo>

@@ -1,0 +1,61 @@
+// Brothers Wash Detailing — Primary Variables
+// Pattern from theme_sidonio (production-proven)
+
+// -- Color Palettes --
+$o-color-palettes: map-merge($o-color-palettes, (
+    'brotherswash-1': (
+        'o-color-1': #050808,
+        'o-color-2': #00e68a,
+        'o-color-3': #0a1210,
+        'o-color-4': #0f1a16,
+        'o-color-5': #eaf5f0,
+
+        // cc5: dark header/footer
+        'o-cc5-headings': 'o-color-2',
+        'o-cc5-text': rgba(#c8d6d0, .85),
+        'o-cc5-link': 'o-color-2',
+        'o-cc5-btn-primary': 'o-color-2',
+        'o-cc5-btn-primary-border': 'o-color-2',
+
+        'menu': 5,
+        'footer': 5,
+        'copyright': 5,
+    ),
+));
+
+// -- Legacy color system --
+$o-theme-color-palettes: map-merge($o-theme-color-palettes, (
+    'brotherswash-1': (
+        'alpha': #00e68a,
+        'beta': #050808,
+        'gamma': #0a1210,
+        'delta': #eaf5f0,
+        'epsilon': #0f1a16,
+    ),
+));
+
+// -- Fonts --
+$o-theme-font-configs: (
+    'Inter': (
+        'family': ('Inter', sans-serif),
+        'url': 'Inter:300,400,500,600,700,800',
+    ),
+);
+
+// -- Website Values --
+$o-website-values-palettes: (
+    (
+        'color-palettes-name': 'brotherswash-1',
+        'font': 'Inter',
+        'headings-font': 'Inter',
+        'header-template': 'default',
+        'footer-template': 'contact',
+    ),
+);
+
+// -- Register palette --
+$o-selected-color-palettes-names: append($o-selected-color-palettes-names, 'brotherswash-1');
+
+$o-color-palettes-compatibility-indexes: (
+    1: 'brotherswash-1',
+);

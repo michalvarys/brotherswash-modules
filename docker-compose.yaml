@@ -1,0 +1,78 @@
+services:
+  web:
+    container_name: varyshop_eu-brotherswash-web
+    image: varyshop/website:release-1.0.6
+    command:
+      - bash
+      - -c
+      - |
+        echo '[options]' > /etc/odoo/odoo.conf
+        echo 'admin_passwd = s63r-c1wq-jooh-6f7o' >> /etc/odoo/odoo.conf
+        ADDONS_PATH=addons,varyshop,varyshop_hosting,sms_modules
+        if find /mnt/extra-addons -mindepth 2 -maxdepth 2 -name '__manifest__.py' 2>/dev/null | grep -q .; then
+          ADDONS_PATH="$$ADDONS_PATH,/mnt/extra-addons"
+        fi
+        exec python3 odoo-bin           -c /etc/odoo/odoo.conf           --addons-path=$$ADDONS_PATH           -r odoo           -w aoSuyue4XvN1WmO2           --db_host varyshop_eu-brotherswash-db           --db_port 5432           -d odoo           --limit-time-real=600 --limit-time-cpu=300           --db-filter='^odoo$$'
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "7328:8069"
+      - "7327:8071"
+      - "7326:8072"
+    volumes:
+      - ./data/data:/root/.local/share/Odoo
+      - ./config:/etc/odoo
+      - ./extra-addons:/mnt/extra-addons
+      - ./sms_modules:/app/sms_modules
+      - ./sms_httpsms:/app/varyshop/sms_httpsms
+    labels:
+      createdBy: "bt_apps"
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: aoSuyue4XvN1WmO2
+    networks:
+      - baota_net
+      - varyshop_eu-brotherswash
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1024MB
+
+  db:
+    container_name: varyshop_eu-brotherswash-db
+    image: postgres:15
+    entrypoint:
+      - bash
+      - -c
+      - |
+        chown -R postgres:postgres /var/lib/postgresql/data
+        exec docker-entrypoint.sh postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: aoSuyue4XvN1WmO2
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    labels:
+      createdBy: "bt_apps"
+    ports:
+      - "1423:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - baota_net
+      - varyshop_eu-brotherswash
+
+networks:
+  baota_net:
+    external: true
+  varyshop_eu-brotherswash:
+    driver: bridge
+

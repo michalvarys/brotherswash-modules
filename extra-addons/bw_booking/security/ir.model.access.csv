@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bw_vehicle_type_public,bw.vehicle.type.public,model_bw_vehicle_type,,1,0,0,0
+access_bw_vehicle_type_admin,bw.vehicle.type.admin,model_bw_vehicle_type,website.group_website_designer,1,1,1,1
+access_bw_service_category_public,bw.service.category.public,model_bw_service_category,,1,0,0,0
+access_bw_service_category_admin,bw.service.category.admin,model_bw_service_category,website.group_website_designer,1,1,1,1
+access_bw_service_public,bw.service.public,model_bw_service,,1,0,0,0
+access_bw_service_admin,bw.service.admin,model_bw_service,website.group_website_designer,1,1,1,1
+access_bw_service_price_public,bw.service.price.public,model_bw_service_price,,1,0,0,0
+access_bw_service_price_admin,bw.service.price.admin,model_bw_service_price,website.group_website_designer,1,1,1,1
+access_bw_booking_public,bw.booking.public,model_bw_booking,,1,0,1,0
+access_bw_booking_admin,bw.booking.admin,model_bw_booking,sales_team.group_sale_manager,1,1,1,1
+access_bw_booking_line_public,bw.booking.line.public,model_bw_booking_line,,1,0,1,0
+access_bw_booking_line_admin,bw.booking.line.admin,model_bw_booking_line,sales_team.group_sale_manager,1,1,1,1

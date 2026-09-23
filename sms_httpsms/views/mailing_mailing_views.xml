@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add "Force Create SMS Queue" button to SMS mailing form -->
+    <record id="mailing_mailing_view_form_sms_httpsms" model="ir.ui.view">
+        <field name="name">mailing.mailing.view.form.sms.httpsms</field>
+        <field name="model">mailing.mailing</field>
+        <field name="inherit_id" ref="mass_mailing_sms.mailing_mailing_view_form_sms"/>
+        <field name="arch" type="xml">
+            <!-- Add button in the header, after the existing buttons -->
+            <xpath expr="//header/button[@name='action_test']" position="after">
+                <button name="action_force_create_sms_queue"
+                        type="object"
+                        string="Force Create SMS Queue"
+                        class="oe_highlight"
+                        invisible="mailing_type != 'sms' or state not in ('draft', 'in_queue', 'sending')"
+                        help="Manually create SMS records for all recipients in the filter. Useful for debugging queue issues."/>
+                <field name="paused" widget="boolean_toggle"
+                       string="Paused"
+                       invisible="mailing_type != 'sms' or state not in ('draft', 'in_queue', 'sending')"
+                       help="Pause sending SMS for this campaign"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

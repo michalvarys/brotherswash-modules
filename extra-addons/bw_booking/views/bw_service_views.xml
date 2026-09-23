@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===== VEHICLE TYPE ===== -->
+    <record id="view_bw_vehicle_type_list" model="ir.ui.view">
+        <field name="name">bw.vehicle.type.list</field>
+        <field name="model">bw.vehicle.type</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_bw_vehicle_type" model="ir.actions.act_window">
+        <field name="name">Typy vozidel</field>
+
+        <field name="res_model">bw.vehicle.type</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- ===== SERVICE CATEGORY ===== -->
+    <record id="view_bw_service_category_form" model="ir.ui.view">
+        <field name="name">bw.service.category.form</field>
+        <field name="model">bw.service.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Název kategorie"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_type"/>
+                            <field name="icon"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Popis kategorie…"/>
+                    <notebook>
+                        <page string="Služby">
+                            <field name="service_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="is_bookable"/>
+                                    <field name="is_highlighted"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bw_service_category_list" model="ir.ui.view">
+        <field name="name">bw.service.category.list</field>
+        <field name="model">bw.service.category</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="category_type"/>
+                <field name="icon"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_bw_service_category" model="ir.actions.act_window">
+        <field name="name">Kategorie služeb</field>
+        <field name="res_model">bw.service.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ===== SERVICE ===== -->
+    <record id="view_bw_service_form" model="ir.ui.view">
+        <field name="name">bw.service.form</field>
+        <field name="model">bw.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Název služby"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_id"/>
+                            <field name="category_type" invisible="1"/>
+                            <field name="sequence"/>
+                            <field name="duration_info"/>
+                        </group>
+                        <group>
+                            <field name="is_bookable"/>
+                            <field name="is_highlighted"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ceny">
+                            <field name="price_ids">
+                                <list editable="bottom">
+                                    <field name="vehicle_type_id"/>
+                                    <field name="price_prefix"/>
+                                    <field name="price"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Popis">
+                            <field name="short_description" placeholder="Krátký popis…"/>
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bw_service_list" model="ir.ui.view">
+        <field name="name">bw.service.list</field>
+        <field name="model">bw.service</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="category_type"/>
+                <field name="duration_info"/>
+                <field name="is_bookable"/>
+                <field name="is_highlighted"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bw_service_search" model="ir.ui.view">
+        <field name="name">bw.service.search</field>
+        <field name="model">bw.service</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="category_id"/>
+                <filter name="filter_program" string="Programy" domain="[('category_type', '=', 'program')]"/>
+                <filter name="filter_premium" string="Prémiové" domain="[('category_type', '=', 'premium')]"/>
+                <filter name="filter_extra" string="Doplňkové" domain="[('category_type', '=', 'extra')]"/>
+                <separator/>
+                <filter name="filter_bookable" string="Rezervovatelné" domain="[('is_bookable', '=', True)]"/>
+                <group expand="0" string="Seskupit podle">
+                    <filter name="group_category" string="Kategorie" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_type" string="Typ" context="{'group_by': 'category_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_bw_service" model="ir.actions.act_window">
+        <field name="name">Služby</field>
+        <field name="res_model">bw.service</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_bw_service_search"/>
+    </record>
+
+    <!-- ===== MENUS ===== -->
+    <menuitem id="menu_bw_root" name="Brothers Wash" sequence="60" web_icon="bw_booking,static/description/icon.png"/>
+
+    <menuitem id="menu_bw_services" name="Služby" parent="menu_bw_root" sequence="10"/>
+    <menuitem id="menu_bw_service_list" name="Všechny služby" parent="menu_bw_services" action="action_bw_service" sequence="1"/>
+    <menuitem id="menu_bw_service_category" name="Kategorie" parent="menu_bw_services" action="action_bw_service_category" sequence="2"/>
+    <menuitem id="menu_bw_vehicle_type" name="Typy vozidel" parent="menu_bw_services" action="action_bw_vehicle_type" sequence="3"/>
+
+</odoo>

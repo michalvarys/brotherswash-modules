@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_bwd_hero" name="BWD Hero Banner">
+    <section class="bwd-hero o_cc o_colored_level" id="bwd-home"
+             data-snippet="s_bwd_hero" data-name="BWD Hero Banner">
+        <div class="bwd-hero__bg" style="background-image: url('/theme_brotherswash/static/src/img/banners/hero-bg-logo.jpg');"/>
+        <div class="bwd-hero__dirt"/>
+        <div class="bwd-hero__wipe-edge"/>
+        <div class="bwd-hero__overlay"/>
+        <div class="bwd-hero__vignette"/>
+        <div class="bwd-hero__content">
+            <p class="bwd-hero__subtitle">Prémiový auto detailing &#8226; Praha 5</p>
+            <h1>Brothers Wash<br/><span class="bwd-accent">Detailing</span></h1>
+            <div class="bwd-hero__line"/>
+            <p class="bwd-hero__desc">Precizní ruční práce, špičkové produkty a důraz na každý detail. Dopřejte svému vozu péči, kterou si zaslouží.</p>
+            <div class="bwd-hero__cta">
+                <a href="#bwd-programs" class="bwd-btn">Zobrazit ceník</a>
+            </div>
+            <div class="bwd-hero__phone-wrap" data-bwd-company="phone"/>
+            <div class="bwd-hero__address" data-bwd-company="address"/>
+            <p class="bwd-hero__hours">po - pá 9:00 - 18:00, so-ne dle domluvy</p>
+            <div class="bwd-hero__socials" data-bwd-company="socials"/>
+        </div>
+    </section>
+</template>
+
+</odoo>

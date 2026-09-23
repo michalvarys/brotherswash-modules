@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_bwd_premium" name="BWD Premium Services">
+    <section class="bwd-premium o_cc o_colored_level" id="bwd-premium"
+             data-snippet="s_bwd_premium" data-name="BWD Premium Services"
+             style="padding-top: 6rem;">
+        <div class="container" data-bwd-services="premium"/>
+    </section>
+</template>
+
+</odoo>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_sms_httpsms" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sms.httpsms</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='sms']" position="after">
+                <div class="app_settings_block" data-string="SMS HttpSMS" string="SMS HttpSMS" data-key="sms_httpsms">
+                    <h2>HttpSMS Integration</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="sms_httpsms_enabled" readonly="1"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_httpsms_enabled"/>
+                                <div class="text-muted">
+                                    Replace Odoo IAP SMS with HttpSMS API
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_httpsms_api_key" string="API Key"/>
+                                <div class="text-muted">
+                                    Get your API key from <a href="https://httpsms.com/settings" target="_blank">HttpSMS Settings</a>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sms_httpsms_api_key" password="True" placeholder="e.g., your-api-key-here"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_httpsms_default_sender" string="Default Sender Phone"/>
+                                <div class="text-muted">
+                                    Phone number to use as sender (international format with + prefix)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sms_httpsms_default_sender" placeholder="e.g., +18005550199"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_httpsms_base_url" string="HttpSMS Base URL"/>
+                                <div class="text-muted">
+                                    Base URL for HttpSMS API (default: cloud version, or your self-hosted instance)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sms_httpsms_base_url" placeholder="https://sms-api.varyshop.eu"/>
+                                        <div class="text-muted mt8">
+                                            <i class="fa fa-info-circle"/> Default: Varyshop self-hosted instance. Use https://api.httpsms.com for cloud version.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_httpsms_rate_limit" string="SMS Rate Limit"/>
+                                <div class="text-muted">
+                                    Delay in seconds between sending each SMS (prevents Android rate limiting)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sms_httpsms_rate_limit" class="oe_inline"/> seconds
+                                        <div class="text-muted mt8">
+                                            <i class="fa fa-info-circle"/> Recommended: 60 seconds (1 SMS per minute) to avoid Android confirmation prompts
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_httpsms_webhook_signing_key" string="Webhook Signing Key (Optional)"/>
+                                <div class="text-muted">
+                                    Optional signing key for webhook security
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sms_httpsms_webhook_signing_key" password="True" placeholder="Optional"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sms_httpsms_webhook_url" string="Webhook URL"/>
+                                <div class="text-muted">
+                                    Configure this URL in HttpSMS webhook settings
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sms_httpsms_webhook_url" widget="CopyClipboardChar" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Test Connection</span>
+                                <div class="text-muted">
+                                    Verify your HttpSMS configuration
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <button name="action_test_httpsms_connection"
+                                                string="Test HttpSMS Connection"
+                                                type="object"
+                                                class="btn-primary"
+                                                invisible="not sms_httpsms_enabled"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Clean Up Stuck SMS</span>
+                                <div class="text-muted">
+                                    Emergency cleanup for duplicate SMS sends
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <button name="action_cleanup_stuck_sms"
+                                                string="Clean Up Stuck SMS"
+                                                type="object"
+                                                class="btn-warning"
+                                                confirm="This will mark all pending/outgoing SMS with mailing_id as sent. Continue?"
+                                                invisible="not sms_httpsms_enabled"/>
+                                        <div class="text-muted mt8">
+                                            <i class="fa fa-warning"/> Use only if you have duplicate SMS sends. This is a one-time emergency fix.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt32">
+                        <div class="col-12">
+                            <div class="alert alert-info" role="alert">
+                                <h4 class="alert-heading">
+                                    <i class="fa fa-info-circle"/> About HttpSMS Integration
+                                </h4>
+                                <p>
+                                    This module replaces the default Odoo IAP SMS service with HttpSMS API.
+                                    Once configured, all SMS messages sent from Odoo will be delivered via HttpSMS.
+                                </p>
+                                <hr/>
+                                <p class="mb-0">
+                                    <strong>Features:</strong>
+                                </p>
+                                <ul>
+                                    <li>Direct integration with HttpSMS API</li>
+                                    <li>No need for Odoo IAP credits</li>
+                                    <li>Compatible with SMS Marketing and all SMS features</li>
+                                    <li>Full error handling and delivery tracking</li>
+                                </ul>
+                                <p class="mb-0">
+                                    <strong>Setup:</strong>
+                                </p>
+                                <ol>
+                                    <li>Sign up at <a href="https://httpsms.com" target="_blank">httpsms.com</a></li>
+                                    <li>Get your API key from <a href="https://httpsms.com/settings" target="_blank">Settings</a></li>
+                                    <li>Configure your Android phone as SMS gateway</li>
+                                    <li>Enter your API key and sender phone number above</li>
+                                    <li>Test the connection and start sending SMS!</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

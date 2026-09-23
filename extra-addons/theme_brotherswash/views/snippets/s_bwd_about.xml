@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_bwd_about" name="BWD About">
+    <section class="bwd-about o_cc o_colored_level" id="bwd-about"
+             data-snippet="s_bwd_about" data-name="BWD About">
+        <div class="container text-center">
+            <h2 class="bwd-section-title bwd-reveal">O nás</h2>
+            <div class="bwd-section-line"/>
+            <p class="bwd-about__text bwd-reveal">Dokonalá péče pro vaše auto &#8211; lesk, čistota a ochrana na nejvyšší úrovni. Používáme špičkové technologie a kvalitní produkty pro perfektní výsledek.</p>
+        </div>
+    </section>
+</template>
+
+</odoo>

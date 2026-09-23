@@ -1,0 +1,1534 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bw_booking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-08 19:25+0000\n"
+"PO-Revision-Date: 2026-03-08 19:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "+420 ..."
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid ",- CZK"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,duration_info:bw_booking.svc_program1
+msgid "15-25 min"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,duration_info:bw_booking.svc_program4
+msgid "60 min"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,duration_info:bw_booking.svc_program2
+msgid "60-90 min"
+msgstr ""
+
+#. module: bw_booking
+#: model:mail.template,body_html:bw_booking.mail_template_booking_pending
+msgid ""
+"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
+"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
+"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"padding:30px;\">\n"
+"                <h2 style=\"color:#1a1a1a;margin-top:0;\">Thank you for your reservation!</h2>\n"
+"                <p>Hello, <strong>{{ object.customer_name }}</strong>,</p>\n"
+"                <p>Your reservation has been successfully received and is awaiting confirmation. We will contact you to confirm the appointment.</p>\n"
+"\n"
+"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Reservation number</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Vehicle</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or 'not specified' }}</td>\n"
+"                    </tr>\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Preferred date</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'not specified' }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Total price</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'from ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"\n"
+"                <h3 style=\"color:#1a1a1a;\">Selected services:</h3>\n"
+"                <ul style=\"padding-left:20px;\">\n"
+"                    % for line in object.line_ids:\n"
+"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
+"                    % endfor\n"
+"                </ul>\n"
+"\n"
+"                % if object.customer_note:\n"
+"                <p><strong>Your note:</strong> {{ object.customer_note }}</p>\n"
+"                % endif\n"
+"\n"
+"                <p style=\"margin-top:20px;color:#666;\">Reservation status: <strong style=\"color:#e67e22;\">Awaiting confirmation</strong></p>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
+"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"            </td>\n"
+"        </tr>\n"
+"    </table>\n"
+"</div>\n"
+"            "
+msgstr ""
+"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
+"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
+"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"padding:30px;\">\n"
+"                <h2 style=\"color:#1a1a1a;margin-top:0;\">Děkujeme za Vaši rezervaci!</h2>\n"
+"                <p>Dobrý den, <strong>{{ object.customer_name }}</strong>,</p>\n"
+"                <p>Vaše rezervace byla úspěšně přijata a čeká na potvrzení. Budeme Vás kontaktovat s potvrzením termínu.</p>\n"
+"\n"
+"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Číslo rezervace</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Vozidlo</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or 'neuvedeno' }}</td>\n"
+"                    </tr>\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Preferovaný termín</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'neuvedeno' }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Celková cena</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'od ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"\n"
+"                <h3 style=\"color:#1a1a1a;\">Vybrané služby:</h3>\n"
+"                <ul style=\"padding-left:20px;\">\n"
+"                    % for line in object.line_ids:\n"
+"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
+"                    % endfor\n"
+"                </ul>\n"
+"\n"
+"                % if object.customer_note:\n"
+"                <p><strong>Vaše poznámka:</strong> {{ object.customer_note }}</p>\n"
+"                % endif\n"
+"\n"
+"                <p style=\"margin-top:20px;color:#666;\">Stav rezervace: <strong style=\"color:#e67e22;\">Čeká na potvrzení</strong></p>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
+"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"            </td>\n"
+"        </tr>\n"
+"    </table>\n"
+"</div>\n"
+"            "
+
+#. module: bw_booking
+#: model:mail.template,body_html:bw_booking.mail_template_booking_confirmed
+msgid ""
+"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
+"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
+"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"padding:30px;\">\n"
+"                <h2 style=\"color:#27ae60;margin-top:0;\">Your reservation has been confirmed!</h2>\n"
+"                <p>Hello, <strong>{{ object.customer_name }}</strong>,</p>\n"
+"                <p>We are pleased to confirm your reservation. We look forward to seeing you at the scheduled time.</p>\n"
+"\n"
+"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Reservation number</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Date</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#27ae60;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'not specified' }}</td>\n"
+"                    </tr>\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Vehicle</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or '' }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Total price</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'from ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"\n"
+"                <h3 style=\"color:#1a1a1a;\">Selected services:</h3>\n"
+"                <ul style=\"padding-left:20px;\">\n"
+"                    % for line in object.line_ids:\n"
+"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
+"                    % endfor\n"
+"                </ul>\n"
+"\n"
+"                <div style=\"margin:25px 0;padding:15px;background:#f0f9f0;border-left:4px solid #27ae60;\">\n"
+"                    <p style=\"margin:0;\"><strong>Address:</strong> {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"                    <p style=\"margin:5px 0 0;\">The event has been added to your calendar.</p>\n"
+"                </div>\n"
+"\n"
+"                <p style=\"color:#666;\">If you need to change the date, please contact us.</p>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
+"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"            </td>\n"
+"        </tr>\n"
+"    </table>\n"
+"</div>\n"
+"            "
+msgstr ""
+"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
+"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
+"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"padding:30px;\">\n"
+"                <h2 style=\"color:#27ae60;margin-top:0;\">Vaše rezervace byla potvrzena!</h2>\n"
+"                <p>Dobrý den, <strong>{{ object.customer_name }}</strong>,</p>\n"
+"                <p>S potěšením Vám potvrzujeme Vaši rezervaci. Těšíme se na Vás v dohodnutém termínu.</p>\n"
+"\n"
+"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Číslo rezervace</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Datum</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#27ae60;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'neuvedeno' }}</td>\n"
+"                    </tr>\n"
+"                    <tr style=\"background:#f5f5f5;\">\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Vozidlo</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or '' }}</td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Celková cena</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'od ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"\n"
+"                <h3 style=\"color:#1a1a1a;\">Vybrané služby:</h3>\n"
+"                <ul style=\"padding-left:20px;\">\n"
+"                    % for line in object.line_ids:\n"
+"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
+"                    % endfor\n"
+"                </ul>\n"
+"\n"
+"                <div style=\"margin:25px 0;padding:15px;background:#f0f9f0;border-left:4px solid #27ae60;\">\n"
+"                    <p style=\"margin:0;\"><strong>Adresa:</strong> {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"                    <p style=\"margin:5px 0 0;\">Událost byla přidána do Vašeho kalendáře.</p>\n"
+"                </div>\n"
+"\n"
+"                <p style=\"color:#666;\">Pokud potřebujete změnit termín, kontaktujte nás prosím.</p>\n"
+"            </td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
+"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"            </td>\n"
+"        </tr>\n"
+"    </table>\n"
+"</div>\n"
+"            "
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "<i class=\"fa fa-home\"/> Back to homepage"
+msgstr "<i class=\"fa fa-home\"/> Zpět na hlavní stránku"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "<i class=\"fa fa-paper-plane\"/> Submit reservation"
+msgstr "<i class=\"fa fa-paper-plane\"/> Odeslat rezervaci"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid ""
+"<span class=\"bw-price-value\">--</span>\n"
+"                                                    <span class=\"bw-price-suffix\">,- CZK</span>"
+msgstr ""
+"<span class=\"bw-price-value\">--</span>\n"
+"                                                    <span class=\"bw-price-suffix\">,- Kč</span>"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "<span class=\"bw-step-num\">1</span> Vehicle type"
+msgstr "<span class=\"bw-step-num\">1</span> Typ vozidla"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "<span class=\"bw-step-num\">2</span> Select services"
+msgstr "<span class=\"bw-step-num\">2</span> Vyberte služby"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "<span class=\"bw-step-num\">3</span> Contact details"
+msgstr "<span class=\"bw-step-num\">3</span> Kontaktní údaje"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "<span invisible=\"not is_price_approximate\" class=\"text-muted\">from </span>"
+msgstr "<span invisible=\"not is_price_approximate\" class=\"text-muted\">od </span>"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid ""
+"<span>Total price:</span>\n"
+"                                <strong id=\"bwTotalPrice\">0,- CZK</strong>"
+msgstr ""
+"<span>Celková cena:</span>\n"
+"                                <strong id=\"bwTotalPrice\">0,- Kč</strong>"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_fusso
+msgid ""
+"<strong>+ Paint decontamination</strong> (removal of tar, iron fallout, "
+"etc.)"
+msgstr ""
+"<strong>+ Dekontaminace laku</strong> (odstranění asfaltu, polétavé rzi "
+"apod.)"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "<strong>Total</strong>"
+msgstr "<strong>Celkem</strong>"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_needaction
+msgid "Action Needed"
+msgstr "Vyžadována akce"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__active
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__active
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__active
+msgid "Active"
+msgstr "Aktivní"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_ids
+msgid "Activities"
+msgstr "Aktivity"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Dekorace výjimky aktivity"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_state
+msgid "Activity State"
+msgstr "Stav aktivity"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Ikona typu aktivity"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Are you sure you want to cancel this reservation?"
+msgstr "Opravdu chcete zrušit tuto rezervaci?"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_attachment_count
+msgid "Attachment Count"
+msgstr "Počet příloh"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_service__is_bookable
+msgid "Available in online configurator"
+msgstr "Dostupné v online konfigurátoru"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Awaiting Confirmation"
+msgstr "Čeká na potvrzení"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__pending
+msgid "Awaiting confirmation"
+msgstr "Čeká na potvrzení"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "BWD-"
+msgstr ""
+
+#. module: bw_booking
+#: model:mail.template,name:bw_booking.mail_template_booking_confirmed
+msgid "BWD: Reservation - Confirmed"
+msgstr "BWD: Rezervace - Potvrzena"
+
+#. module: bw_booking
+#: model:mail.template,name:bw_booking.mail_template_booking_pending
+msgid "BWD: Reservation - Pending confirmation"
+msgstr "BWD: Rezervace - Čeká na potvrzení"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Bookable"
+msgstr "Rezervovatelné"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__booking_id
+msgid "Booking"
+msgstr "Rezervace"
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_booking_line
+msgid "Booking Line"
+msgstr "Položka rezervace"
+
+#. module: bw_booking
+#: model:ir.ui.menu,name:bw_booking.menu_bw_root
+msgid "Brothers Wash"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__lead_id
+msgid "CRM příležitost"
+msgstr ""
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Can only confirm a reservation in \"Awaiting confirmation\" state."
+msgstr "Lze potvrdit pouze rezervaci ve stavu \"Čeká na potvrzení\"."
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Cancel"
+msgstr "Zrušit"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__cancelled
+msgid "Cancelled"
+msgstr "Zrušeno"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Categories"
+msgstr "Kategoerie"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__category_id
+msgid "Category"
+msgstr "Kategorie"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__category_type
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__category_type
+msgid "Category Type"
+msgstr "Typ kategorie"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
+msgid "Category description…"
+msgstr "Popis kategorie"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
+msgid "Category name"
+msgstr "Název kategorie"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__total_price
+msgid "Celková cena"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__price
+msgid "Cena"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service.category,name:bw_booking.cat_program
+msgid "Ceník služeb"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_keramika
+msgid "Ceramic protection condition check"
+msgstr "Kontrola stavu keramické ochrany"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_lesteni
+msgid "Chemical and mechanical paint decontamination"
+msgstr "Chemická a mechanická dekontaminace laku"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid ""
+"Choose your services, select a date and we will send you a confirmation."
+msgstr "Vyberte si služby, zvolte termín a odešleme vám potvrzení."
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Cleaning and treating interior and exterior plastic trim"
+msgstr "Očištění a ošetření plastových vnitřních i vnějších dílů"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Cleaning door jambs, sills and wheel arches"
+msgstr "Mytí vnitřních hran dveří, prahů a podblatníků"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Complete body drying"
+msgstr "Kompletní vysušení karoserie"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+#: model_terms:bw.service,description:bw_booking.svc_program4
+msgid "Complete interior vacuuming"
+msgstr "Kompletní vysátí interiéru"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Complete textile interior extraction cleaning (wet method)"
+msgstr "Kompletní tepování textilního interiéru (mokrou cestou)"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Completed"
+msgstr "Dokončeno"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Confirm Reservation"
+msgstr "Potvrdit rezervaci"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__confirmed
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Confirmed"
+msgstr "Potvrzeno"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__create_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__create_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__create_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__create_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__create_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__create_uid
+msgid "Created by"
+msgstr "Vytvořil"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__create_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__create_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__create_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__create_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__create_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__create_date
+msgid "Created on"
+msgstr "Vytvořeno dne"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Customer"
+msgstr "Zákazník"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Customer note..."
+msgstr "Poznámka zákazníka..."
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Date"
+msgstr "Datum"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__description
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__description
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Description"
+msgstr "Popis"
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_booking
+msgid "Detailing Booking"
+msgstr "Rezervace detailingu"
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_service
+msgid "Detailing Service"
+msgstr "Služba detailingu"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__display_name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__display_name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__display_name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__display_name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__display_name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__display_name
+msgid "Display Name"
+msgstr "Zobrazovaný název"
+
+#. module: bw_booking
+#: model:bw.service.category,description:bw_booking.cat_premium
+msgid "Dlouhodobá ochrana a profesionální péče"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_fusso
+msgid "Dlouhodobý tuhý vosk"
+msgstr ""
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__done
+msgid "Done"
+msgstr "Dokončeno"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_service_category.py:0
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_service_category__category_type__extra
+msgid "Doplňková služba"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service.category,name:bw_booking.cat_extra
+msgid "Doplňkové služby"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__duration_info
+msgid "Duration Info"
+msgstr "Informace o délce"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_email
+msgid "Email"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Email *"
+msgstr "Email *"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Extras"
+msgstr "Doplňkové"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_lesteni
+msgid "Final quality inspection"
+msgstr "Závěrečná kontrola kvality"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_follower_ids
+msgid "Followers"
+msgstr "Sledující"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Sledující (partneři)"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_service_category__icon
+msgid "Font Awesome class, e.g. fa-star"
+msgstr "Třída Font Awesome, např. fa-star"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Ikona Font Awesome, např. fa-tasks"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_keramika
+msgid "Free maintenance wash"
+msgstr "Údržbové mytí vozu zdarma"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Full name *"
+msgstr "Jméno a příjmení *"
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_keramika
+msgid "Garantovaná ochrana až 3 roky"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Group by"
+msgstr "Seskupit podle"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Hand car wash"
+msgstr "Ruční mytí auta"
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_program1
+msgid "Handwashing"
+msgstr "Ruční mytí vozu"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__has_message
+msgid "Has Message"
+msgstr "Má zprávu"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_lesteni
+msgid "Hloubkové leštění karoserie"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_sedacky
+msgid "Hloubkové čištění (tepování) sedaček"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__id
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__id
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__id
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__id
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__id
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__id
+msgid "ID"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_exception_icon
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__icon
+msgid "Icon"
+msgstr "Ikona"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Ikona pro označení výjimečné aktivity."
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Pokud zaškrtnuto, nové zprávy vyžadují vaši pozornost."
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__message_has_error
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Pokud zaškrtnuto, některé zprávy mají chybu doručení."
+
+#. module: bw_booking
+#: model:bw.service.category,description:bw_booking.cat_extra
+msgid "Individuální péče podle vašich potřeb"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+#: model_terms:bw.service,description:bw_booking.svc_program4
+msgid "Interior fragrance"
+msgstr "Provonění interiéru"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program4
+msgid "Interior plastic treatment and protection"
+msgstr "Ošetření a konzervace vnitřních plastů"
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_program4
+msgid "Interiér"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__is_bookable
+msgid "Is Bookable"
+msgstr "Je rezervovatelné"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_is_follower
+msgid "Is Follower"
+msgstr "Je sledující"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__is_highlighted
+msgid "Is Highlighted"
+msgstr "Je zvýrazněné"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_fusso
+msgid ""
+"Japanese synthetic wax lasting up to 12 months. Provides strong protection "
+"against water, salt, UV rays and road chemicals."
+msgstr ""
+"Japonský syntetický vosk s výdrží až 12 měsíců. Poskytuje silnou ochranu "
+"proti vodě, soli, UV záření a silniční chemii."
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__lang
+msgid "Jazyk"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_name
+msgid "Jméno zákazníka"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.ui.menu,name:bw_booking.menu_bw_service_category
+msgid "Kategorie"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.actions.act_window,name:bw_booking.action_bw_service_category
+msgid "Kategorie služeb"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_keramika
+msgid "Keramická ochrana laku"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_program3
+msgid "Kompletní detailing"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_vysati
+msgid "Kompletní vysátí interiéru"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__partner_id
+msgid "Kontakt"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__write_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__write_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__write_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__write_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__write_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__write_uid
+msgid "Last Updated by"
+msgstr "Naposledy upravil"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__write_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__write_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__write_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__write_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__write_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__write_date
+msgid "Last Updated on"
+msgstr "Naposledy upraveno dne"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_lesteni_dil
+msgid "Leštění jednotlivého dílu"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Links"
+msgstr "Propojení"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_has_error
+msgid "Message Delivery error"
+msgstr "Chyba doručení zprávy"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_ids
+msgid "Messages"
+msgstr "Zprávy"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Mirror polishing"
+msgstr "Vyleštění zrcátek"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_lesteni
+msgid "Multi-step machine polishing with professional compounds"
+msgstr "Vícekrokové strojní leštění profesionálními pastami"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Termín mé aktivity"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_alu
+msgid "Mytí a vyčištění ALU disků"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_gumove
+msgid "Mytí gumových koberečků"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_motor
+msgid "Mytí motoru (na vlastní riziko)"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__name
+msgid "Name"
+msgstr "Název"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Další aktivita v kalendáři"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Termín další aktivity"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_summary
+msgid "Next Activity Summary"
+msgstr "Souhrn další aktivity"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_type_id
+msgid "Next Activity Type"
+msgstr "Typ další aktivity"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Note"
+msgstr "Poznámka"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Počet akcí"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_has_error_counter
+msgid "Number of errors"
+msgstr "Počet chyb"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Počet zpráv vyžadujících akci"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Počet zpráv s chybou doručení"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_asfalt
+msgid "Odstranění asfaltu"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_polepy
+msgid "Odstranění polepů"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_keramika
+msgid "Optional protective layer top-up"
+msgstr "Případné doplnění ochranné vrstvy"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__is_price_approximate
+msgid "Orientační cena"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_vnitrni_plasty
+msgid "Očištění a ošetření vnitřních plastových dílů"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_venkovni_plasty
+msgid "Ošetření a konzervace venkovních plastových dílů"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_pneumatiky
+msgid "Ošetření pneumatik"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_keramika
+msgid "Package includes a service book and inspection every 6 months:"
+msgstr "Součást balíčku je servisní kniha a kontrola každých 6 měsíců:"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Phone *"
+msgstr "Telefon *"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+msgid "Polishing exterior windows and mirrors"
+msgstr "Vyleštění vnějších oken a zrcátek"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Polishing interior and exterior windows"
+msgstr "Vyleštění vnitřních i vnějších oken"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program2
+msgid "Polishing interior and exterior windows and mirrors"
+msgstr "Vyleštění vnitřních i vnějších oken a zrcátek"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__line_ids
+msgid "Položky"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_note
+msgid "Poznámka zákazníka"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__preferred_date
+msgid "Preferovaný termín"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Preferred Date"
+msgstr "Preferovaný termín"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__price_prefix
+msgid "Prefix ceny"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Premium"
+msgstr "Prémiové"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__price
+msgid "Price"
+msgstr "Cena"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__price_prefix
+msgid "Price Prefix"
+msgstr "Prefix ceny"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__price_ids
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Prices"
+msgstr "Ceny"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_keramika
+msgid ""
+"Professional ceramic coating creating a hard protective layer. Protects "
+"paint against UV rays, salt, chemicals, insects and minor scratches."
+msgstr ""
+"Profesionální keramický povlak vytvářející tvrdou ochrannou vrstvu. Chrání "
+"lak před UV zářením, solí, chemikáliemi, hmyzem i drobnými škrábanci."
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_lesteni
+msgid ""
+"Professional machine polishing removing fine and medium scratches, "
+"holograms, oxidation and marks from improper washing."
+msgstr ""
+"Profesionální strojní leštění odstraňující jemné i střední škrábance, "
+"hologramy, oxidaci a stopy po špatném mytí."
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_service_category.py:0
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_service_category__category_type__program
+msgid "Program (ceník)"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_program1
+msgid "Program 1"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_program2
+msgid "Program 2"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_program3
+msgid "Program 3"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_program4
+msgid "Program 4"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Programs"
+msgstr "Programy"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_service_category.py:0
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_service_category__category_type__premium
+msgid "Prémiová služba"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service.category,name:bw_booking.cat_premium
+msgid "Prémiové služby"
+msgstr ""
+
+#. module: bw_booking
+#: model:mail.template,subject:bw_booking.mail_template_booking_confirmed
+msgid "Reservation confirmed - {{ object.env.company.name }} #{{ object.id }}"
+msgstr "Rezervace potvrzena - {{ object.env.company.name }} #{{ object.id }}"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "Reservation number:"
+msgstr "Číslo rezervace:"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_calendar
+msgid "Reservations"
+msgstr "Rezervace"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_user_id
+msgid "Responsible User"
+msgstr "Odpovědný uživatel"
+
+#. module: bw_booking
+#: model:ir.actions.act_window,name:bw_booking.action_bw_booking
+#: model:ir.ui.menu,name:bw_booking.menu_bw_booking
+msgid "Rezervace"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+msgid "Rubber mat cleaning"
+msgstr "Mytí gumových koberečků"
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_program2
+msgid "Ruční mytí + interiér"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Chyba doručení SMS"
+
+#. module: bw_booking
+#: model:bw.vehicle.type,name:bw_booking.vehicle_type_suv
+msgid "SUV"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.vehicle.type,name:bw_booking.vehicle_type_sedan
+msgid "Sedan"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Selected Services"
+msgstr "Vybrané služby"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__sequence
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__sequence
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__sequence
+#: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__sequence
+msgid "Sequence"
+msgstr "Pořadí"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__service_id
+msgid "Service"
+msgstr "Služba"
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_service_category
+msgid "Service Category"
+msgstr "Kategorie služeb"
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_service_price
+msgid "Service Price per Vehicle Type"
+msgstr "Cena služby podle typu vozidla"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Service name"
+msgstr "Název služby"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__service_ids
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
+msgid "Services"
+msgstr "Služby"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service__short_description
+msgid "Short Description"
+msgstr "Krátký popis"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Short description…"
+msgstr "Krátký popis…"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__service_id
+msgid "Služba"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.actions.act_window,name:bw_booking.action_bw_service
+#: model:ir.ui.menu,name:bw_booking.menu_bw_services
+msgid "Služby"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_fusso
+msgid "Soft99 Fusso Coat"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Special dried insect removal"
+msgstr "Speciální odstranění hmyzu"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__state
+msgid "State"
+msgstr "Stav"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Status"
+msgstr "Stav"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Stav podle aktivit\n"
+"Po termínu: Termín již uplynul\n"
+"Dnes: Datum aktivity je dnes\n"
+"Plánované: Budoucí aktivity."
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "Summary"
+msgstr "Souhrn"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_sterace
+msgid "Tekuté stěrače, trvanlivost až 1 rok"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_phone
+msgid "Telefon"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_podlaha
+msgid "Tepování podlahy"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_strop
+msgid "Tepování stropu"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "Thank you!"
+msgstr "Děkujeme!"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "This Week"
+msgstr "Tento týden"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Tire dressing"
+msgstr "Ošetření pneumatik"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "To email"
+msgstr "Na email"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Today"
+msgstr "Dnes"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__is_price_approximate
+msgid "True pokud alespoň jedna služba má prefix \"od\""
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__vehicle_type_id
+msgid "Typ vozidla"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Type"
+msgstr "Typ"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Typ výjimečné aktivity na záznamu."
+
+#. module: bw_booking
+#: model:ir.actions.act_window,name:bw_booking.action_bw_vehicle_type
+#: model:ir.ui.menu,name:bw_booking.menu_bw_vehicle_type
+msgid "Typy vozidel"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__calendar_event_id
+msgid "Událost v kalendáři"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Vehicle (make / model)"
+msgstr "Vozidlo (značka / model)"
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_vehicle_type
+#: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__vehicle_type_id
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Vehicle Type"
+msgstr "Typ vozidla"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Vehicle and Date"
+msgstr "Vozidlo a termín"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_service__is_highlighted
+msgid "Visual highlight (recommended)"
+msgstr "Vizuální zvýraznění (doporučené)"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_voskovani
+msgid "Voskování vozu voskem s UV filtrem a teflonem"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__vehicle_info
+msgid "Vozidlo (značka/model)"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service.category,description:bw_booking.cat_program
+msgid "Vyberte si program, který vám vyhovuje"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__service_ids
+msgid "Vybrané služby"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_lesteni
+msgid "Vícekroková korekce laku"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.ui.menu,name:bw_booking.menu_bw_service_list
+msgid "Všechny služby"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "We will contact you to confirm the appointment."
+msgstr "Budeme Vás kontaktovat s potvrzením termínu."
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__website_message_ids
+msgid "Website Messages"
+msgstr "Zprávy z webu"
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__website_message_ids
+msgid "Website communication history"
+msgstr "Historie komunikace z webu"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program1
+#: model_terms:bw.service,description:bw_booking.svc_program2
+#: model_terms:bw.service,description:bw_booking.svc_program3
+msgid "Wheel cleaning"
+msgstr "Mytí disků kol"
+
+#. module: bw_booking
+#: model_terms:bw.service,description:bw_booking.svc_program4
+msgid "Window cleaning"
+msgstr "Mytí oken"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "Your reservation has been received"
+msgstr "Vaše rezervace byla přijata"
+
+#. module: bw_booking
+#: model:bw.service,duration_info:bw_booking.svc_program3
+msgid "cca 6 hodin"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking_line__price_prefix
+msgid "e.g. \"od\""
+msgstr "např. \"od\""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_service_price__price_prefix
+msgid "e.g. \"od\" for \"od 500,-\""
+msgstr "např. \"od\" pro \"od 500,-\""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_service__duration_info
+msgid "e.g. 15-25 min, cca 6 hodin"
+msgstr "např. 15-25 min, cca 6 hodin"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "jan@example.com"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service.price,price_prefix:bw_booking.svc_extra_asfalt_price
+#: model:bw.service.price,price_prefix:bw_booking.svc_extra_chlupy_price
+#: model:bw.service.price,price_prefix:bw_booking.svc_extra_lesteni_dil_price
+#: model:bw.service.price,price_prefix:bw_booking.svc_extra_polepy_price
+#: model:bw.service.price,price_prefix:bw_booking.svc_lesteni_price_sedan
+#: model:bw.service.price,price_prefix:bw_booking.svc_lesteni_price_suv
+msgid "od"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "we have sent you a confirmation."
+msgstr "jsme Vám odeslali potvrzení."
+
+#. module: bw_booking
+#: model:mail.template,subject:bw_booking.mail_template_booking_pending
+msgid "{{ object.env.company.name }} - Your reservation #{{ object.id }}"
+msgstr "{{ object.env.company.name }} - Vaše rezervace #{{ object.id }}"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_kuze
+msgid "Čištění a impregnace kůže"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_okna
+msgid "Čištění a vyleštění vnějších oken a zrcátek"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_chlupy
+msgid "Čištění interiéru od chlupů"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_klima
+msgid "Čištění klimatizace"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_koberecky
+msgid "Čištění textilních koberečků (tepování) + provonění"
+msgstr ""

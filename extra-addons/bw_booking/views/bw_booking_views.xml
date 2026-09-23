@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===== BOOKING FORM ===== -->
+    <record id="view_bw_booking_form" model="ir.ui.view">
+        <field name="name">bw.booking.form</field>
+        <field name="model">bw.booking</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Potvrdit rezervaci"
+                            class="btn-primary" invisible="state != 'pending'"/>
+                    <button name="action_done" type="object" string="Dokončeno"
+                            class="btn-success" invisible="state != 'confirmed'"/>
+                    <button name="action_cancel" type="object" string="Zrušit"
+                            class="btn-danger" invisible="state in ('done', 'cancelled')"
+                            confirm="Opravdu chcete zrušit tuto rezervaci?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,confirmed,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Zákazník">
+                            <field name="customer_name"/>
+                            <field name="customer_email"/>
+                            <field name="customer_phone"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group string="Vozidlo a termín">
+                            <field name="vehicle_type_id"/>
+                            <field name="vehicle_info"/>
+                            <field name="preferred_date"/>
+                            <field name="is_price_approximate" invisible="1"/>
+                            <label for="total_price"/>
+                            <div class="o_row">
+                                <span invisible="not is_price_approximate" class="text-muted">od </span>
+                                <field name="total_price" widget="monetary"/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Vybrané služby">
+                            <field name="line_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="service_id"/>
+                                    <field name="price_prefix" optional="show"/>
+                                    <field name="price"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Poznámka">
+                            <field name="customer_note" placeholder="Poznámka zákazníka..."/>
+                        </page>
+                        <page string="Propojení">
+                            <group>
+                                <field name="lead_id"/>
+                                <field name="calendar_event_id"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ===== BOOKING LIST ===== -->
+    <record id="view_bw_booking_list" model="ir.ui.view">
+        <field name="name">bw.booking.list</field>
+        <field name="model">bw.booking</field>
+        <field name="arch" type="xml">
+            <list decoration-warning="state == 'pending'" decoration-success="state == 'confirmed'" decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="customer_name"/>
+                <field name="customer_phone"/>
+                <field name="vehicle_type_id"/>
+                <field name="preferred_date"/>
+                <field name="total_price" widget="monetary"/>
+                <field name="state" widget="badge"
+                       decoration-warning="state == 'pending'"
+                       decoration-success="state == 'confirmed'"
+                       decoration-info="state == 'done'"
+                       decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ===== BOOKING CALENDAR ===== -->
+    <record id="view_bw_booking_calendar" model="ir.ui.view">
+        <field name="name">bw.booking.calendar</field>
+        <field name="model">bw.booking</field>
+        <field name="arch" type="xml">
+            <calendar string="Rezervace" date_start="preferred_date" mode="week" color="state" event_limit="5" quick_create="0">
+                <field name="customer_name"/>
+                <field name="vehicle_type_id"/>
+                <field name="total_price"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- ===== BOOKING KANBAN ===== -->
+    <record id="view_bw_booking_kanban" model="ir.ui.view">
+        <field name="name">bw.booking.kanban</field>
+        <field name="model">bw.booking</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" quick_create="0">
+                <field name="state"/>
+                <field name="customer_name"/>
+                <field name="vehicle_type_id"/>
+                <field name="preferred_date"/>
+                <field name="total_price"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_content">
+                            <strong><field name="customer_name"/></strong>
+                            <div><field name="vehicle_type_id"/> | <field name="preferred_date"/></div>
+                            <div class="text-primary fw-bold"><field name="total_price" widget="monetary"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ===== BOOKING SEARCH ===== -->
+    <record id="view_bw_booking_search" model="ir.ui.view">
+        <field name="name">bw.booking.search</field>
+        <field name="model">bw.booking</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="customer_name"/>
+                <field name="customer_email"/>
+                <field name="customer_phone"/>
+                <filter name="filter_pending" string="Čeká na potvrzení" domain="[('state', '=', 'pending')]"/>
+                <filter name="filter_confirmed" string="Potvrzeno" domain="[('state', '=', 'confirmed')]"/>
+                <filter name="filter_done" string="Dokončeno" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <filter name="filter_today" string="Dnes" domain="[('preferred_date', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('preferred_date', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=1), datetime.time(0,0,0)))]"/>
+                <filter name="filter_week" string="Tento týden" domain="[('preferred_date', '&gt;=', (context_today() - relativedelta(weekday=0)).strftime('%%Y-%%m-%%d')), ('preferred_date', '&lt;', (context_today() + relativedelta(weeks=1, weekday=0)).strftime('%%Y-%%m-%%d'))]"/>
+                <group expand="0" string="Seskupit podle">
+                    <filter name="group_state" string="Stav" context="{'group_by': 'state'}"/>
+                    <filter name="group_vehicle" string="Typ vozidla" context="{'group_by': 'vehicle_type_id'}"/>
+                    <filter name="group_date" string="Datum" context="{'group_by': 'preferred_date:week'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ===== BOOKING ACTION ===== -->
+    <record id="action_bw_booking" model="ir.actions.act_window">
+        <field name="name">Rezervace</field>
+        <field name="res_model">bw.booking</field>
+        <field name="view_mode">list,kanban,calendar,form</field>
+        <field name="search_view_id" ref="view_bw_booking_search"/>
+        <field name="context">{'search_default_filter_pending': 1}</field>
+    </record>
+
+    <!-- ===== MENUS (under bw_root from service views) ===== -->
+    <menuitem id="menu_bw_booking" name="Rezervace" parent="menu_bw_root" action="action_bw_booking" sequence="1"/>
+
+</odoo>

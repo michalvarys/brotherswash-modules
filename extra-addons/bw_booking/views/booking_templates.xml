@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===== BOOKING CONFIGURATOR PAGE ===== -->
+    <template id="booking_page" name="Rezervace - Brothers Wash Detailing">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="bw-booking-page">
+
+                    <!-- Hero -->
+                    <section class="bw-booking-hero">
+                        <div class="container text-center">
+                            <h1>Rezervace</h1>
+                            <p class="lead">Vyberte si služby, zvolte termín a odešleme vám potvrzení.</p>
+                        </div>
+                    </section>
+
+                    <form action="/booking/submit" method="post" id="bwBookingForm" class="container bw-booking-form"
+                          data-currency-suffix=",- Kč"
+                          data-msg-select-vehicle="Prosím vyberte typ vozidla."
+                          data-msg-select-service="Prosím vyberte alespoň jednu službu."
+                          data-msg-sending="Odesílám...">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                        <!-- Step 1: Vehicle Type -->
+                        <section class="bw-step" id="bwStep1">
+                            <h2 class="bw-step-title"><span class="bw-step-num">1</span> Typ vozidla</h2>
+                            <div class="bw-vehicle-types">
+                                <t t-foreach="vehicle_types" t-as="vt">
+                                    <label class="bw-vehicle-card" t-att-data-id="vt.id">
+                                        <input type="radio" name="vehicle_type_id" t-att-value="vt.id" required="required"/>
+                                        <div class="bw-vehicle-card-inner">
+                                            <i class="fa fa-car fa-2x"/>
+                                            <span t-field="vt.name"/>
+                                        </div>
+                                    </label>
+                                </t>
+                            </div>
+                        </section>
+
+                        <!-- Step 2: Services -->
+                        <section class="bw-step" id="bwStep2">
+                            <h2 class="bw-step-title"><span class="bw-step-num">2</span> Vyberte služby</h2>
+
+                            <t t-foreach="categories" t-as="cat">
+                                <div class="bw-service-group">
+                                    <h3 class="bw-service-group-title">
+                                        <i t-att-class="'fa ' + (cat.icon or 'fa-wrench')"/>
+                                        <t t-esc="cat.name"/>
+                                    </h3>
+                                    <t t-if="cat.description">
+                                        <p class="bw-service-group-desc" t-esc="cat.description"/>
+                                    </t>
+
+                                    <div class="bw-service-list">
+                                        <t t-foreach="services.filtered(lambda s: s.category_id.id == cat.id)" t-as="svc">
+                                            <label class="bw-service-item" t-att-class="'bw-service-item--highlight' if svc.is_highlighted else ''"
+                                                   t-att-data-service-id="svc.id"
+                                                   t-att-data-badge="'Doporučujeme' if svc.is_highlighted else None">
+                                                <div class="bw-service-check">
+                                                    <input type="checkbox" t-att-name="'service_%d' % svc.id"/>
+                                                </div>
+                                                <div class="bw-service-info">
+                                                    <strong t-field="svc.name"/>
+                                                    <t t-if="svc.short_description">
+                                                        <small t-field="svc.short_description"/>
+                                                    </t>
+                                                    <t t-if="svc.duration_info">
+                                                        <span class="bw-duration">
+                                                            <i class="fa fa-clock-o"/> <t t-esc="svc.duration_info"/>
+                                                        </span>
+                                                    </t>
+                                                </div>
+                                                <div class="bw-service-price" t-att-data-service-id="svc.id">
+                                                    <span class="bw-price-value">--</span>
+                                                    <span class="bw-price-suffix">,- Kč</span>
+                                                </div>
+                                            </label>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </section>
+
+                        <!-- Total -->
+                        <section class="bw-total-bar" id="bwTotalBar">
+                            <div class="bw-total-inner">
+                                <span>Celková cena:</span>
+                                <strong id="bwTotalPrice">0,- Kč</strong>
+                            </div>
+                        </section>
+
+                        <!-- Step 3: Contact + Date -->
+                        <section class="bw-step" id="bwStep3">
+                            <h2 class="bw-step-title"><span class="bw-step-num">3</span> Kontaktní údaje</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Jméno a příjmení *</label>
+                                        <input type="text" name="customer_name" class="form-control" required="required"
+                                               t-att-placeholder="'Např. Jan Novák'"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" name="customer_email" class="form-control" required="required"
+                                               placeholder="jan@example.com"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Telefon *</label>
+                                        <input type="tel" name="customer_phone" class="form-control" required="required"
+                                               placeholder="+420 ..."/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Vozidlo (značka / model)</label>
+                                        <input type="text" name="vehicle_info" class="form-control"
+                                               t-att-placeholder="'např. Škoda Octavia'"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Preferovaný termín</label>
+                                        <input type="datetime-local" name="preferred_date" class="form-control"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Poznámka</label>
+                                        <textarea name="customer_note" class="form-control" rows="3"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Submit -->
+                        <section class="bw-step text-center">
+                            <button type="submit" class="btn btn-lg bw-btn-submit" id="bwSubmitBtn">
+                                <i class="fa fa-paper-plane"/> Odeslat rezervaci
+                            </button>
+                        </section>
+                    </form>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- ===== THANK YOU PAGE ===== -->
+    <template id="booking_thank_you" name="Děkujeme - Brothers Wash Detailing">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div class="bw-booking-page">
+                    <section class="bw-booking-hero">
+                        <div class="container text-center">
+                            <h1>Děkujeme!</h1>
+                        </div>
+                    </section>
+
+                    <div class="container bw-thank-you">
+                        <div class="bw-thank-you-card">
+                            <div class="bw-thank-you-icon">
+                                <i class="fa fa-check-circle"/>
+                            </div>
+                            <h2>Vaše rezervace byla přijata</h2>
+                            <p>Číslo rezervace: <strong>BWD-<t t-esc="booking.id"/></strong></p>
+                            <p>Na email <strong><t t-esc="booking.customer_email"/></strong> jsme Vám odeslali potvrzení.</p>
+                            <p>Budeme Vás kontaktovat s potvrzením termínu.</p>
+
+                            <div class="bw-thank-you-summary">
+                                <h3>Souhrn</h3>
+                                <table class="table">
+                                    <tbody>
+                                        <t t-foreach="booking.line_ids" t-as="line">
+                                            <tr>
+                                                <td t-esc="line.service_id.name"/>
+                                                <td class="text-end"><t t-esc="'%.0f' % line.price"/>,- Kč</td>
+                                            </tr>
+                                        </t>
+                                        <tr class="bw-total-row">
+                                            <td><strong>Celkem</strong></td>
+                                            <td class="text-end"><strong><t t-esc="'%.0f' % booking.total_price"/>,- Kč</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <a href="/" class="btn bw-btn-submit mt-3">
+                                <i class="fa fa-home"/> Zpět na hlavní stránku
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Inject price_map_json as script data -->
+    <template id="booking_page_js_data" inherit_id="bw_booking.booking_page" name="Booking Price Data">
+        <xpath expr="//form[@id='bwBookingForm']" position="before">
+            <script type="text/javascript">
+                var bwPriceMap = <t t-raw="price_map_json"/>;
+            </script>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,427 @@
+// Brothers Wash Detailing — Booking Configurator
+$bwd-accent: #00e68a;
+$bwd-accent-dim: #00b36b;
+$bwd-bg: #050808;
+$bwd-bg-card: #0a1210;
+$bwd-border: rgba(0, 230, 138, 0.08);
+$bwd-border-strong: rgba(0, 230, 138, 0.2);
+$bwd-text: #c8d6d0;
+$bwd-text-muted: #5a7a6e;
+$bwd-text-bright: #eaf5f0;
+$bwd-success: #00e68a;
+$bwd-gradient: linear-gradient(135deg, #00e68a 0%, #00b4d8 50%, #00c9a7 100%);
+
+// ===== PAGE =====
+.bw-booking-page {
+    background: $bwd-bg;
+    color: $bwd-text;
+    min-height: 100vh;
+    padding-bottom: 4rem;
+}
+
+// ===== HERO =====
+.bw-booking-hero {
+    padding: 4rem 0 2rem;
+    background: linear-gradient(135deg, $bwd-bg 0%, $bwd-bg-card 100%);
+    text-align: center;
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: $bwd-accent;
+        margin-bottom: 0.5rem;
+    }
+
+    .lead {
+        color: $bwd-text-muted;
+        font-size: 1.1rem;
+    }
+}
+
+// ===== FORM =====
+.bw-booking-form {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+// ===== STEPS =====
+.bw-step {
+    margin: 3rem 0;
+}
+
+.bw-step-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $bwd-text-bright;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.bw-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: $bwd-gradient;
+    color: #000;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+// ===== VEHICLE TYPE =====
+.bw-vehicle-types {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.bw-vehicle-card {
+    cursor: pointer;
+
+    input[type="radio"] {
+        display: none;
+    }
+}
+
+.bw-vehicle-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2.5rem;
+    border: 2px solid $bwd-border;
+    border-radius: 16px;
+    background: $bwd-bg-card;
+    transition: all 0.2s ease;
+    color: $bwd-text-muted;
+
+    &:hover {
+        border-color: $bwd-accent;
+        color: $bwd-accent;
+    }
+}
+
+.bw-vehicle-card--active .bw-vehicle-card-inner {
+    border-color: $bwd-accent;
+    background: rgba($bwd-accent, 0.08);
+    color: $bwd-accent;
+}
+
+// ===== SERVICE GROUPS =====
+.bw-service-group {
+    margin-bottom: 2.5rem;
+}
+
+.bw-service-group-title {
+    font-size: 1.2rem;
+    color: $bwd-accent;
+    margin-bottom: 0.5rem;
+
+    .fa {
+        margin-right: 0.5rem;
+    }
+}
+
+.bw-service-group-desc {
+    color: $bwd-text-muted;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+// ===== SERVICE ITEMS =====
+.bw-service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bw-service-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid $bwd-border;
+    border-radius: 8px;
+    background: $bwd-bg-card;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0;
+
+    &:hover {
+        border-color: $bwd-border-strong;
+    }
+
+    &--selected {
+        border-color: $bwd-accent;
+        background: rgba($bwd-accent, 0.05);
+    }
+
+    &--highlight {
+        border-color: $bwd-border-strong;
+        position: relative;
+
+        &[data-badge]::after {
+            content: attr(data-badge);
+            position: absolute;
+            top: -0.5rem;
+            right: 1rem;
+            background: $bwd-gradient;
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            letter-spacing: 0.05em;
+        }
+    }
+}
+
+.bw-service-check {
+    flex-shrink: 0;
+
+    input[type="checkbox"] {
+        width: 1.2rem;
+        height: 1.2rem;
+        accent-color: $bwd-accent;
+    }
+}
+
+.bw-service-info {
+    flex: 1;
+    min-width: 0;
+
+    strong {
+        display: block;
+        color: $bwd-text-bright;
+        font-size: 0.95rem;
+    }
+
+    small {
+        display: block;
+        color: $bwd-text-muted;
+        font-size: 0.8rem;
+        margin-top: 0.15rem;
+    }
+}
+
+.bw-duration {
+    display: inline-block;
+    color: $bwd-text-muted;
+    font-size: 0.75rem;
+    margin-top: 0.2rem;
+
+    .fa {
+        margin-right: 0.2rem;
+    }
+}
+
+.bw-service-price {
+    flex-shrink: 0;
+    text-align: right;
+    min-width: 5rem;
+}
+
+.bw-price-value {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: $bwd-accent;
+}
+
+.bw-price-suffix {
+    font-size: 0.8rem;
+    color: $bwd-text-muted;
+}
+
+.bw-price-na {
+    .bw-price-value {
+        color: $bwd-text-muted;
+    }
+}
+
+// ===== TOTAL BAR =====
+.bw-total-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    padding: 1rem 0;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all 0.3s ease;
+    pointer-events: none;
+
+    &.bw-total-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+.bw-total-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    background: $bwd-bg-card;
+    border: 2px solid $bwd-accent;
+    border-radius: 16px;
+    font-size: 1.1rem;
+
+    span {
+        color: $bwd-text;
+    }
+
+    strong {
+        font-size: 1.3rem;
+        color: $bwd-accent;
+    }
+}
+
+// ===== CONTACT FORM =====
+.bw-step .form-label {
+    color: $bwd-text;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.bw-step .form-control {
+    background: $bwd-bg-card;
+    border: 1px solid $bwd-border;
+    color: $bwd-text-bright;
+    border-radius: 8px;
+    padding: 0.6rem 0.85rem;
+
+    &::placeholder {
+        color: $bwd-text-muted;
+    }
+
+    &:focus {
+        border-color: $bwd-accent;
+        box-shadow: 0 0 0 0.2rem rgba($bwd-accent, 0.15);
+        background: $bwd-bg-card;
+        color: $bwd-text-bright;
+    }
+}
+
+// ===== SUBMIT BUTTON =====
+.bw-btn-submit {
+    background: $bwd-gradient;
+    color: #000;
+    border: none;
+    border-radius: 0;
+    padding: 1rem 3rem;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 0 30px rgba(0, 230, 138, 0.3);
+        color: #000;
+        transform: translateY(-2px);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+}
+
+// ===== THANK YOU =====
+.bw-thank-you {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.bw-thank-you-card {
+    background: $bwd-bg-card;
+    border: 1px solid $bwd-border;
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.bw-thank-you-icon {
+    font-size: 3.5rem;
+    color: $bwd-success;
+    margin-bottom: 1rem;
+}
+
+.bw-thank-you-card h2 {
+    color: $bwd-text-bright;
+    margin-bottom: 1rem;
+}
+
+.bw-thank-you-card p {
+    color: $bwd-text;
+}
+
+.bw-thank-you-summary {
+    text-align: left;
+    margin-top: 2rem;
+
+    h3 {
+        color: $bwd-accent;
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .table {
+        color: $bwd-text;
+        margin-bottom: 0;
+
+        td {
+            border-color: $bwd-border;
+            padding: 0.6rem 0.5rem;
+        }
+    }
+
+    .bw-total-row td {
+        border-top: 2px solid $bwd-accent;
+        color: $bwd-accent;
+    }
+}
+
+// ===== RESPONSIVE =====
+@media (max-width: 768px) {
+    .bw-booking-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .bw-vehicle-types {
+        flex-direction: column;
+    }
+
+    .bw-vehicle-card-inner {
+        flex-direction: row;
+        padding: 1rem 1.5rem;
+    }
+
+    .bw-service-item {
+        flex-wrap: wrap;
+    }
+
+    .bw-service-price {
+        width: 100%;
+        text-align: left;
+        padding-left: 2.2rem;
+        margin-top: 0.25rem;
+    }
+
+    .bw-total-inner {
+        flex-direction: column;
+        gap: 0.3rem;
+        text-align: center;
+    }
+}

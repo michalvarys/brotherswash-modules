@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_bwd_booking" name="BWD Booking Form">
+    <section class="bwd-booking o_cc o_colored_level" id="bwd-booking"
+             data-snippet="s_bwd_booking" data-name="BWD Booking Form">
+        <div class="container">
+            <h2 class="bwd-section-title bwd-reveal">Rezervace</h2>
+            <div class="bwd-section-line"/>
+            <p class="bwd-section-subtitle bwd-reveal">Vyberte si služby a zarezervujte si termín online</p>
+            <div class="bwd-booking-form" id="bwdBookingForm">
+                <!-- Owl component mounts here -->
+            </div>
+        </div>
+    </section>
+</template>
+
+</odoo>

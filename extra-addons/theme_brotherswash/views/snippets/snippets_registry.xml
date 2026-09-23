@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="brotherswash_snippets" name="Brothers Wash Snippets" inherit_id="website.snippets">
+    <xpath expr="//snippets[@id='snippet_structure']" position="after">
+        <snippets id="bwd_snippets" string="Brothers Wash">
+            <t t-snippet="theme_brotherswash.s_bwd_hero"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_hero.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_about"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_about.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_premium"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_premium.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_programs"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_programs.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_extras"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_extras.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_reviews"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_reviews.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_gallery"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_gallery.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_booking"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_booking.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_contact"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_contact.svg"/>
+            <t t-snippet="theme_brotherswash.s_bwd_footer"
+               t-thumbnail="/theme_brotherswash/static/src/img/snippets/s_bwd_footer.svg"/>
+        </snippets>
+    </xpath>
+</template>
+
+</odoo>

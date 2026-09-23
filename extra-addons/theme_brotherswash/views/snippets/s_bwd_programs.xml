@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_bwd_programs" name="BWD Programs (Ceník)">
+    <section class="bwd-programs o_cc o_colored_level" id="bwd-programs"
+             data-snippet="s_bwd_programs" data-name="BWD Programs">
+        <div class="container" data-bwd-services="program"/>
+    </section>
+</template>
+
+</odoo>
