@@ -402,6 +402,7 @@ publicWidget.registry.BwdBookingForm = publicWidget.Widget.extend({
         var email = document.getElementById('bwdEmail').value.trim();
         var phone = document.getElementById('bwdPhone').value.trim();
         if (!name || !email || !phone) { alert(_t("Please fill in name, email and phone.")); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert(_t("Please enter a valid email address.")); return; }
 
         btn.disabled = true;
         btn.textContent = _t("Submitting...");
@@ -440,6 +441,10 @@ publicWidget.registry.BwdBookingForm = publicWidget.Widget.extend({
                 self.el.querySelector('#bwdStep3').style.display = 'none';
                 self.el.querySelector('#bwdWizardIndicator').style.display = 'none';
                 document.getElementById('bwdBookingSuccess').style.display = 'block';
+            } else if (result && result.error === 'invalid_email') {
+                alert(_t("Please enter a valid email address."));
+                btn.disabled = false;
+                btn.textContent = _t("Submit reservation");
             } else {
                 alert(_t("Error submitting. Please try again."));
                 btn.disabled = false;

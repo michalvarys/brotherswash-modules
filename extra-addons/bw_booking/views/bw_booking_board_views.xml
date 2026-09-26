@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===== BOARD REZERVACÍ ===== -->
+    <record id="view_bw_booking_board_kanban" model="ir.ui.view">
+        <field name="name">bw.booking.board.kanban</field>
+        <field name="model">bw.booking</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" class="o_kanban_small_column" quick_create="0" sample="1">
+                <field name="stage_id"/>
+                <field name="state"/>
+                <field name="ad_platform"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <strong><field name="customer_name"/></strong>
+                            <span t-if="record.ad_platform.raw_value == 'google'" class="badge text-bg-primary">Google Ads</span>
+                            <span t-if="record.ad_platform.raw_value == 'meta'" class="badge text-bg-info">Meta Ads</span>
+                        </div>
+                        <div class="text-muted">
+                            BWD-<field name="id"/> &#8226; <field name="vehicle_type_id"/>
+                        </div>
+                        <div class="mt-1">
+                            <i class="fa fa-calendar me-1" title="Preferovaný termín"/><field name="preferred_date"/>
+                        </div>
+                        <div class="mt-1">
+                            <i class="fa fa-phone me-1" title="Telefon"/><field name="customer_phone"/>
+                        </div>
+                        <div class="mt-1 fw-bold"><field name="total_price" widget="monetary"/></div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_bw_booking_board" model="ir.actions.act_window">
+        <field name="name">Board rezervací</field>
+        <field name="res_model">bw.booking</field>
+        <field name="view_mode">kanban,list,calendar,form</field>
+        <field name="view_id" ref="view_bw_booking_board_kanban"/>
+        <field name="search_view_id" ref="view_bw_booking_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiley_face">Zatím žádné rezervace.</p>
+            <p>Nová rezervace z webu se objeví ve sloupci „Nové“ a přetahováním ji posouváš dál.
+               V „Potvrzeno“ se zákazníkovi pošle potvrzení, „Zákazník přišel“ se započítá jako konverze z reklamy.</p>
+        </field>
+    </record>
+
+    <!-- ===== NASTAVENÍ SLOUPCŮ ===== -->
+    <record id="view_bw_booking_stage_list" model="ir.ui.view">
+        <field name="name">bw.booking.stage.list</field>
+        <field name="model">bw.booking.stage</field>
+        <field name="arch" type="xml">
+            <list string="Sloupce boardu">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="mail_enabled" widget="boolean_toggle" string="Posílat e-mail"/>
+                <field name="booking_state" string="Stav rezervace"/>
+                <field name="mail_template_id" string="E-mail" optional="show"/>
+                <field name="fold" widget="boolean_toggle" optional="hide"/>
+                <field name="booking_count" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bw_booking_stage_form" model="ir.ui.view">
+        <field name="name">bw.booking.stage.form</field>
+        <field name="model">bw.booking.stage</field>
+        <field name="arch" type="xml">
+            <form string="Sloupec boardu">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="fold"/>
+                        </group>
+                        <group>
+                            <field name="booking_state"/>
+                            <field name="mail_enabled"/>
+                            <field name="mail_template_id" invisible="not mail_enabled" required="mail_enabled"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="not mail_enabled">
+                        <p>Po přetažení rezervace do tohoto sloupce dostane zákazník vybraný e-mail
+                           v jazyce, ve kterém rezervoval (čeština, angličtina, ukrajinština). Každý e-mail jen jednou.
+                           Text e-mailu upravíš v Nastavení → Technické → E-mailové šablony.</p>
+                    </div>
+                    <div class="text-muted" invisible="mail_enabled">
+                        <p>Tento sloupec zákazníkovi <b>nic nepošle</b>. Zapni „Poslat e-mail zákazníkovi“, pokud chceš.</p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bw_booking_stage" model="ir.actions.act_window">
+        <field name="name">Nastavení sloupců</field>
+        <field name="res_model">bw.booking.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_bw_booking_board" name="Board rezervací" parent="menu_bw_root" action="action_bw_booking_board" sequence="0"/>
+    <menuitem id="menu_bw_booking_stage" name="Nastavení sloupců" parent="menu_bw_root" action="action_bw_booking_stage" sequence="90"/>
+
+</odoo>

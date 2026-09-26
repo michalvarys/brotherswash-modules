@@ -3,7 +3,7 @@
     'description': 'Service configurator, booking system with CRM and calendar integration for Brothers Wash Detailing. '
                    'Sends booking conversions to Meta Pixel / Google tag and keeps the ad attribution on bookings and CRM leads.',
     'category': 'Website/Services',
-    'version': '18.0.1.1.0',
+    'version': '18.0.1.2.0',
     'author': 'Michal Varys',
     'depends': [
         'website',
@@ -22,8 +22,10 @@
         'data/res_company_data.xml',
         'data/crm_data.xml',
         'data/mail_template_data.xml',
+        'data/bw_booking_stage_data.xml',
         'views/bw_service_views.xml',
         'views/bw_booking_views.xml',
+        'views/bw_booking_board_views.xml',
         'views/booking_templates.xml',
         'views/website_tracking_templates.xml',
         'views/res_config_settings_views.xml',

@@ -11,3 +11,5 @@ access_bw_booking_public,bw.booking.public,model_bw_booking,,1,0,1,0
 access_bw_booking_admin,bw.booking.admin,model_bw_booking,sales_team.group_sale_manager,1,1,1,1
 access_bw_booking_line_public,bw.booking.line.public,model_bw_booking_line,,1,0,1,0
 access_bw_booking_line_admin,bw.booking.line.admin,model_bw_booking_line,sales_team.group_sale_manager,1,1,1,1
+access_bw_booking_stage_user,bw.booking.stage.user,model_bw_booking_stage,base.group_user,1,0,0,0
+access_bw_booking_stage_admin,bw.booking.stage.admin,model_bw_booking_stage,sales_team.group_sale_manager,1,1,1,1

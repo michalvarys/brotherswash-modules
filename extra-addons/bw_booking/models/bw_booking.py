@@ -44,6 +44,15 @@ class BwBooking(models.Model):
         ('no_show', 'No-show'),
         ('cancelled', 'Cancelled'),
     ], default='pending', tracking=True, required=True)
+    stage_id = fields.Many2one(
+        'bw.booking.stage', string='Sloupec (board)', tracking=True, index=True, copy=False,
+        group_expand='_read_group_stage_ids',
+        default=lambda self: self.env['bw.booking.stage'].search([('booking_state', '=', 'pending')], limit=1),
+    )
+    mailed_stage_ids = fields.Many2many(
+        'bw.booking.stage', 'bw_booking_mailed_stage_rel', 'booking_id', 'stage_id',
+        string='E-mail už odeslán ve sloupcích', copy=False,
+    )
 
     # Customer info
     customer_name = fields.Char(required=True, string='Jméno zákazníka')
@@ -284,43 +293,103 @@ class BwBooking(models.Model):
     # Workflow
     # ------------------------------------------------------------------
 
+    # The booking board (kanban) and the buttons drive the same workflow:
+    # moving a card into a column applies the column's booking state, a button
+    # moves the card into the column of the new state. E-mails are sent by the
+    # column (bw.booking.stage), once per column.
+
     def action_confirm(self):
         """Owner confirms the booking — creates calendar event and sends confirmation email."""
         for rec in self:
             if rec.state != 'pending':
                 raise UserError(_('Can only confirm a reservation in "Awaiting confirmation" state.'))
-
-            if not rec.partner_id:
-                rec._create_or_find_partner()
-            rec._create_calendar_event()
-            rec.state = 'confirmed'
-
-            template = self.env.ref('bw_booking.mail_template_booking_confirmed', raise_if_not_found=False)
-            if template:
-                template.send_mail(rec.id, force_send=True)
+        self._bw_set_state('confirmed')
 
     def action_done(self):
         """Customer showed up — this is the real conversion (CRM won + Meta Purchase)."""
-        for rec in self:
-            rec.state = 'done'
-            if rec.lead_id and rec.lead_id.active:
-                rec.lead_id.action_set_won()
-            rec._bw_meta_send('Purchase')
+        self._bw_set_state('done')
 
     def action_no_show(self):
-        lost_reason = self.env.ref('bw_booking.lost_reason_no_show', raise_if_not_found=False)
-        for rec in self:
-            rec.state = 'no_show'
-            if rec.lead_id and rec.lead_id.active:
-                rec.lead_id.action_set_lost(lost_reason_id=lost_reason.id if lost_reason else False)
+        self._bw_set_state('no_show')
 
     def action_cancel(self):
+        self._bw_set_state('cancelled')
+
+    def _bw_set_state(self, state, move_card=True):
+        lost_reason = self.env.ref('bw_booking.lost_reason_no_show', raise_if_not_found=False)
         for rec in self:
-            rec.state = 'cancelled'
-            if rec.lead_id:
-                rec.lead_id.active = False
-            if rec.calendar_event_id:
-                rec.calendar_event_id.unlink()
+            if rec.state == state:
+                continue
+            if state == 'confirmed':
+                if not rec.partner_id:
+                    rec._create_or_find_partner()
+                if not rec.calendar_event_id:
+                    rec._create_calendar_event()
+            elif state == 'done':
+                if rec.lead_id and rec.lead_id.active:
+                    rec.lead_id.action_set_won()
+                rec._bw_meta_send('Purchase')
+            elif state == 'no_show':
+                if rec.lead_id and rec.lead_id.active:
+                    rec.lead_id.action_set_lost(lost_reason_id=lost_reason.id if lost_reason else False)
+            elif state == 'cancelled':
+                if rec.lead_id:
+                    rec.lead_id.active = False
+                if rec.calendar_event_id:
+                    rec.calendar_event_id.unlink()
+            rec.with_context(bw_stage_sync=True).state = state
+            if move_card:
+                stage = self.env['bw.booking.stage'].search([('booking_state', '=', state)], limit=1)
+                if stage and rec.stage_id != stage:
+                    rec.with_context(bw_stage_sync=True).stage_id = stage
+                    rec._bw_stage_notify()
+
+    @api.model
+    def _bw_assign_stages(self):
+        Stage = self.env['bw.booking.stage']
+        sent_before = {
+            'pending': ['pending'],
+            'confirmed': ['pending', 'confirmed'],
+            'done': ['pending', 'confirmed'],
+            'no_show': ['pending', 'confirmed'],
+            'cancelled': ['pending'],
+        }
+        for rec in self.search([('stage_id', '=', False)]):
+            stage = Stage.search([('booking_state', '=', rec.state)], limit=1)
+            mailed = Stage.search([('booking_state', 'in', sent_before.get(rec.state, []))])
+            rec.with_context(bw_stage_sync=True).write({
+                'stage_id': stage.id,
+                'mailed_stage_ids': [(6, 0, mailed.ids)],
+            })
+
+    @api.model
+    def _read_group_stage_ids(self, stages, domain):
+        """Show empty columns on the board too."""
+        return self.env['bw.booking.stage'].search([])
+
+    def write(self, vals):
+        res = super().write(vals)
+        if 'stage_id' in vals and not self.env.context.get('bw_stage_sync'):
+            # Card moved on the board
+            for rec in self:
+                if rec.stage_id.booking_state:
+                    rec._bw_set_state(rec.stage_id.booking_state, move_card=False)
+                rec._bw_stage_notify()
+        return res
+
+    def _bw_stage_notify(self):
+        """Send the column e-mail (once per column and booking)."""
+        for rec in self:
+            stage = rec.stage_id
+            template = stage.mail_template_id
+            if not stage.mail_enabled or not template or not rec.customer_email or stage in rec.mailed_stage_ids:
+                continue
+            try:
+                template.sudo().send_mail(rec.id, force_send=True)
+                rec.with_context(bw_stage_sync=True).mailed_stage_ids = [(4, stage.id)]
+            except Exception:
+                # a broken SMTP must never block the board
+                _logger.exception('Booking %s: e-mail of column %s failed', rec.id, stage.name)
 
     def _create_or_find_partner(self):
         """Find or create res.partner from customer info."""

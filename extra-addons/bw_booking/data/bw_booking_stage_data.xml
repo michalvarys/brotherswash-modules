@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Default board columns. noupdate: renamed columns, e-mail switches and added columns stay. -->
+    <data noupdate="1">
+        <record id="booking_stage_new" model="bw.booking.stage">
+            <field name="name">Nové</field>
+            <field name="sequence">10</field>
+            <field name="booking_state">pending</field>
+            <field name="mail_enabled" eval="True"/>
+            <field name="mail_template_id" ref="mail_template_booking_pending"/>
+        </record>
+        <record id="booking_stage_confirmed" model="bw.booking.stage">
+            <field name="name">Potvrzeno</field>
+            <field name="sequence">20</field>
+            <field name="booking_state">confirmed</field>
+            <field name="mail_enabled" eval="True"/>
+            <field name="mail_template_id" ref="mail_template_booking_confirmed"/>
+        </record>
+        <record id="booking_stage_done" model="bw.booking.stage">
+            <field name="name">Zákazník přišel</field>
+            <field name="sequence">30</field>
+            <field name="booking_state">done</field>
+        </record>
+        <record id="booking_stage_no_show" model="bw.booking.stage">
+            <field name="name">Nedorazil</field>
+            <field name="sequence">40</field>
+            <field name="booking_state">no_show</field>
+            <field name="fold" eval="True"/>
+        </record>
+        <record id="booking_stage_cancelled" model="bw.booking.stage">
+            <field name="name">Zrušeno</field>
+            <field name="sequence">50</field>
+            <field name="booking_state">cancelled</field>
+            <field name="fold" eval="True"/>
+        </record>
+    </data>
+
+    <!-- Bookings created before the board existed: put them into the column of their state -->
+    <function model="bw.booking" name="_bw_assign_stages"/>
+</odoo>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-26 07:21+0000\n"
-"PO-Revision-Date: 2026-09-26 07:21+0000\n"
+"POT-Creation-Date: 2026-09-26 07:58+0000\n"
+"PO-Revision-Date: 2026-09-26 07:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -200,6 +200,11 @@ msgid ""
 msgstr ""
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_board_kanban
+msgid "<i class=\"fa fa-calendar me-1\" title=\"Preferovaný termín\"/>"
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
 msgid "<i class=\"fa fa-home\"/> Back to the homepage"
 msgstr "<i class=\"fa fa-home\"/> Zpět na hlavní stránku"
@@ -208,6 +213,11 @@ msgstr "<i class=\"fa fa-home\"/> Zpět na hlavní stránku"
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
 msgid "<i class=\"fa fa-paper-plane\"/> Submit reservation"
 msgstr "<i class=\"fa fa-paper-plane\"/> Odeslat rezervaci"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_board_kanban
+msgid "<i class=\"fa fa-phone me-1\" title=\"Telefon\"/>"
+msgstr ""
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
@@ -348,6 +358,7 @@ msgstr "Čeká na potvrzení"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_board_kanban
 msgid "BWD-"
 msgstr ""
 
@@ -372,6 +383,12 @@ msgid "Bez reklamy"
 msgstr ""
 
 #. module: bw_booking
+#: model:ir.actions.act_window,name:bw_booking.action_bw_booking_board
+#: model:ir.ui.menu,name:bw_booking.menu_bw_booking_board
+msgid "Board rezervací"
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__booking_id
 msgid "Booking"
 msgstr "Rezervace"
@@ -389,6 +406,11 @@ msgstr "Brothers Wash"
 #. module: bw_booking
 #: model:ir.model,name:bw_booking.model_bw_data_translations
 msgid "Brothers Wash data translations fix"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_booking_stage
+msgid "Brothers Wash – sloupec boardu rezervací"
 msgstr ""
 
 #. module: bw_booking
@@ -492,6 +514,11 @@ msgid "Cleaning door jambs, sills and wheel arches"
 msgstr "Mytí vnitřních hran dveří, prahů a podblatníků"
 
 #. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking_stage__booking_state
+msgid "Co se s rezervací stane po přetažení do sloupce: „Potvrzeno“ založí událost v kalendáři, „Zákazník přišel“ označí CRM příležitost jako vyhranou a pošle konverzi do Meta, „Nedorazil“ ji uzavře jako ztracenou. Prázdné = jen tvůj interní krok."
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program1
 #: model_terms:bw.service,description:bw_booking.svc_program2
 #: model_terms:bw.service,description:bw_booking.svc_program3
@@ -529,6 +556,7 @@ msgstr "Potvrzeno"
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__create_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__create_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__create_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__create_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__create_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__create_uid
@@ -539,6 +567,7 @@ msgstr "Vytvořil"
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__create_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__create_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__create_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__create_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__create_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__create_date
@@ -586,6 +615,7 @@ msgstr "Služba detailingu"
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__display_name
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__display_name
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__display_name
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__display_name
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__display_name
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__display_name
@@ -624,6 +654,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__duration_info
 msgid "Duration Info"
 msgstr "Informace o délce"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__mail_template_id
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_stage_list
+msgid "E-mail"
+msgstr "E-mail"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__mailed_stage_ids
+msgid "E-mail už odeslán ve sloupcích"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_email
@@ -694,6 +735,7 @@ msgstr ""
 #. module: bw_booking
 #: model:crm.tag,name:bw_booking.crm_tag_google_ads
 #: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__ad_platform__google
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_board_kanban
 msgid "Google Ads"
 msgstr ""
 
@@ -773,6 +815,7 @@ msgstr "Dobrý den"
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__id
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__id
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__id
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__id
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__id
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__id
@@ -897,6 +940,11 @@ msgid "Kategorie služeb"
 msgstr ""
 
 #. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking_stage__mail_enabled
+msgid "Když rezervace vstoupí do sloupce, pošle se zákazníkovi vybraný e-mail (v jazyce, ve kterém rezervoval). Každý e-mail jen jednou."
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__partner_id
 msgid "Kontakt"
 msgstr ""
@@ -914,6 +962,7 @@ msgstr ""
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__write_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__write_uid
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__write_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__write_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__write_uid
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__write_uid
@@ -924,6 +973,7 @@ msgstr "Naposledy upravil"
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__write_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__write_date
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__write_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__write_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__write_date
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__write_date
@@ -978,6 +1028,7 @@ msgstr ""
 
 #. module: bw_booking
 #: model:crm.tag,name:bw_booking.crm_tag_meta_ads
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_board_kanban
 msgid "Meta Ads"
 msgstr ""
 
@@ -1065,6 +1116,13 @@ msgid "Name"
 msgstr "Název"
 
 #. module: bw_booking
+#: model:ir.actions.act_window,name:bw_booking.action_bw_booking_stage
+#: model:ir.ui.menu,name:bw_booking.menu_bw_booking_stage
+msgid "Nastavení sloupců"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking_stage__booking_state__no_show
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
 msgid "Nedorazil"
@@ -1106,6 +1164,13 @@ msgid "Nová rezervace BWD-{{ object.id }}: {{ object.customer_name }} ({{ objec
 msgstr ""
 
 #. module: bw_booking
+#: model_terms:ir.actions.act_window,help:bw_booking.action_bw_booking_board
+msgid ""
+"Nová rezervace z webu se objeví ve sloupci „Nové“ a přetahováním ji posouváš dál.\n"
+"               V „Potvrzeno“ se zákazníkovi pošle potvrzení, „Zákazník přišel“ se započítá jako konverze z reklamy."
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_needaction_counter
 msgid "Number of Actions"
 msgstr "Počet akcí"
@@ -1133,6 +1198,11 @@ msgstr ""
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
 msgid "Název kategorie"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__name
+msgid "Název sloupce"
 msgstr ""
 
 #. module: bw_booking
@@ -1198,6 +1268,14 @@ msgid "Please select your vehicle type."
 msgstr "Prosím vyberte typ vozidla."
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_stage_form
+msgid ""
+"Po přetažení rezervace do tohoto sloupce dostane zákazník vybraný e-mail\n"
+"                           v jazyce, ve kterém rezervoval (čeština, angličtina, ukrajinština). Každý e-mail jen jednou.\n"
+"                           Text e-mailu upravíš v Nastavení → Technické → E-mailové šablony."
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program1
 msgid "Polishing exterior windows and mirrors"
 msgstr "Vyleštění vnějších oken a zrcátek"
@@ -1228,11 +1306,22 @@ msgid "Popis kategorie…"
 msgstr ""
 
 #. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__mail_enabled
+msgid "Poslat e-mail zákazníkovi"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_stage_list
+msgid "Posílat e-mail"
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
 msgid "Potvrdit rezervaci"
 msgstr ""
 
 #. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking_stage__booking_state__confirmed
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
 msgid "Potvrzeno"
 msgstr ""
@@ -1250,6 +1339,11 @@ msgstr ""
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
 msgid "Poznámka zákazníka..."
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__sequence
+msgid "Pořadí"
 msgstr ""
 
 #. module: bw_booking
@@ -1406,6 +1500,11 @@ msgid "Rezervace"
 msgstr ""
 
 #. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__booking_count
+msgid "Rezervací"
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
 msgid "Rezervovatelné"
 msgstr ""
@@ -1429,6 +1528,11 @@ msgstr "Chyba doručení SMS"
 #: model:bw.vehicle.type,name:bw_booking.vehicle_type_suv
 msgid "SUV"
 msgstr "SUV"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__fold
+msgid "Sbaleno v boardu"
+msgstr ""
 
 #. module: bw_booking
 #: model:bw.vehicle.type,name:bw_booking.vehicle_type_sedan
@@ -1502,6 +1606,26 @@ msgid "Single panel polishing"
 msgstr "Leštění jednotlivého dílu"
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_stage_list
+msgid "Sloupce boardu"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__stage_id
+msgid "Sloupec (board)"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_stage_form
+msgid "Sloupec boardu"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking_stage__fold
+msgid "Sloupec bude v boardu sbalený (hodí se pro koncové stavy)."
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__service_id
 msgid "Služba"
 msgstr ""
@@ -1554,6 +1678,12 @@ msgid "Stav"
 msgstr ""
 
 #. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking_stage__booking_state
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_stage_list
+msgid "Stav rezervace"
+msgstr ""
+
+#. module: bw_booking
 #: model:bw.service,name:bw_booking.svc_extra_polepy
 msgid "Sticker and wrap removal"
 msgstr "Odstranění polepů"
@@ -1576,6 +1706,11 @@ msgstr "Odstranění asfaltu"
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_phone
 msgid "Telefon"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_stage_form
+msgid "Tento sloupec zákazníkovi <b>nic nepošle</b>. Zapni „Poslat e-mail zákazníkovi“, pokud chceš."
 msgstr ""
 
 #. module: bw_booking
@@ -1822,6 +1957,16 @@ msgid "Z reklamy"
 msgstr ""
 
 #. module: bw_booking
+#: model_terms:ir.actions.act_window,help:bw_booking.action_bw_booking_board
+msgid "Zatím žádné rezervace."
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking_stage__booking_state__cancelled
+msgid "Zrušeno"
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
 msgid "Zrušit"
 msgstr ""
@@ -1834,6 +1979,11 @@ msgstr ""
 #. module: bw_booking
 #: model:crm.lost.reason,name:bw_booking.lost_reason_no_show
 msgid "Zákazník nedorazil"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking_stage__booking_state__done
+msgid "Zákazník přišel"
 msgstr ""
 
 #. module: bw_booking
@@ -1905,6 +2055,7 @@ msgid "{{ object.env.company.name }} - {{ object._bw_mail_texts()['subject_pendi
 msgstr ""
 
 #. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking_stage__booking_state__pending
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
 msgid "Čeká na potvrzení"
 msgstr ""

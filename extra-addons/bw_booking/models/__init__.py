@@ -1,6 +1,7 @@
 from . import bw_vehicle_type
 from . import bw_service_category
 from . import bw_service
+from . import bw_booking_stage
 from . import bw_booking
 from . import website
 from . import res_config_settings

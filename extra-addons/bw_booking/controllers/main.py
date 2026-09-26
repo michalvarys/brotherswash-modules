@@ -4,6 +4,7 @@ from datetime import datetime
 
 from odoo import http
 from odoo.http import request
+from odoo.tools import email_normalize
 
 _logger = logging.getLogger(__name__)
 
@@ -111,14 +112,15 @@ class BwBookingController(http.Controller):
         # The lead is for the (Czech speaking) owner, whatever the visitor language
         booking.with_context(lang='cs_CZ')._create_crm_lead()
 
-        for xmlid in ('bw_booking.mail_template_booking_pending', 'bw_booking.mail_template_booking_owner'):
-            template = request.env.ref(xmlid, raise_if_not_found=False)
-            if template:
-                try:
-                    template.sudo().send_mail(booking.id, force_send=True)
-                except Exception:
-                    # A broken SMTP must never lose the booking itself
-                    _logger.exception('Booking %s: sending %s failed', booking.id, xmlid)
+        # Customer e-mail comes from the board column the booking lands in ("Nové")
+        booking._bw_stage_notify()
+        template = request.env.ref('bw_booking.mail_template_booking_owner', raise_if_not_found=False)
+        if template:
+            try:
+                template.sudo().send_mail(booking.id, force_send=True)
+            except Exception:
+                # A broken SMTP must never lose the booking itself
+                _logger.exception('Booking %s: owner e-mail failed', booking.id)
 
         booking._bw_meta_send('Lead')
         return booking
@@ -130,6 +132,8 @@ class BwBookingController(http.Controller):
         for field in required:
             if not post.get(field):
                 return {'success': False, 'error': 'missing_fields'}
+        if not email_normalize(post['customer_email']):
+            return {'success': False, 'error': 'invalid_email'}
 
         service_ids = post.get('service_ids', [])
         if not service_ids:
@@ -178,6 +182,8 @@ class BwBookingController(http.Controller):
         for field in required:
             if not post.get(field):
                 return request.redirect('/booking?error=missing_fields')
+        if not email_normalize(post['customer_email']):
+            return request.redirect('/booking?error=invalid_email')
 
         service_ids = []
         for key in post:
