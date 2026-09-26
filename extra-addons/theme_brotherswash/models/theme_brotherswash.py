@@ -1,5 +1,7 @@
 from odoo import api, models
 
+from .view_terms import VIEW_TERMS
+
 # Menu labels: theme.website.menu (xmlid) -> (cs_CZ, en_US, uk_UA).
 # The menus were created with Czech as the en_US source, so /en showed Czech labels.
 MENU_TRANSLATIONS = {
@@ -45,3 +47,30 @@ class ThemeBrothersWashTranslations(models.AbstractModel):
             self._bwd_set_translations(theme_menu, 'name', cs, en, uk)
             for menu in self.env['website.menu'].with_context(active_test=False).search([('theme_template_id', '=', theme_menu.id)]):
                 self._bwd_set_translations(menu, 'name', cs, en, uk)
+
+    @api.model
+    def _bwd_fix_edited_views(self):
+        """Website copies of the snippets saved from the editor (arch_updated) are skipped
+        by the theme upgrade and keep the old Czech source. Switch their Czech terms to the
+        English source and store cs/uk as term translations; anything else is left alone."""
+        installed = dict(self.env['res.lang'].get_installed())
+        field = self.env['ir.ui.view']._fields['arch_db']
+        views = self.env['ir.ui.view'].with_context(active_test=False).search([
+            ('key', '=like', 'theme_brotherswash.%'), ('website_id', '!=', False),
+        ])
+        for view in views:
+            source = view.with_context(lang='en_US').arch_db
+            if not source:
+                continue
+            terms = [term for term in field.get_trans_terms(source) if term in VIEW_TERMS]
+            if not terms:
+                continue
+            english = field.translate(lambda term: VIEW_TERMS[term][0] if term in VIEW_TERMS else term, source)
+            view.with_context(lang='en_US').write({'arch_db': english})
+            translations = {}
+            if 'cs_CZ' in installed:
+                translations['cs_CZ'] = {VIEW_TERMS[term][0]: term for term in terms}
+            if 'uk_UA' in installed:
+                translations['uk_UA'] = {VIEW_TERMS[term][0]: VIEW_TERMS[term][1] for term in terms}
+            if translations:
+                view.update_field_translations('arch_db', translations)

@@ -2,4 +2,5 @@
 <odoo>
     <!-- Runs on every upgrade; hand-edited menu labels are left alone -->
     <function model="theme.brotherswash.translations" name="_bwd_fix_menu_translations"/>
+    <function model="theme.brotherswash.translations" name="_bwd_fix_edited_views"/>
 </odoo>
