@@ -72,6 +72,18 @@ class BwBookingController(http.Controller):
                 }
         return result
 
+    def _bw_booking_lang(self, page_lang):
+        """Language of the page the visitor booked on (sent by the form).
+
+        The AJAX call has no /en or /uk prefix, so request.env.lang is only a guess
+        when the visitor has no frontend_lang cookie yet.
+        """
+        installed = dict(request.env['res.lang'].get_installed())
+        code = (page_lang or '').replace('-', '_')
+        if code in installed:
+            return code
+        return request.env.lang if request.env.lang in installed else request.website.default_lang_id.code
+
     def _bw_create_booking(self, post, service_ids, tracking=None):
         """Shared booking creation for the AJAX homepage form and the /booking page.
 
@@ -103,7 +115,7 @@ class BwBookingController(http.Controller):
             'vehicle_type_id': vehicle_type_id,
             'vehicle_info': post.get('vehicle_info', ''),
             'preferred_date': Booking._bw_parse_local_datetime(post.get('preferred_date')),
-            'lang': request.env.lang or 'cs_CZ',
+            'lang': self._bw_booking_lang(post.get('lang')),
             'website_id': request.website.id,
             'line_ids': lines,
         }

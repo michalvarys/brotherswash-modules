@@ -403,6 +403,8 @@ class BwBooking(models.Model):
                 'phone': self.customer_phone,
                 'lang': self.lang if self.lang in dict(self.env['res.lang'].get_installed()) else False,
             })
+        elif not partner.phone and not partner.mobile and self.customer_phone:
+            partner.phone = self.customer_phone
         self.partner_id = partner
 
     def _bw_attribution_text(self):
@@ -491,7 +493,8 @@ class BwBooking(models.Model):
         }
         if self.lead_id:
             event_vals['opportunity_id'] = self.lead_id.id
-        event = self.env['calendar.event'].create(event_vals)
+        # no_mail_to_attendees: the customer gets our translated confirmation, not Odoo's invitation
+        event = self.env['calendar.event'].with_context(no_mail_to_attendees=True).create(event_vals)
         self.calendar_event_id = event
 
     # ------------------------------------------------------------------

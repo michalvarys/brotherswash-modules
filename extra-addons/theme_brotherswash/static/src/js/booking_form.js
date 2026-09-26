@@ -428,6 +428,7 @@ publicWidget.registry.BwdBookingForm = publicWidget.Widget.extend({
             service_ids: Array.from(this.selectedServices),
             service_data: serviceData,
             tracking: window.bwTracking ? window.bwTracking.getAttribution() : {},
+            lang: document.documentElement.lang,
         }).then(function (result) {
             if (result && result.success) {
                 // Conversion for Meta Pixel / GA4 / Google Ads / GTM (bw_booking tracking.js)

@@ -20,6 +20,7 @@
                           data-currency-suffix=",- Kč">
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                         <input type="hidden" name="bw_tracking" id="bwTrackingInput" value="{}"/>
+                        <input type="hidden" name="lang" t-att-value="request.env.lang"/>
 
                         <!-- Step 1: Vehicle Type -->
                         <section class="bw-step" id="bwStep1">
