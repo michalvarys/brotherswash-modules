@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-08 19:33+0000\n"
-"PO-Revision-Date: 2026-03-08 19:33+0000\n"
+"POT-Creation-Date: 2026-09-26 07:21+0000\n"
+"PO-Revision-Date: 2026-09-26 07:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,262 +16,193 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-msgid "+420 ..."
+#: model:ir.model.fields,help:bw_booking.field_res_config_settings__bw_ads_booking_send_to
+#: model:ir.model.fields,help:bw_booking.field_website__bw_ads_booking_send_to
+msgid "\"send_to\" of the Google Ads conversion fired after a booking is submitted, e.g. AW-17998032792/n-P5CKCcyc8cEJjfkIZD."
 msgstr ""
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
-msgid ",- CZK"
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "(volitelné)"
 msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "+420 ..."
+msgstr "+420 ..."
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid ",- Kč"
+msgstr ",- Kč"
 
 #. module: bw_booking
 #: model:bw.service,duration_info:bw_booking.svc_program1
 msgid "15-25 min"
-msgstr ""
+msgstr "15-25 хв"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "2284373242317259"
+msgstr "2284373242317259"
 
 #. module: bw_booking
 #: model:bw.service,duration_info:bw_booking.svc_program4
 msgid "60 min"
-msgstr ""
+msgstr "60 хв"
 
 #. module: bw_booking
 #: model:bw.service,duration_info:bw_booking.svc_program2
 msgid "60-90 min"
+msgstr "60-90 хв"
+
+#. module: bw_booking
+#: model:mail.template,body_html:bw_booking.mail_template_booking_owner
+msgid ""
+"<div style=\"font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;max-width:600px;\">\n"
+"    <h2 style=\"margin-top:0;\">Nová rezervace BWD-<t t-out=\"object.id\"/></h2>\n"
+"    <table cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%;\">\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">Zákazník</td><td style=\"padding:6px 10px;border:1px solid #ddd;\" t-out=\"object.customer_name\"/></tr>\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">Telefon</td><td style=\"padding:6px 10px;border:1px solid #ddd;\" t-out=\"object.customer_phone\"/></tr>\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">E-mail</td><td style=\"padding:6px 10px;border:1px solid #ddd;\" t-out=\"object.customer_email\"/></tr>\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">Vozidlo</td><td style=\"padding:6px 10px;border:1px solid #ddd;\"><t t-out=\"object.vehicle_type_id.name\"/> - <t t-out=\"object.vehicle_info or 'neuvedeno'\"/></td></tr>\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">Termín</td><td style=\"padding:6px 10px;border:1px solid #ddd;\" t-out=\"object._bw_preferred_date_str()\"/></tr>\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">Cena</td><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"object._bw_total_price_str()\"/></tr>\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">Jazyk webu</td><td style=\"padding:6px 10px;border:1px solid #ddd;\" t-out=\"object.lang\"/></tr>\n"
+"        <tr><td style=\"padding:6px 10px;border:1px solid #ddd;font-weight:bold;\">Reklama</td><td style=\"padding:6px 10px;border:1px solid #ddd;\"><t t-out=\"dict(object._fields['ad_platform']._description_selection(object.env)).get(object.ad_platform, '')\"/><t t-if=\"object.campaign_id\"> - <t t-out=\"object.campaign_id.name\"/></t></td></tr>\n"
+"    </table>\n"
+"    <h3>Služby</h3>\n"
+"    <ul>\n"
+"        <li t-foreach=\"object.line_ids\" t-as=\"line\"><t t-out=\"line.service_id.name\"/> - <t t-out=\"object._bw_line_price_str(line)\"/></li>\n"
+"    </ul>\n"
+"    <p t-if=\"object.customer_note\"><strong>Poznámka:</strong> <t t-out=\"object.customer_note\"/></p>\n"
+"    <p style=\"margin-top:24px;\">\n"
+"        <a t-att-href=\"'%s/odoo/action-bw_booking.action_bw_booking/%s' % (object.get_base_url(), object.id)\" style=\"background:#c8a961;color:#1a1a1a;padding:10px 18px;text-decoration:none;font-weight:bold;border-radius:4px;\">Otevřít rezervaci v Odoo</a>\n"
+"    </p>\n"
+"</div>\n"
+"            "
 msgstr ""
 
 #. module: bw_booking
 #: model:mail.template,body_html:bw_booking.mail_template_booking_pending
 msgid ""
-"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
-"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
+"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;\">\n"
+"    <t t-set=\"tx\" t-value=\"object._bw_mail_texts()\"/>\n"
+"    <t t-set=\"company\" t-value=\"object.env.company\"/>\n"
+"    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
 "        <tr>\n"
 "            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
-"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
+"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\" t-out=\"company.name\"/>\n"
 "            </td>\n"
 "        </tr>\n"
 "        <tr>\n"
 "            <td style=\"padding:30px;\">\n"
-"                <h2 style=\"color:#1a1a1a;margin-top:0;\">Thank you for your reservation!</h2>\n"
-"                <p>Hello, <strong>{{ object.customer_name }}</strong>,</p>\n"
-"                <p>Your reservation has been successfully received and is awaiting confirmation. We will contact you to confirm the appointment.</p>\n"
+"                <h2 style=\"color:#1a1a1a;margin-top:0;\" t-out=\"tx['pending_title']\"/>\n"
+"                <p><t t-out=\"tx['hello']\"/> <strong t-out=\"object.customer_name\"/>,</p>\n"
+"                <p t-out=\"tx['pending_intro']\"/>\n"
 "\n"
-"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
+"                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
 "                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Reservation number</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['reservation_number']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-<t t-out=\"object.id\"/></td>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Vehicle</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or 'not specified' }}</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['vehicle']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\"><t t-out=\"object.vehicle_type_id.name\"/> - <t t-out=\"object.vehicle_info or tx['not_specified']\"/></td>\n"
 "                    </tr>\n"
 "                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Preferred date</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'not specified' }}</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['preferred_date']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\" t-out=\"object._bw_preferred_date_str()\"/>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Total price</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'from ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['total_price']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#a8893f;\" t-out=\"object._bw_total_price_str()\"/>\n"
 "                    </tr>\n"
 "                </table>\n"
 "\n"
-"                <h3 style=\"color:#1a1a1a;\">Selected services:</h3>\n"
+"                <h3 style=\"color:#1a1a1a;\"><t t-out=\"tx['services']\"/>:</h3>\n"
 "                <ul style=\"padding-left:20px;\">\n"
-"                    % for line in object.line_ids:\n"
-"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
-"                    % endfor\n"
+"                    <li t-foreach=\"object.line_ids\" t-as=\"line\"><t t-out=\"line.service_id.name\"/> - <t t-out=\"object._bw_line_price_str(line)\"/></li>\n"
 "                </ul>\n"
 "\n"
-"                % if object.customer_note:\n"
-"                <p><strong>Your note:</strong> {{ object.customer_note }}</p>\n"
-"                % endif\n"
+"                <p t-if=\"object.customer_note\"><strong><t t-out=\"tx['your_note']\"/>:</strong> <t t-out=\"object.customer_note\"/></p>\n"
 "\n"
-"                <p style=\"margin-top:20px;color:#666;\">Reservation status: <strong style=\"color:#e67e22;\">Awaiting confirmation</strong></p>\n"
+"                <p style=\"margin-top:20px;color:#666;\"><t t-out=\"tx['status']\"/>: <strong style=\"color:#e67e22;\" t-out=\"tx['awaiting']\"/></p>\n"
 "            </td>\n"
 "        </tr>\n"
 "        <tr>\n"
 "            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
-"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"                <p style=\"margin:0;\"><t t-out=\"company.name\"/> | <t t-out=\"object._bw_company_address()\"/><t t-if=\"company.phone\"> | <t t-out=\"company.phone\"/></t></p>\n"
 "            </td>\n"
 "        </tr>\n"
 "    </table>\n"
 "</div>\n"
 "            "
 msgstr ""
-"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
-"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
-"        <tr>\n"
-"            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
-"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
-"            </td>\n"
-"        </tr>\n"
-"        <tr>\n"
-"            <td style=\"padding:30px;\">\n"
-"                <h2 style=\"color:#1a1a1a;margin-top:0;\">Дякуємо за ваше бронювання!</h2>\n"
-"                <p>Вітаємо, <strong>{{ object.customer_name }}</strong>,</p>\n"
-"                <p>Ваше бронювання було успішно отримано і очікує підтвердження. Ми зв'яжемося з вами для підтвердження дати.</p>\n"
-"\n"
-"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
-"                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Номер бронювання</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
-"                    </tr>\n"
-"                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Автомобіль</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or 'не вказано' }}</td>\n"
-"                    </tr>\n"
-"                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Бажана дата</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'не вказано' }}</td>\n"
-"                    </tr>\n"
-"                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Загальна ціна</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'від ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
-"                    </tr>\n"
-"                </table>\n"
-"\n"
-"                <h3 style=\"color:#1a1a1a;\">Обрані послуги:</h3>\n"
-"                <ul style=\"padding-left:20px;\">\n"
-"                    % for line in object.line_ids:\n"
-"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
-"                    % endfor\n"
-"                </ul>\n"
-"\n"
-"                % if object.customer_note:\n"
-"                <p><strong>Ваша примітка:</strong> {{ object.customer_note }}</p>\n"
-"                % endif\n"
-"\n"
-"                <p style=\"margin-top:20px;color:#666;\">Статус бронювання: <strong style=\"color:#e67e22;\">Очікує підтвердження</strong></p>\n"
-"            </td>\n"
-"        </tr>\n"
-"        <tr>\n"
-"            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
-"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
-"            </td>\n"
-"        </tr>\n"
-"    </table>\n"
-"</div>\n"
-"            "
 
 #. module: bw_booking
 #: model:mail.template,body_html:bw_booking.mail_template_booking_confirmed
 msgid ""
-"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
-"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
+"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;\">\n"
+"    <t t-set=\"tx\" t-value=\"object._bw_mail_texts()\"/>\n"
+"    <t t-set=\"company\" t-value=\"object.env.company\"/>\n"
+"    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
 "        <tr>\n"
 "            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
-"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
+"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\" t-out=\"company.name\"/>\n"
 "            </td>\n"
 "        </tr>\n"
 "        <tr>\n"
 "            <td style=\"padding:30px;\">\n"
-"                <h2 style=\"color:#27ae60;margin-top:0;\">Your reservation has been confirmed!</h2>\n"
-"                <p>Hello, <strong>{{ object.customer_name }}</strong>,</p>\n"
-"                <p>We are pleased to confirm your reservation. We look forward to seeing you at the scheduled time.</p>\n"
+"                <h2 style=\"color:#27ae60;margin-top:0;\" t-out=\"tx['confirmed_title']\"/>\n"
+"                <p><t t-out=\"tx['hello']\"/> <strong t-out=\"object.customer_name\"/>,</p>\n"
+"                <p t-out=\"tx['confirmed_intro']\"/>\n"
 "\n"
-"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
+"                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
 "                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Reservation number</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['reservation_number']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-<t t-out=\"object.id\"/></td>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Date</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#27ae60;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'not specified' }}</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['date']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#27ae60;\" t-out=\"object._bw_preferred_date_str()\"/>\n"
 "                    </tr>\n"
 "                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Vehicle</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or '' }}</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['vehicle']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;\"><t t-out=\"object.vehicle_type_id.name\"/> - <t t-out=\"object.vehicle_info or tx['not_specified']\"/></td>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Total price</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'from ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\" t-out=\"tx['total_price']\"/>\n"
+"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#a8893f;\" t-out=\"object._bw_total_price_str()\"/>\n"
 "                    </tr>\n"
 "                </table>\n"
 "\n"
-"                <h3 style=\"color:#1a1a1a;\">Selected services:</h3>\n"
+"                <h3 style=\"color:#1a1a1a;\"><t t-out=\"tx['services']\"/>:</h3>\n"
 "                <ul style=\"padding-left:20px;\">\n"
-"                    % for line in object.line_ids:\n"
-"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
-"                    % endfor\n"
+"                    <li t-foreach=\"object.line_ids\" t-as=\"line\"><t t-out=\"line.service_id.name\"/> - <t t-out=\"object._bw_line_price_str(line)\"/></li>\n"
 "                </ul>\n"
 "\n"
 "                <div style=\"margin:25px 0;padding:15px;background:#f0f9f0;border-left:4px solid #27ae60;\">\n"
-"                    <p style=\"margin:0;\"><strong>Address:</strong> {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
-"                    <p style=\"margin:5px 0 0;\">The event has been added to your calendar.</p>\n"
+"                    <p style=\"margin:0;\"><strong><t t-out=\"tx['address']\"/>:</strong> <t t-out=\"object._bw_company_address()\"/></p>\n"
 "                </div>\n"
 "\n"
-"                <p style=\"color:#666;\">If you need to change the date, please contact us.</p>\n"
+"                <p style=\"color:#666;\" t-out=\"tx['change_date']\"/>\n"
 "            </td>\n"
 "        </tr>\n"
 "        <tr>\n"
 "            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
-"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
+"                <p style=\"margin:0;\"><t t-out=\"company.name\"/> | <t t-out=\"object._bw_company_address()\"/><t t-if=\"company.phone\"> | <t t-out=\"company.phone\"/></t></p>\n"
 "            </td>\n"
 "        </tr>\n"
 "    </table>\n"
 "</div>\n"
 "            "
 msgstr ""
-"<div style=\"margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;\">\n"
-"    <table width=\"100%\" style=\"max-width:600px;margin:0 auto;background:#ffffff;\">\n"
-"        <tr>\n"
-"            <td style=\"background:#1a1a1a;padding:30px;text-align:center;\">\n"
-"                <h1 style=\"color:#c8a961;margin:0;font-size:24px;\">{{ object.env.company.name }}</h1>\n"
-"            </td>\n"
-"        </tr>\n"
-"        <tr>\n"
-"            <td style=\"padding:30px;\">\n"
-"                <h2 style=\"color:#27ae60;margin-top:0;\">Ваше бронювання підтверджено!</h2>\n"
-"                <p>Вітаємо, <strong>{{ object.customer_name }}</strong>,</p>\n"
-"                <p>Ми раді підтвердити ваше бронювання. Чекаємо на вас у призначений час.</p>\n"
-"\n"
-"                <table width=\"100%\" style=\"margin:20px 0;border-collapse:collapse;\">\n"
-"                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Номер бронювання</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">BWD-{{ object.id }}</td>\n"
-"                    </tr>\n"
-"                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Дата</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#27ae60;\">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'не вказано' }}</td>\n"
-"                    </tr>\n"
-"                    <tr style=\"background:#f5f5f5;\">\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Автомобіль</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;\">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or '' }}</td>\n"
-"                    </tr>\n"
-"                    <tr>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;\">Загальна ціна</td>\n"
-"                        <td style=\"padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;\">{{ object.is_price_approximate and 'від ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>\n"
-"                    </tr>\n"
-"                </table>\n"
-"\n"
-"                <h3 style=\"color:#1a1a1a;\">Обрані послуги:</h3>\n"
-"                <ul style=\"padding-left:20px;\">\n"
-"                    % for line in object.line_ids:\n"
-"                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>\n"
-"                    % endfor\n"
-"                </ul>\n"
-"\n"
-"                <div style=\"margin:25px 0;padding:15px;background:#f0f9f0;border-left:4px solid #27ae60;\">\n"
-"                    <p style=\"margin:0;\"><strong>Адреса:</strong> {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
-"                    <p style=\"margin:5px 0 0;\">Подію додано до вашого календаря.</p>\n"
-"                </div>\n"
-"\n"
-"                <p style=\"color:#666;\">Якщо вам потрібно змінити дату, зв'яжіться з нами.</p>\n"
-"            </td>\n"
-"        </tr>\n"
-"        <tr>\n"
-"            <td style=\"background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;\">\n"
-"                <p style=\"margin:0;\">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>\n"
-"            </td>\n"
-"        </tr>\n"
-"    </table>\n"
-"</div>\n"
-"            "
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
-msgid "<i class=\"fa fa-home\"/> Back to homepage"
-msgstr "<i class=\"fa fa-home\"/> Повернутися на головну сторінку"
+msgid "<i class=\"fa fa-home\"/> Back to the homepage"
+msgstr "<i class=\"fa fa-home\"/> Назад на головну сторінку"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
@@ -282,7 +213,7 @@ msgstr "<i class=\"fa fa-paper-plane\"/> Надіслати бронювання
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
 msgid ""
 "<span class=\"bw-price-value\">--</span>\n"
-"                                                    <span class=\"bw-price-suffix\">,- CZK</span>"
+"                                                    <span class=\"bw-price-suffix\">,- Kč</span>"
 msgstr ""
 
 #. module: bw_booking
@@ -292,7 +223,7 @@ msgstr "<span class=\"bw-step-num\">1</span> Тип автомобіля"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-msgid "<span class=\"bw-step-num\">2</span> Select services"
+msgid "<span class=\"bw-step-num\">2</span> Choose services"
 msgstr "<span class=\"bw-step-num\">2</span> Оберіть послуги"
 
 #. module: bw_booking
@@ -302,29 +233,43 @@ msgstr "<span class=\"bw-step-num\">3</span> Контактні дані"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "<span invisible=\"not is_price_approximate\" class=\"text-muted\">from </span>"
-msgstr "<span invisible=\"not is_price_approximate\" class=\"text-muted\">від </span>"
+msgid "<span invisible=\"not is_price_approximate\" class=\"text-muted\">od </span>"
+msgstr ""
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
 msgid ""
 "<span>Total price:</span>\n"
-"                                <strong id=\"bwTotalPrice\">0,- CZK</strong>"
+"                                <strong id=\"bwTotalPrice\">0,- Kč</strong>"
 msgstr ""
+"<span>Загальна ціна:</span>\n"
+"                                <strong id=\"bwTotalPrice\">0,- Kč</strong>"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_fusso
-msgid ""
-"<strong>+ Paint decontamination</strong> (removal of tar, iron fallout, "
-"etc.)"
-msgstr ""
-"<strong>+ Деконтамінація лаку</strong> (видалення асфальту, летючої іржі "
-"тощо)"
+msgid "<strong>+ Paint decontamination</strong> (removal of tar, iron fallout, etc.)"
+msgstr "<strong>+ Деконтамінація лаку</strong> (видалення асфальту, летючої іржі тощо)"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
 msgid "<strong>Total</strong>"
 msgstr "<strong>Усього</strong>"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "AW-17998032792"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "AW-17998032792/n-P5CKCcyc8cEJjfkIZD"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_res_config_settings__bw_meta_capi_token
+#: model:ir.model.fields,help:bw_booking.field_website__bw_meta_capi_token
+msgid "Access token from Meta Events Manager. When set, bookings are also sent server-side (Lead on submit, Purchase when the booking is marked done)."
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_needaction
@@ -359,9 +304,30 @@ msgid "Activity Type Icon"
 msgstr "Іконка типу дії"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Are you sure you want to cancel this reservation?"
-msgstr "Ви дійсно хочете скасувати це бронювання?"
+#: model:bw.service.category,name:bw_booking.cat_extra
+msgid "Additional services"
+msgstr "Додаткові послуги"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Address"
+msgstr "Адреса"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Ads konverze rezervace"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_klima
+msgid "Air conditioning cleaning"
+msgstr "Чищення кондиціонера"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_alu
+msgid "Alloy wheel cleaning"
+msgstr "Миття та чищення ALU дисків"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_attachment_count
@@ -372,11 +338,6 @@ msgstr "Кількість вкладень"
 #: model:ir.model.fields,help:bw_booking.field_bw_service__is_bookable
 msgid "Available in online configurator"
 msgstr "Доступно в онлайн-конфігураторі"
-
-#. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
-msgid "Awaiting Confirmation"
-msgstr "Очікує підтвердження"
 
 #. module: bw_booking
 #. odoo-python
@@ -396,14 +357,19 @@ msgid "BWD: Reservation - Confirmed"
 msgstr "BWD: Бронювання - Підтверджено"
 
 #. module: bw_booking
+#: model:mail.template,name:bw_booking.mail_template_booking_owner
+msgid "BWD: Reservation - New booking (owner)"
+msgstr ""
+
+#. module: bw_booking
 #: model:mail.template,name:bw_booking.mail_template_booking_pending
 msgid "BWD: Reservation - Pending confirmation"
 msgstr "BWD: Бронювання - Очікує підтвердження"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
-msgid "Bookable"
-msgstr "Доступне для бронювання"
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__ad_platform__none
+msgid "Bez reklamy"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__booking_id
@@ -418,6 +384,11 @@ msgstr "Рядок бронювання"
 #. module: bw_booking
 #: model:ir.ui.menu,name:bw_booking.menu_bw_root
 msgid "Brothers Wash"
+msgstr "Brothers Wash"
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_bw_data_translations
+msgid "Brothers Wash data translations fix"
 msgstr ""
 
 #. module: bw_booking
@@ -426,27 +397,25 @@ msgid "CRM příležitost"
 msgstr "CRM можливість"
 
 #. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__campaign_id
+msgid "Campaign"
+msgstr ""
+
+#. module: bw_booking
 #. odoo-python
 #: code:addons/bw_booking/models/bw_booking.py:0
 msgid "Can only confirm a reservation in \"Awaiting confirmation\" state."
 msgstr "Можна підтвердити лише бронювання у стані \"Очікує підтвердження\"."
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Cancel"
-msgstr "Скасувати"
-
-#. module: bw_booking
-#. odoo-python
-#: code:addons/bw_booking/models/bw_booking.py:0
 #: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__cancelled
 msgid "Cancelled"
 msgstr "Скасовано"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
-msgid "Categories"
-msgstr "Категорії"
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Car (make / model)"
+msgstr "Автомобіль (марка / модель)"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__category_id
@@ -460,16 +429,6 @@ msgid "Category Type"
 msgstr "Тип категорії"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
-msgid "Category description…"
-msgstr "Опис категорії…"
-
-#. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
-msgid "Category name"
-msgstr "Назва категорії"
-
-#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__total_price
 msgid "Celková cena"
 msgstr "Загальна ціна"
@@ -480,9 +439,14 @@ msgid "Cena"
 msgstr "Ціна"
 
 #. module: bw_booking
-#: model:bw.service.category,name:bw_booking.cat_program
-msgid "Ceník služeb"
-msgstr "Прайс-лист послуг"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Ceny"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_keramika
+msgid "Ceramic paint protection"
+msgstr "Керамічний захист лаку"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_keramika
@@ -495,16 +459,30 @@ msgid "Chemical and mechanical paint decontamination"
 msgstr "Хімічна та механічна деконтамінація лаку"
 
 #. module: bw_booking
+#: model:bw.service.category,description:bw_booking.cat_program
+msgid "Choose the programme that suits you"
+msgstr "Оберіть програму, яка вам підходить"
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-msgid ""
-"Choose your services, select a date and we will send you a confirmation."
-msgstr "Оберіть послуги, виберіть дату і ми надішлемо вам підтвердження."
+msgid "Choose your services and a date, and we will send you a confirmation."
+msgstr "Оберіть послуги та термін, і ми надішлемо вам підтвердження."
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_okna
+msgid "Cleaning and polishing of exterior windows and mirrors"
+msgstr "Чищення та полірування зовнішніх вікон і дзеркал"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program2
 #: model_terms:bw.service,description:bw_booking.svc_program3
 msgid "Cleaning and treating interior and exterior plastic trim"
 msgstr "Очищення та обробка пластикових внутрішніх і зовнішніх деталей"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_vnitrni_plasty
+msgid "Cleaning and treatment of interior plastics"
+msgstr "Очищення та обробка внутрішніх пластикових деталей"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program1
@@ -521,6 +499,12 @@ msgid "Complete body drying"
 msgstr "Повне висушування кузова"
 
 #. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_program3
+msgid "Complete detailing"
+msgstr "Повний детейлінг"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_vysati
 #: model_terms:bw.service,description:bw_booking.svc_program2
 #: model_terms:bw.service,description:bw_booking.svc_program3
 #: model_terms:bw.service,description:bw_booking.svc_program4
@@ -530,24 +514,15 @@ msgstr "Повне пилососіння інтер'єру"
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program3
 msgid "Complete textile interior extraction cleaning (wet method)"
-msgstr "Повна екстракція текстильного інтер'єру (мокрим способом)"
+msgstr "Повна хімчистка текстильного салону (мокрим способом)"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
-msgid "Completed"
-msgstr "Завершено"
+#: model:ir.model,name:bw_booking.model_res_config_settings
+msgid "Config Settings"
+msgstr "Налаштування"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Confirm Reservation"
-msgstr "Підтвердити бронювання"
-
-#. module: bw_booking
-#. odoo-python
-#: code:addons/bw_booking/models/bw_booking.py:0
 #: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__confirmed
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
 msgid "Confirmed"
 msgstr "Підтверджено"
 
@@ -572,24 +547,29 @@ msgid "Created on"
 msgstr "Створено"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Customer"
-msgstr "Замовник"
-
-#. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Customer note..."
-msgstr "Примітка замовника..."
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Date and time"
+msgstr "Дата і час"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
-msgid "Date"
-msgstr "Дата"
+msgid "Datum"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_lesteni
+msgid "Deep body polishing"
+msgstr "Глибоке полірування кузова"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_sedacky
+msgid "Deep seat shampooing"
+msgstr "Глибоке чищення (екстракція) сидінь"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__description
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__description
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
 msgid "Description"
 msgstr "Опис"
 
@@ -614,18 +594,16 @@ msgid "Display Name"
 msgstr "Назва для відображення"
 
 #. module: bw_booking
-#: model:bw.service.category,description:bw_booking.cat_premium
-msgid "Dlouhodobá ochrana a profesionální péče"
-msgstr "Довготривалий захист і професійний догляд"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Dnes"
+msgstr ""
 
 #. module: bw_booking
-#: model:bw.service,short_description:bw_booking.svc_fusso
-msgid "Dlouhodobý tuhý vosk"
-msgstr "Довготривалий твердий віск"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Dokončeno"
+msgstr ""
 
 #. module: bw_booking
-#. odoo-python
-#: code:addons/bw_booking/models/bw_booking.py:0
 #: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__done
 msgid "Done"
 msgstr "Завершено"
@@ -638,9 +616,9 @@ msgid "Doplňková služba"
 msgstr "Додаткова послуга"
 
 #. module: bw_booking
-#: model:bw.service.category,name:bw_booking.cat_extra
-msgid "Doplňkové služby"
-msgstr "Додаткові послуги"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Doplňkové"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__duration_info
@@ -658,14 +636,19 @@ msgid "Email *"
 msgstr "Ел. пошта *"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
-msgid "Extras"
-msgstr "Додаткові"
+#: model:bw.service,name:bw_booking.svc_extra_motor
+msgid "Engine wash (at your own risk)"
+msgstr "Миття двигуна (на власний ризик)"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_lesteni
 msgid "Final quality inspection"
 msgstr "Фінальна перевірка якості"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_podlaha
+msgid "Floor carpet shampooing"
+msgstr "Екстракція підлоги"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_follower_ids
@@ -688,6 +671,12 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr "Іконка Font Awesome, напр. fa-tasks"
 
 #. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_res_config_settings__bw_tracking_test_mode
+#: model:ir.model.fields,help:bw_booking.field_website__bw_tracking_test_mode
+msgid "For the dev server: GA4 events are sent with debug_mode, the Google Ads conversion is not fired and every tracking call is logged into the browser console."
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_keramika
 msgid "Free maintenance wash"
 msgstr "Сервісне миття автомобіля безкоштовно"
@@ -698,17 +687,62 @@ msgid "Full name *"
 msgstr "Ім'я та прізвище *"
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "GA4 ID se zadává výše v „Google Analytics“. Testovací režim patří jen na dev: nevolá Google Ads konverzi a GA4 posílá s debug_mode."
+msgstr ""
+
+#. module: bw_booking
+#: model:crm.tag,name:bw_booking.crm_tag_google_ads
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__ad_platform__google
+msgid "Google Ads"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_res_config_settings__bw_google_ads_id
+#: model:ir.model.fields,field_description:bw_booking.field_website__bw_google_ads_id
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Google Ads ID"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_res_config_settings__bw_ads_booking_send_to
+#: model:ir.model.fields,field_description:bw_booking.field_website__bw_ads_booking_send_to
+msgid "Google Ads booking conversion"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_res_config_settings__bw_google_ads_id
+#: model:ir.model.fields,help:bw_booking.field_website__bw_google_ads_id
+msgid "Google Ads tag ID, e.g. AW-17998032792. Loaded together with the Google tag (GA4)."
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__gbraid
+msgid "Google gbraid"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__gclid
+msgid "Google gclid"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__wbraid
+msgid "Google wbraid"
+msgstr ""
+
+#. module: bw_booking
 #: model:bw.service,short_description:bw_booking.svc_keramika
-msgid "Garantovaná ochrana až 3 roky"
+msgid "Guaranteed protection for up to 3 years"
 msgstr "Гарантований захист до 3 років"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
-msgid "Group by"
-msgstr "Групувати за"
+#: model:ir.model,name:bw_booking.model_ir_http
+msgid "HTTP Routing"
+msgstr "Маршрутизація HTTP"
 
 #. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_program1
 #: model_terms:bw.service,description:bw_booking.svc_program1
 #: model_terms:bw.service,description:bw_booking.svc_program2
 #: model_terms:bw.service,description:bw_booking.svc_program3
@@ -716,9 +750,9 @@ msgid "Hand car wash"
 msgstr "Ручне миття автомобіля"
 
 #. module: bw_booking
-#: model:bw.service,short_description:bw_booking.svc_program1
-msgid "Handwashing"
-msgstr "Ручне миття"
+#: model:bw.service,short_description:bw_booking.svc_program2
+msgid "Hand wash + interior"
+msgstr "Ручне миття + інтер'єр"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__has_message
@@ -726,14 +760,15 @@ msgid "Has Message"
 msgstr "Має повідомлення"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_lesteni
-msgid "Hloubkové leštění karoserie"
-msgstr "Глибоке полірування кузова"
+#: model:bw.service,name:bw_booking.svc_extra_strop
+msgid "Headliner shampooing"
+msgstr "Екстракція стелі"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_sedacky
-msgid "Hloubkové čištění (tepování) sedaček"
-msgstr "Глибоке чищення (екстракція) сидінь"
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Hello"
+msgstr "Доброго дня"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__id
@@ -743,6 +778,16 @@ msgstr "Глибоке чищення (екстракція) сидінь"
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__id
 #: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__id
 msgid "ID"
+msgstr "ID"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__tracking_event_id
+msgid "ID události"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__client_ip
+msgid "IP adresa"
 msgstr ""
 
 #. module: bw_booking
@@ -757,6 +802,11 @@ msgid "Icon to indicate an exception activity."
 msgstr "Іконка для позначення виняткової дії."
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Identifikátory kliknutí"
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.model.fields,help:bw_booking.field_bw_booking__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr "Якщо позначено, нові повідомлення потребують вашої уваги."
@@ -768,26 +818,32 @@ msgid "If checked, some messages have a delivery error."
 msgstr "Якщо позначено, деякі повідомлення мають помилку доставки."
 
 #. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "If you need to change the appointment, just reply to this e-mail or call us."
+msgstr "Якщо потрібно змінити термін, просто дайте відповідь на цей лист або зателефонуйте нам."
+
+#. module: bw_booking
 #: model:bw.service.category,description:bw_booking.cat_extra
-msgid "Individuální péče podle vašich potřeb"
+msgid "Individual care tailored to your needs"
 msgstr "Індивідуальний догляд за вашими потребами"
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_program4
+msgid "Interior"
+msgstr "Інтер'єр"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program2
 #: model_terms:bw.service,description:bw_booking.svc_program3
 #: model_terms:bw.service,description:bw_booking.svc_program4
 msgid "Interior fragrance"
-msgstr "Ароматизація інтер'єру"
+msgstr "Ароматизація салону"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program4
 msgid "Interior plastic treatment and protection"
 msgstr "Обробка та консервація внутрішніх пластиків"
-
-#. module: bw_booking
-#: model:bw.service,short_description:bw_booking.svc_program4
-msgid "Interiér"
-msgstr "Інтер'єр"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__is_bookable
@@ -806,12 +862,8 @@ msgstr "Виділено"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_fusso
-msgid ""
-"Japanese synthetic wax lasting up to 12 months. Provides strong protection "
-"against water, salt, UV rays and road chemicals."
-msgstr ""
-"Японський синтетичний віск з терміном дії до 12 місяців. Забезпечує надійний "
-"захист від води, солі, ультрафіолету та дорожньої хімії."
+msgid "Japanese synthetic wax lasting up to 12 months. Provides strong protection against water, salt, UV rays and road chemicals."
+msgstr "Японський синтетичний віск з терміном дії до 12 місяців. Забезпечує надійний захист від води, солі, ультрафіолету та дорожньої хімії."
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__lang
@@ -819,12 +871,23 @@ msgid "Jazyk"
 msgstr "Мова"
 
 #. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__ad_platform__other
+msgid "Jiná kampaň"
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_name
 msgid "Jméno zákazníka"
 msgstr "Ім'я замовника"
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Kampaň"
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.ui.menu,name:bw_booking.menu_bw_service_category
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
 msgid "Kategorie"
 msgstr "Категорії"
 
@@ -834,24 +897,19 @@ msgid "Kategorie služeb"
 msgstr "Категорії послуг"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_keramika
-msgid "Keramická ochrana laku"
-msgstr "Керамічний захист лаку"
-
-#. module: bw_booking
-#: model:bw.service,short_description:bw_booking.svc_program3
-msgid "Kompletní detailing"
-msgstr "Повний детейлінг"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_vysati
-msgid "Kompletní vysátí interiéru"
-msgstr "Повне пилососіння інтер'єру"
-
-#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__partner_id
 msgid "Kontakt"
 msgstr "Контакт"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Konverze po odeslání rezervace: Meta Pixel (Lead), GA4 (generate_lead), Google Ads konverze a dataLayer pro GTM."
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Krátký popis…"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__write_uid
@@ -874,14 +932,34 @@ msgid "Last Updated on"
 msgstr "Востаннє змінено"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_lesteni_dil
-msgid "Leštění jednotlivého dílu"
-msgstr "Полірування окремої деталі"
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__meta_lead_sent
+msgid "Lead odeslán do Meta CAPI"
+msgstr ""
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Links"
-msgstr "Посилання"
+#: model:bw.service,name:bw_booking.svc_extra_kuze
+msgid "Leather cleaning and conditioning"
+msgstr "Чищення та імпрегнація шкіри"
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_sterace
+msgid "Liquid wipers (rain repellent), lasts up to 1 year"
+msgstr "Рідкі склоочисники, термін дії до 1 року"
+
+#. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_fusso
+msgid "Long-lasting hard wax"
+msgstr "Довготривалий твердий віск"
+
+#. module: bw_booking
+#: model:bw.service.category,description:bw_booking.cat_premium
+msgid "Long-lasting protection and professional care"
+msgstr "Довготривалий захист і професійний догляд"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__medium_id
+msgid "Medium"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_has_error
@@ -894,9 +972,69 @@ msgid "Messages"
 msgstr "Повідомлення"
 
 #. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__ad_platform__meta
+msgid "Meta (Facebook / Instagram)"
+msgstr ""
+
+#. module: bw_booking
+#: model:crm.tag,name:bw_booking.crm_tag_meta_ads
+msgid "Meta Ads"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Meta CAPI token"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_res_config_settings__bw_meta_capi_token
+#: model:ir.model.fields,field_description:bw_booking.field_website__bw_meta_capi_token
+msgid "Meta Conversions API token"
+msgstr ""
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Meta Conversions API: event \"%(event)s\" failed: %(error)s"
+msgstr "Meta Conversions API: не вдалося надіслати подію «%(event)s»: %(error)s"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Meta Conversions API: event \"%s\" sent."
+msgstr "Meta Conversions API: подію «%s» надіслано."
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Meta Pixel ID"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__fbc
+msgid "Meta fbc"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__fbclid
+msgid "Meta fbclid"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__fbp
+msgid "Meta fbp"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_res_config_settings__bw_meta_test_event_code
+#: model:ir.model.fields,field_description:bw_booking.field_website__bw_meta_test_event_code
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Meta test event code"
+msgstr ""
+
+#. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program3
 msgid "Mirror polishing"
-msgstr "Полірування до дзеркального блиску"
+msgstr "Полірування дзеркал"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_lesteni
@@ -904,24 +1042,19 @@ msgid "Multi-step machine polishing with professional compounds"
 msgstr "Багатоетапне машинне полірування професійними пастами"
 
 #. module: bw_booking
+#: model:bw.service,short_description:bw_booking.svc_lesteni
+msgid "Multi-step paint correction"
+msgstr "Багатоетапна корекція лаку"
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__my_activity_date_deadline
 msgid "My Activity Deadline"
 msgstr "Крайній термін моєї дії"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_alu
-msgid "Mytí a vyčištění ALU disků"
-msgstr "Миття та чищення ALU дисків"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_gumove
-msgid "Mytí gumových koberečků"
-msgstr "Миття гумових килимків"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_motor
-msgid "Mytí motoru (na vlastní riziko)"
-msgstr "Миття двигуна (на власний ризик)"
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Měření rezervací (Brothers Wash)"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__name
@@ -930,6 +1063,12 @@ msgstr "Миття двигуна (на власний ризик)"
 #: model:ir.model.fields,field_description:bw_booking.field_bw_vehicle_type__name
 msgid "Name"
 msgstr "Назва"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Nedorazil"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_calendar_event_id
@@ -952,10 +1091,19 @@ msgid "Next Activity Type"
 msgstr "Тип наступної дії"
 
 #. module: bw_booking
+#: model:ir.model.fields.selection,name:bw_booking.selection__bw_booking__state__no_show
+msgid "No-show"
+msgstr "Не з’явився"
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
 msgid "Note"
 msgstr "Примітка"
+
+#. module: bw_booking
+#: model:mail.template,subject:bw_booking.mail_template_booking_owner
+msgid "Nová rezervace BWD-{{ object.id }}: {{ object.customer_name }} ({{ object._bw_total_price_str() }})"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_needaction_counter
@@ -978,14 +1126,34 @@ msgid "Number of messages with delivery error"
 msgstr "Кількість повідомлень з помилкою доставки"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_asfalt
-msgid "Odstranění asfaltu"
-msgstr "Видалення асфальту"
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__meta_purchase_sent
+msgid "Návštěva odeslána do Meta CAPI"
+msgstr ""
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_polepy
-msgid "Odstranění polepů"
-msgstr "Видалення наклейок"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
+msgid "Název kategorie"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Název služby"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__referrer
+msgid "Odkud přišel (referrer)"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Odkud zákazník přišel"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Opravdu chcete zrušit tuto rezervaci?"
+msgstr ""
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_keramika
@@ -998,19 +1166,9 @@ msgid "Orientační cena"
 msgstr "Орієнтовна ціна"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_vnitrni_plasty
-msgid "Očištění a ošetření vnitřních plastových dílů"
-msgstr "Очищення та обробка внутрішніх пластикових деталей"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_venkovni_plasty
-msgid "Ošetření a konzervace venkovních plastových dílů"
-msgstr "Обробка та консервація зовнішніх пластикових деталей"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_pneumatiky
-msgid "Ošetření pneumatik"
-msgstr "Обробка шин"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Označit, že zákazník nedorazil? CRM příležitost se uzavře jako ztracená."
+msgstr ""
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_keramika
@@ -1018,9 +1176,26 @@ msgid "Package includes a service book and inspection every 6 months:"
 msgstr "До пакету входить сервісна книга та перевірка кожні 6 місяців:"
 
 #. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_chlupy
+msgid "Pet hair removal from interior"
+msgstr "Чищення інтер'єру від шерсті"
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
 msgid "Phone *"
 msgstr "Телефон *"
+
+#. module: bw_booking
+#. odoo-javascript
+#: code:addons/bw_booking/static/src/js/configurator.js:0
+msgid "Please select at least one service."
+msgstr "Будь ласка, оберіть хоча б одну послугу."
+
+#. module: bw_booking
+#. odoo-javascript
+#: code:addons/bw_booking/static/src/js/configurator.js:0
+msgid "Please select your vehicle type."
+msgstr "Будь ласка, оберіть тип транспортного засобу."
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program1
@@ -1043,9 +1218,39 @@ msgid "Položky"
 msgstr "Позиції"
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
+msgid "Popis"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
+msgid "Popis kategorie…"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Potvrdit rezervaci"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Potvrzeno"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Poznámka"
+msgstr ""
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_note
 msgid "Poznámka zákazníka"
 msgstr "Примітка замовника"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Poznámka zákazníka..."
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__preferred_date
@@ -1053,9 +1258,11 @@ msgid "Preferovaný termín"
 msgstr "Бажана дата"
 
 #. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-msgid "Preferred Date"
-msgstr "Бажана дата"
+msgid "Preferred date"
+msgstr "Бажаний термін"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__price_prefix
@@ -1063,9 +1270,9 @@ msgid "Prefix ceny"
 msgstr "Префікс ціни"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
-msgid "Premium"
-msgstr "Преміум"
+#: model:bw.service.category,name:bw_booking.cat_premium
+msgid "Premium services"
+msgstr "Преміум послуги"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__price
@@ -1079,27 +1286,18 @@ msgstr "Префікс ціни"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__price_ids
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
 msgid "Prices"
 msgstr "Ціни"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_keramika
-msgid ""
-"Professional ceramic coating creating a hard protective layer. Protects "
-"paint against UV rays, salt, chemicals, insects and minor scratches."
-msgstr ""
-"Професійне керамічне покриття, що створює твердий захисний шар. Захищає лак "
-"від ультрафіолету, солі, хімікатів, комах та дрібних подряпин."
+msgid "Professional ceramic coating creating a hard protective layer. Protects paint against UV rays, salt, chemicals, insects and minor scratches."
+msgstr "Професійне керамічне покриття, що створює твердий захисний шар. Захищає лак від ультрафіолету, солі, хімікатів, комах та дрібних подряпин."
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_lesteni
-msgid ""
-"Professional machine polishing removing fine and medium scratches, "
-"holograms, oxidation and marks from improper washing."
-msgstr ""
-"Професійне машинне полірування, що усуває дрібні та середні подряпини, "
-"голограми, окислення та сліди від неправильного миття."
+msgid "Professional machine polishing removing fine and medium scratches, holograms, oxidation and marks from improper washing."
+msgstr "Професійне машинне полірування, що усуває дрібні та середні подряпини, голограми, окислення та сліди від неправильного миття."
 
 #. module: bw_booking
 #. odoo-python
@@ -1110,28 +1308,38 @@ msgstr "Програма (прайс-лист)"
 
 #. module: bw_booking
 #: model:bw.service,name:bw_booking.svc_program1
-msgid "Program 1"
-msgstr ""
+msgid "Programme 1"
+msgstr "Програма 1"
 
 #. module: bw_booking
 #: model:bw.service,name:bw_booking.svc_program2
-msgid "Program 2"
-msgstr ""
+msgid "Programme 2"
+msgstr "Програма 2"
 
 #. module: bw_booking
 #: model:bw.service,name:bw_booking.svc_program3
-msgid "Program 3"
-msgstr ""
+msgid "Programme 3"
+msgstr "Програма 3"
 
 #. module: bw_booking
 #: model:bw.service,name:bw_booking.svc_program4
-msgid "Program 4"
-msgstr ""
+msgid "Programme 4"
+msgstr "Програма 4"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
-msgid "Programs"
-msgstr "Програми"
+msgid "Programy"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__client_user_agent
+msgid "Prohlížeč"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Propojení"
+msgstr ""
 
 #. module: bw_booking
 #. odoo-python
@@ -1141,15 +1349,38 @@ msgid "Prémiová služba"
 msgstr "Преміум послуга"
 
 #. module: bw_booking
-#: model:bw.service.category,name:bw_booking.cat_premium
-msgid "Prémiové služby"
-msgstr "Преміум послуги"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Prémiové"
+msgstr ""
 
 #. module: bw_booking
-#: model:mail.template,subject:bw_booking.mail_template_booking_confirmed
-msgid "Reservation confirmed - {{ object.env.company.name }} #{{ object.id }}"
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Recommended"
+msgstr "Рекомендуємо"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__ad_platform
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Reklama"
 msgstr ""
-"Бронювання підтверджено - {{ object.env.company.name }} #{{ object.id }}"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "Reservation"
+msgstr "Бронювання"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Reservation BWD-%s confirmed"
+msgstr "Бронювання BWD-%s підтверджено"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Reservation number"
+msgstr "Номер бронювання"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
@@ -1157,10 +1388,10 @@ msgid "Reservation number:"
 msgstr "Номер бронювання:"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_calendar
-msgid "Reservations"
-msgstr "Бронювання"
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Reservation status"
+msgstr "Статус бронювання"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__activity_user_id
@@ -1170,18 +1401,24 @@ msgstr "Відповідальний користувач"
 #. module: bw_booking
 #: model:ir.actions.act_window,name:bw_booking.action_bw_booking
 #: model:ir.ui.menu,name:bw_booking.menu_bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_calendar
 msgid "Rezervace"
 msgstr "Бронювання"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Rezervovatelné"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_gumove
+msgid "Rubber floor mat washing"
+msgstr "Миття гумових килимків"
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program1
 msgid "Rubber mat cleaning"
 msgstr "Миття гумових килимків"
-
-#. module: bw_booking
-#: model:bw.service,short_description:bw_booking.svc_program2
-msgid "Ruční mytí + interiér"
-msgstr "Ручне миття + інтер'єр"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__message_has_sms_error
@@ -1191,17 +1428,24 @@ msgstr "Помилка доставки SMS"
 #. module: bw_booking
 #: model:bw.vehicle.type,name:bw_booking.vehicle_type_suv
 msgid "SUV"
-msgstr ""
+msgstr "Позашляховик (SUV)"
 
 #. module: bw_booking
 #: model:bw.vehicle.type,name:bw_booking.vehicle_type_sedan
 msgid "Sedan"
-msgstr ""
+msgstr "Седан"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Selected Services"
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Selected services"
 msgstr "Обрані послуги"
+
+#. module: bw_booking
+#. odoo-javascript
+#: code:addons/bw_booking/static/src/js/configurator.js:0
+msgid "Sending..."
+msgstr "Надсилаю..."
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__sequence
@@ -1227,15 +1471,25 @@ msgid "Service Price per Vehicle Type"
 msgstr "Ціна послуги за типом автомобіля"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
-msgid "Service name"
-msgstr "Назва послуги"
+#: model:bw.service.category,name:bw_booking.cat_program
+msgid "Service price list"
+msgstr "Прайс-лист послуг"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_category__service_ids
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
 msgid "Services"
 msgstr "Послуги"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Seskupit podle"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__tracking_event_id
+msgid "Shared event ID of the browser Pixel and the Conversions API (deduplication)."
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service__short_description
@@ -1243,9 +1497,9 @@ msgid "Short Description"
 msgstr "Короткий опис"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_form
-msgid "Short description…"
-msgstr "Короткий опис…"
+#: model:bw.service,name:bw_booking.svc_extra_lesteni_dil
+msgid "Single panel polishing"
+msgstr "Полірування окремої деталі"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking_line__service_id
@@ -1255,12 +1509,18 @@ msgstr "Послуга"
 #. module: bw_booking
 #: model:ir.actions.act_window,name:bw_booking.action_bw_service
 #: model:ir.ui.menu,name:bw_booking.menu_bw_services
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_category_form
 msgid "Služby"
 msgstr "Послуги"
 
 #. module: bw_booking
 #: model:bw.service,name:bw_booking.svc_fusso
 msgid "Soft99 Fusso Coat"
+msgstr "Soft99 Fusso Coat"
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__source_id
+msgid "Source"
 msgstr ""
 
 #. module: bw_booking
@@ -1276,11 +1536,6 @@ msgid "State"
 msgstr "Стан"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
-msgid "Status"
-msgstr "Статус"
-
-#. module: bw_booking
 #: model:ir.model.fields,help:bw_booking.field_bw_booking__activity_state
 msgid ""
 "Status based on activities\n"
@@ -1294,14 +1549,29 @@ msgstr ""
 "Заплановано: Майбутні дії."
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Stav"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_polepy
+msgid "Sticker and wrap removal"
+msgstr "Видалення наклейок"
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
 msgid "Summary"
 msgstr "Підсумок"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_sterace
-msgid "Tekuté stěrače, trvanlivost až 1 rok"
-msgstr "Рідкі склоочисники, термін дії до 1 року"
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "TEST12345"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_asfalt
+msgid "Tar removal"
+msgstr "Видалення асфальту"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__customer_phone
@@ -1309,14 +1579,36 @@ msgid "Telefon"
 msgstr "Телефон"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_podlaha
-msgid "Tepování podlahy"
-msgstr "Екстракція підлоги"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Tento týden"
+msgstr ""
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_strop
-msgid "Tepování stropu"
-msgstr "Екстракція стелі"
+#: model:ir.model.fields,help:bw_booking.field_res_config_settings__bw_meta_test_event_code
+#: model:ir.model.fields,help:bw_booking.field_website__bw_meta_test_event_code
+msgid "Test event code (TEST12345) from Meta Events Manager. Server-side events then show up only in \"Test events\" and do not affect ad optimisation."
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.res_config_settings_view_form_bw_tracking
+msgid "Testovací režim"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_koberecky
+msgid "Textile floor mat shampooing + freshening"
+msgstr "Чищення текстильних килимків (екстракція) + ароматизація"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "Thank you"
+msgstr "Дякуємо"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Thank you for your reservation!"
+msgstr "Дякуємо за Ваше бронювання!"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
@@ -1324,9 +1616,19 @@ msgid "Thank you!"
 msgstr "Дякуємо!"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
-msgid "This Week"
-msgstr "Цей тиждень"
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__campaign_id
+msgid "This is a name that helps you keep track of your different campaign efforts, e.g. Fall_Drive, Christmas_Special"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__medium_id
+msgid "This is the method of delivery, e.g. Postcard, Email, or Banner Ad"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,help:bw_booking.field_bw_booking__source_id
+msgid "This is the source of the link, e.g. Search Engine, another domain, or name of email list"
+msgstr ""
 
 #. module: bw_booking
 #: model_terms:bw.service,description:bw_booking.svc_program1
@@ -1336,14 +1638,21 @@ msgid "Tire dressing"
 msgstr "Обробка шин"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
-msgid "To email"
-msgstr "На електронну пошту"
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Total price"
+msgstr "Загальна ціна"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
-msgid "Today"
-msgstr "Сьогодні"
+#: model:ir.model.fields,field_description:bw_booking.field_res_config_settings__bw_tracking_test_mode
+#: model:ir.model.fields,field_description:bw_booking.field_website__bw_tracking_test_mode
+msgid "Tracking test mode"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_venkovni_plasty
+msgid "Treatment and protection of exterior plastics"
+msgstr "Обробка та консервація зовнішніх пластикових деталей"
 
 #. module: bw_booking
 #: model:ir.model.fields,help:bw_booking.field_bw_booking__is_price_approximate
@@ -1351,14 +1660,15 @@ msgid "True pokud alespoň jedna služba má prefix \"od\""
 msgstr "True, якщо хоча б одна послуга має префікс \"від\""
 
 #. module: bw_booking
-#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__vehicle_type_id
-msgid "Typ vozidla"
-msgstr "Тип транспортного засобу"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
+msgid "Typ"
+msgstr ""
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_service_search
-msgid "Type"
-msgstr "Тип"
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__vehicle_type_id
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Typ vozidla"
+msgstr "Тип транспортного засобу"
 
 #. module: bw_booking
 #: model:ir.model.fields,help:bw_booking.field_bw_booking__activity_exception_decoration
@@ -1372,26 +1682,26 @@ msgid "Typy vozidel"
 msgstr "Типи транспортних засобів"
 
 #. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_pneumatiky
+msgid "Tyre dressing"
+msgstr "Обробка шин"
+
+#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__calendar_event_id
 msgid "Událost v kalendáři"
 msgstr "Подія в календарі"
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-msgid "Vehicle (make / model)"
-msgstr "Автомобіль (марка / модель)"
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Vehicle"
+msgstr "Транспортний засіб"
 
 #. module: bw_booking
 #: model:ir.model,name:bw_booking.model_bw_vehicle_type
 #: model:ir.model.fields,field_description:bw_booking.field_bw_service_price__vehicle_type_id
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
 msgid "Vehicle Type"
 msgstr "Тип транспортного засобу"
-
-#. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
-msgid "Vehicle and Date"
-msgstr "Автомобіль та дата"
 
 #. module: bw_booking
 #: model:ir.model.fields,help:bw_booking.field_bw_service__is_highlighted
@@ -1399,29 +1709,25 @@ msgid "Visual highlight (recommended)"
 msgstr "Візуальне виділення (рекомендовано)"
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_voskovani
-msgid "Voskování vozu voskem s UV filtrem a teflonem"
-msgstr "Воскування автомобіля воском з UV фільтром та тефлоном"
-
-#. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__vehicle_info
 msgid "Vozidlo (značka/model)"
 msgstr "Автомобіль (марка/модель)"
 
 #. module: bw_booking
-#: model:bw.service.category,description:bw_booking.cat_program
-msgid "Vyberte si program, který vám vyhovuje"
-msgstr "Оберіть програму, яка вам підходить"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Vozidlo a termín"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__landing_url
+msgid "Vstupní stránka"
+msgstr ""
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__service_ids
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
 msgid "Vybrané služby"
 msgstr "Обрані послуги"
-
-#. module: bw_booking
-#: model:bw.service,short_description:bw_booking.svc_lesteni
-msgid "Vícekroková korekce laku"
-msgstr "Багатоетапна корекція лаку"
 
 #. module: bw_booking
 #: model:ir.ui.menu,name:bw_booking.menu_bw_service_list
@@ -1429,9 +1735,41 @@ msgid "Všechny služby"
 msgstr "Усі послуги"
 
 #. module: bw_booking
+#: model:bw.service,name:bw_booking.svc_extra_voskovani
+msgid "Waxing with UV filter and Teflon wax"
+msgstr "Воскування автомобіля воском з UV фільтром та тефлоном"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "We are pleased to confirm your reservation. We look forward to seeing you."
+msgstr "Раді підтвердити Ваше бронювання. Чекаємо на Вас."
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "We have received your reservation and it is now awaiting confirmation. We will contact you shortly to confirm the appointment."
+msgstr "Ми отримали Ваше бронювання, і воно очікує підтвердження. Незабаром ми зв’яжемося з Вами, щоб підтвердити термін."
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
+msgid "We have sent a confirmation to"
+msgstr "Ми надіслали підтвердження на"
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
 msgid "We will contact you to confirm the appointment."
 msgstr "Ми зв'яжемося з вами для підтвердження дати."
+
+#. module: bw_booking
+#: model:ir.model.fields,field_description:bw_booking.field_bw_booking__website_id
+msgid "Web"
+msgstr ""
+
+#. module: bw_booking
+#: model:ir.model,name:bw_booking.model_website
+msgid "Website"
+msgstr "Веб-сайт"
 
 #. module: bw_booking
 #: model:ir.model.fields,field_description:bw_booking.field_bw_booking__website_message_ids
@@ -1456,14 +1794,57 @@ msgid "Window cleaning"
 msgstr "Миття вікон"
 
 #. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Your note"
+msgstr "Ваша примітка"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Your reservation BWD-%s"
+msgstr "Ваше бронювання BWD-%s"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "Your reservation has been confirmed!"
+msgstr "Ваше бронювання підтверджено!"
+
+#. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
 msgid "Your reservation has been received"
 msgstr "Ваше бронювання було прийнято"
 
 #. module: bw_booking
-#: model:bw.service,duration_info:bw_booking.svc_program3
-msgid "cca 6 hodin"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Z reklamy"
 msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Zrušit"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Zákazník"
+msgstr ""
+
+#. module: bw_booking
+#: model:crm.lost.reason,name:bw_booking.lost_reason_no_show
+msgid "Zákazník nedorazil"
+msgstr ""
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_form
+msgid "Zákazník přišel (dokončeno)"
+msgstr ""
+
+#. module: bw_booking
+#: model:bw.service,duration_info:bw_booking.svc_program3
+msgid "approx. 6 hours"
+msgstr "близько 6 годин"
 
 #. module: bw_booking
 #: model:ir.model.fields,help:bw_booking.field_bw_booking_line__price_prefix
@@ -1482,50 +1863,48 @@ msgstr "напр. 15-25 хв, близько 6 годин"
 
 #. module: bw_booking
 #: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
-msgid "jan@example.com"
-msgstr ""
+msgid "e.g. John Smith"
+msgstr "напр. Іван Петренко"
 
 #. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "e.g. Škoda Octavia"
+msgstr "напр. Škoda Octavia"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
 #: model:bw.service.price,price_prefix:bw_booking.svc_extra_asfalt_price
 #: model:bw.service.price,price_prefix:bw_booking.svc_extra_chlupy_price
 #: model:bw.service.price,price_prefix:bw_booking.svc_extra_lesteni_dil_price
 #: model:bw.service.price,price_prefix:bw_booking.svc_extra_polepy_price
 #: model:bw.service.price,price_prefix:bw_booking.svc_lesteni_price_sedan
 #: model:bw.service.price,price_prefix:bw_booking.svc_lesteni_price_suv
-msgid "od"
+msgid "from"
+msgstr "від"
+
+#. module: bw_booking
+#: model_terms:ir.ui.view,arch_db:bw_booking.booking_page
+msgid "jan@example.com"
+msgstr "jan@example.com"
+
+#. module: bw_booking
+#. odoo-python
+#: code:addons/bw_booking/models/bw_booking.py:0
+msgid "not specified"
+msgstr "не вказано"
+
+#. module: bw_booking
+#: model:mail.template,subject:bw_booking.mail_template_booking_confirmed
+msgid "{{ object.env.company.name }} - {{ object._bw_mail_texts()['subject_confirmed'] }}"
 msgstr ""
 
 #. module: bw_booking
-#: model_terms:ir.ui.view,arch_db:bw_booking.booking_thank_you
-msgid "we have sent you a confirmation."
-msgstr "ми надіслали вам підтвердження."
-
-#. module: bw_booking
 #: model:mail.template,subject:bw_booking.mail_template_booking_pending
-msgid "{{ object.env.company.name }} - Your reservation #{{ object.id }}"
-msgstr "{{ object.env.company.name }} - Ваше бронювання #{{ object.id }}"
+msgid "{{ object.env.company.name }} - {{ object._bw_mail_texts()['subject_pending'] }}"
+msgstr ""
 
 #. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_kuze
-msgid "Čištění a impregnace kůže"
-msgstr "Чищення та імпрегнація шкіри"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_okna
-msgid "Čištění a vyleštění vnějších oken a zrcátek"
-msgstr "Чищення та полірування зовнішніх вікон і дзеркал"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_chlupy
-msgid "Čištění interiéru od chlupů"
-msgstr "Чищення інтер'єру від шерсті"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_klima
-msgid "Čištění klimatizace"
-msgstr "Чищення кондиціонера"
-
-#. module: bw_booking
-#: model:bw.service,name:bw_booking.svc_extra_koberecky
-msgid "Čištění textilních koberečků (tepování) + provonění"
-msgstr "Чищення текстильних килимків (екстракція) + ароматизація"
+#: model_terms:ir.ui.view,arch_db:bw_booking.view_bw_booking_search
+msgid "Čeká na potvrzení"
+msgstr ""

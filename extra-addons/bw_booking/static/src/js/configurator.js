@@ -1,6 +1,8 @@
 /** @odoo-module **/
 
-document.addEventListener('DOMContentLoaded', function () {
+import { _t } from "@web/core/l10n/translation";
+
+function bwInitConfigurator() {
     var form = document.getElementById('bwBookingForm');
     if (!form) return;
 
@@ -9,11 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var vehicleRadios = form.querySelectorAll('input[name="vehicle_type_id"]');
     var serviceChecks = form.querySelectorAll('input[type="checkbox"][name^="service_"]');
 
-    // Translatable strings from data attributes
     var currencySuffix = form.dataset.currencySuffix || ',- Kč';
-    var msgSelectVehicle = form.dataset.msgSelectVehicle || 'Prosím vyberte typ vozidla.';
-    var msgSelectService = form.dataset.msgSelectService || 'Prosím vyberte alespoň jednu službu.';
-    var msgSending = form.dataset.msgSending || 'Odesílám...';
+    var msgSelectVehicle = _t("Please select your vehicle type.");
+    var msgSelectService = _t("Please select at least one service.");
+    var msgSending = _t("Sending...");
 
     function getSelectedVehicle() {
         var checked = form.querySelector('input[name="vehicle_type_id"]:checked');
@@ -116,6 +117,12 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        // Ad attribution (gclid / fbclid / utm) for the booking and CRM lead
+        var trackingInput = document.getElementById('bwTrackingInput');
+        if (trackingInput && window.bwTracking) {
+            trackingInput.value = JSON.stringify(window.bwTracking.getAttribution());
+        }
+
         var btn = document.getElementById('bwSubmitBtn');
         if (btn) {
             btn.disabled = true;
@@ -124,4 +131,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     updatePrices();
-});
+}
+
+// The frontend bundle is loaded lazily, DOMContentLoaded may be long gone
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bwInitConfigurator);
+} else {
+    bwInitConfigurator();
+}

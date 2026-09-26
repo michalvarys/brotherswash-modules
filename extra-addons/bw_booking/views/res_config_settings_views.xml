@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_bw_tracking" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.bw_booking.tracking</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='google_analytics_setting']" position="after">
+                <setting id="bw_booking_tracking_setting" string="Měření rezervací (Brothers Wash)"
+                         help="Konverze po odeslání rezervace: Meta Pixel (Lead), GA4 (generate_lead), Google Ads konverze a dataLayer pro GTM.">
+                    <div class="content-group">
+                        <!-- The Facebook Pixel setting of facebook_pixel hides this field while the pixel is enabled -->
+                        <div class="row mt16">
+                            <label class="col-lg-4 o_light_label" string="Meta Pixel ID" for="facebook_pixel_key"/>
+                            <field name="facebook_pixel_key" placeholder="2284373242317259"/>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-4 o_light_label" string="Google Ads ID" for="bw_google_ads_id"/>
+                            <field name="bw_google_ads_id" placeholder="AW-17998032792"/>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-4 o_light_label" string="Ads konverze rezervace" for="bw_ads_booking_send_to"/>
+                            <field name="bw_ads_booking_send_to" placeholder="AW-17998032792/n-P5CKCcyc8cEJjfkIZD"/>
+                        </div>
+                        <div class="row" groups="base.group_system">
+                            <label class="col-lg-4 o_light_label" string="Meta CAPI token" for="bw_meta_capi_token"/>
+                            <field name="bw_meta_capi_token" password="True" placeholder="(volitelné)"/>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-4 o_light_label" string="Meta test event code" for="bw_meta_test_event_code"/>
+                            <field name="bw_meta_test_event_code" placeholder="TEST12345"/>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-4 o_light_label" string="Testovací režim" for="bw_tracking_test_mode"/>
+                            <field name="bw_tracking_test_mode"/>
+                        </div>
+                        <div class="text-muted mt8">
+                            GA4 ID se zadává výše v „Google Analytics“. Testovací režim patří jen na dev: nevolá Google Ads konverzi a GA4 posílá s debug_mode.
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

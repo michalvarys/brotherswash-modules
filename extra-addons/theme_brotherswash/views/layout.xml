@@ -92,7 +92,7 @@
             <div id="footer">
                 <t t-set="bwd_company" t-value="request.env.company.sudo()"/>
                 <div class="container text-center">
-                    <p>Dopřejte svému vozu nadstandardní péči na úrovni prémiového detailingu.</p>
+                    <p>Give your car exceptional care at the level of premium detailing.</p>
                     <p class="bwd-footer__copy">&#169; <t t-esc="datetime.date.today().year"/> <t t-esc="bwd_company.name or 'Brothers Wash Detailing'"/></p>
                 </div>
             </div>

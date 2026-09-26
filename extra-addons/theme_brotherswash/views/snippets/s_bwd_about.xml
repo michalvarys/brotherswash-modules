@@ -5,9 +5,9 @@
     <section class="bwd-about o_cc o_colored_level" id="bwd-about"
              data-snippet="s_bwd_about" data-name="BWD About">
         <div class="container text-center">
-            <h2 class="bwd-section-title bwd-reveal">O nás</h2>
+            <h2 class="bwd-section-title bwd-reveal">About us</h2>
             <div class="bwd-section-line"/>
-            <p class="bwd-about__text bwd-reveal">Dokonalá péče pro vaše auto &#8211; lesk, čistota a ochrana na nejvyšší úrovni. Používáme špičkové technologie a kvalitní produkty pro perfektní výsledek.</p>
+            <p class="bwd-about__text bwd-reveal">Perfect care for your car &#8211; shine, cleanliness and protection at the highest level. We use cutting-edge technology and quality products for a perfect result.</p>
         </div>
     </section>
 </template>

@@ -10,16 +10,16 @@
         <div class="bwd-hero__overlay"/>
         <div class="bwd-hero__vignette"/>
         <div class="bwd-hero__content">
-            <p class="bwd-hero__subtitle">Prémiový auto detailing &#8226; Praha 5</p>
+            <p class="bwd-hero__subtitle">Premium car detailing &#8226; Prague 5</p>
             <h1>Brothers Wash<br/><span class="bwd-accent">Detailing</span></h1>
             <div class="bwd-hero__line"/>
-            <p class="bwd-hero__desc">Precizní ruční práce, špičkové produkty a důraz na každý detail. Dopřejte svému vozu péči, kterou si zaslouží.</p>
+            <p class="bwd-hero__desc">Precise handwork, top-quality products and attention to every detail. Give your car the care it deserves.</p>
             <div class="bwd-hero__cta">
-                <a href="#bwd-programs" class="bwd-btn">Zobrazit ceník</a>
+                <a href="#bwd-programs" class="bwd-btn">View price list</a>
             </div>
             <div class="bwd-hero__phone-wrap" data-bwd-company="phone"/>
             <div class="bwd-hero__address" data-bwd-company="address"/>
-            <p class="bwd-hero__hours">po - pá 9:00 - 18:00, so-ne dle domluvy</p>
+            <p class="bwd-hero__hours">Mon - Fri 9:00 - 18:00, Sat-Sun by appointment</p>
             <div class="bwd-hero__socials" data-bwd-company="socials"/>
         </div>
     </section>

@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-08 19:33+0000\n"
-"PO-Revision-Date: 2026-03-08 19:33+0000\n"
+"POT-Creation-Date: 2026-09-26 07:22+0000\n"
+"PO-Revision-Date: 2026-09-26 07:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,58 +17,79 @@ msgstr ""
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
+msgid "4.9 rating on Google Maps"
+msgstr "Рейтинг 4.9 на Google Maps"
+
+#. module: theme_brotherswash
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>David P.</strong><span>Tesla Model 3</span>"
-msgstr ""
+msgstr "<strong>David P.</strong><span>Tesla Model 3</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Eva K.</strong><span>Ford Focus</span>"
-msgstr ""
+msgstr "<strong>Eva K.</strong><span>Ford Focus</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Jana D.</strong><span>Audi Q7</span>"
-msgstr ""
+msgstr "<strong>Jana D.</strong><span>Audi Q7</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Kateřina S.</strong><span>Toyota RAV4</span>"
-msgstr ""
+msgstr "<strong>Kateřina S.</strong><span>Toyota RAV4</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Lukáš M.</strong><span>Volkswagen Golf</span>"
-msgstr ""
+msgstr "<strong>Lukáš M.</strong><span>Volkswagen Golf</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Martin K.</strong><span>BMW X5</span>"
-msgstr ""
+msgstr "<strong>Martin K.</strong><span>BMW X5</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Michal R.</strong><span>Hyundai Tucson</span>"
-msgstr ""
+msgstr "<strong>Michal R.</strong><span>Hyundai Tucson</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Petr V.</strong><span>Škoda Superb</span>"
-msgstr ""
+msgstr "<strong>Petr V.</strong><span>Škoda Superb</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Robert H.</strong><span>Porsche Cayenne</span>"
-msgstr ""
+msgstr "<strong>Robert H.</strong><span>Porsche Cayenne</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "<strong>Tomáš N.</strong><span>Mercedes C-Class</span>"
-msgstr ""
+msgstr "<strong>Tomáš N.</strong><span>Mercedes C-Class</span>"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_gallery
 msgid "@brotherswashdetailing"
-msgstr ""
+msgstr "@brotherswashdetailing"
+
+#. module: theme_brotherswash
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
+msgid "AC cleaning and complete interior. Finally no odor and the car inside is like new. Excellent communication."
+msgstr "Чищення кондиціонера та повний інтер'єр. Нарешті жодного запаху і авто всередині як нове. Відмінна комунікація."
+
+#. module: theme_brotherswash
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_about
+msgid "About us"
+msgstr "Про нас"
+
+#. module: theme_brotherswash
+#. odoo-javascript
+#: code:addons/theme_brotherswash/static/src/js/snippets.js:0
+msgid "Address"
+msgstr "Адреса"
 
 #. module: theme_brotherswash
 #. odoo-javascript
@@ -78,16 +98,26 @@ msgid "Back"
 msgstr "Назад"
 
 #. module: theme_brotherswash
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
+msgid "Best car wash in Prague. Hand washing on a completely different level than anywhere else. Every detail is taken care of."
+msgstr "Найкраща автомийка в Празі. Ручне миття на зовсім іншому рівні, ніж будь-де інде. Кожна деталь доглянута."
+
+#. module: theme_brotherswash
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_contact
+msgid "Book your appointment"
+msgstr "Забронюйте свій час"
+
+#. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.brotherswash_snippets
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_homepage
 msgid "Brothers Wash"
-msgstr ""
+msgstr "Brothers Wash"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_header
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_homepage
 msgid "Brothers Wash Detailing"
-msgstr ""
+msgstr "Brothers Wash Detailing"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_homepage
@@ -95,9 +125,14 @@ msgid "Brothers Wash Detailing | Premium Car Detailing Prague 5"
 msgstr "Brothers Wash Detailing | Преміум автодетейлінг Прага 5"
 
 #. module: theme_brotherswash
+#: model:ir.model,name:theme_brotherswash.model_theme_brotherswash_translations
+msgid "Brothers Wash theme translations fix"
+msgstr ""
+
+#. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_hero
 msgid "Brothers Wash<br/><span class=\"bwd-accent\">Detailing</span>"
-msgstr ""
+msgstr "Brothers Wash<br/><span class=\"bwd-accent\">Detailing</span>"
 
 #. module: theme_brotherswash
 #. odoo-javascript
@@ -106,18 +141,20 @@ msgid "Car make / model"
 msgstr "Марка / модель авто"
 
 #. module: theme_brotherswash
-#: model:theme.website.menu,name:theme_brotherswash.menu_cenik
-msgid "Ceník"
-msgstr "Прайс-лист"
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_booking
+msgid "Choose your services and book an appointment online"
+msgstr "Оберіть послуги та забронюйте час онлайн"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid "Co říkají naši zákazníci"
-msgstr "Що кажуть наші клієнти"
+msgid "Complete detailing including ceramic coating. The car shines like new from the showroom and water beads beautifully. Great investment!"
+msgstr "Повний детейлінг включно з керамікою. Авто блищить як з салону і вода чудово перлиться. Чудова інвестиція!"
 
 #. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
+#: model:theme.website.menu,name:theme_brotherswash.menu_kontakt
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_contact
 msgid "Contact"
 msgstr "Контакт"
 
@@ -142,46 +179,42 @@ msgstr "Продовжити до вибору послуг"
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "DP"
-msgstr ""
-
-#. module: theme_brotherswash
-#: model:theme.website.menu,name:theme_brotherswash.menu_home
-msgid "Domovská stránka"
-msgstr "Головна сторінка"
-
-#. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_footer_layout
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_footer
-msgid ""
-"Dopřejte svému vozu nadstandardní péči na úrovni prémiového detailingu."
-msgstr ""
-"Подаруйте своєму авто надзвичайний догляд на рівні преміум детейлінгу."
+msgstr "DP"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Dával jsem auto na Program 3 a jsem naprosto spokojený. Celé auto je jako ze"
-" salónu. Doporučuji každému!"
-msgstr ""
-"Замовив Програму 3 і абсолютно задоволений. Все авто як з салону. Рекомендую"
-" кожному!"
+msgid "Deep polishing completely removed holograms from previous poor care. The paint looks factory new. Thanks!"
+msgstr "Глибоке полірування повністю видалило голограми від попереднього неякісного догляду. Лак виглядає як з заводу. Дякую!"
+
+#. module: theme_brotherswash
+#. odoo-javascript
+#: code:addons/theme_brotherswash/static/src/js/snippets.js:0
+msgid "Dirt surcharge – from 25%"
+msgstr "Доплата за сильне забруднення – від 25%"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "EK"
-msgstr ""
+msgstr "EK"
 
 #. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
+#: code:addons/theme_brotherswash/static/src/js/snippets.js:0
 msgid "Email"
-msgstr ""
+msgstr "Ел. пошта"
 
 #. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
 msgid "Error submitting. Please try again."
 msgstr "Помилка відправлення. Будь ласка, спробуйте ще раз."
+
+#. module: theme_brotherswash
+#. odoo-javascript
+#: code:addons/theme_brotherswash/static/src/js/snippets.js:0
+msgid "Facebook"
+msgstr "Facebook"
 
 #. module: theme_brotherswash
 #. odoo-javascript
@@ -196,6 +229,11 @@ msgid "Fill in your details to complete the reservation."
 msgstr "Заповніть Ваші дані для завершення бронювання."
 
 #. module: theme_brotherswash
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_gallery
+msgid "Follow our work on Instagram"
+msgstr "Слідкуйте за нашою роботою в Instagram"
+
+#. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
 msgid "Full name"
@@ -203,76 +241,61 @@ msgstr "Прізвище та ім'я"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Fusso Coat na mém autě drží parádně. Voda stéká jako po teflonovém rendlíku."
-" Super služba za rozumnou cenu."
-msgstr ""
-"Fusso Coat на моєму авто тримається чудово. Вода стікає як по тефлоновій"
-" сковорідці. Чудовий сервіс за розумну ціну."
+msgid "Fusso Coat on my car holds up brilliantly. Water rolls off like on a teflon pan. Great service at a reasonable price."
+msgstr "Fusso Coat на моєму авто тримається чудово. Вода стікає як по тефлоновій сковорідці. Чудовий сервіс за розумну ціну."
 
 #. module: theme_brotherswash
 #: model:theme.website.menu,name:theme_brotherswash.menu_galerie
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_gallery
-msgid "Galerie"
+msgid "Gallery"
 msgstr "Галерея"
 
 #. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Hloubkové leštění kompletně odstranilo hologramy po předchozí špatné péči. "
-"Lak vypadá jako z výroby. Díky!"
-msgstr ""
-"Глибоке полірування повністю видалило голограми від попереднього неякісного "
-"догляду. Лак виглядає як з заводу. Дякую!"
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_footer_layout
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_footer
+msgid "Give your car exceptional care at the level of premium detailing."
+msgstr "Подаруйте своєму авто надзвичайний догляд на рівні преміум детейлінгу."
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid "Hodnocení 4.9 na Google Maps"
-msgstr "Рейтинг 4.9 на Google Maps"
-
-#. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid "Hodnocení z Google Maps"
+msgid "Google Maps reviews"
 msgstr "Відгуки з Google Maps"
 
 #. module: theme_brotherswash
+#: model:theme.website.menu,name:theme_brotherswash.menu_home
+msgid "Homepage"
+msgstr "Головна сторінка"
+
+#. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Interiér po tepování vypadá a voní jako nový. Odstranili i skvrny, se "
-"kterými jsem už nepočítal. Velké díky!"
-msgstr ""
-"Інтер'єр після глибокого чищення виглядає і пахне як новий. Видалили навіть "
-"плями, на які я вже не розраховував. Велике дякую!"
+msgid "I had my car on Program 3 and I am completely satisfied. The whole car looks like from a showroom. I recommend it to everyone!"
+msgstr "Замовив Програму 3 і абсолютно задоволений. Все авто як з салону. Рекомендую кожному!"
+
+#. module: theme_brotherswash
+#. odoo-javascript
+#: code:addons/theme_brotherswash/static/src/js/snippets.js:0
+msgid "Instagram"
+msgstr "Instagram"
+
+#. module: theme_brotherswash
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
+msgid "Interior after deep cleaning looks and smells like new. They even removed stains I had given up on. Many thanks!"
+msgstr "Інтер'єр після глибокого чищення виглядає і пахне як новий. Видалили навіть плями, на які я вже не розраховував. Велике дякую!"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "KS"
-msgstr ""
-
-#. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Kompletní detailing včetně keramiky. Vůz se leskne jako ze salónu a voda "
-"krásně perlí. Skvělá investice!"
-msgstr ""
-"Повний детейлінг включно з керамікою. Авто блищить як з салону і вода чудово "
-"перлиться. Чудова інвестиція!"
-
-#. module: theme_brotherswash
-#: model:theme.website.menu,name:theme_brotherswash.menu_kontakt
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_contact
-msgid "Kontakt"
-msgstr "Контакт"
+msgstr "KS"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "LM"
-msgstr ""
+msgstr "LM"
 
 #. module: theme_brotherswash
 #. odoo-javascript
@@ -283,12 +306,12 @@ msgstr "Завантаження послуг…"
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "MK"
-msgstr ""
+msgstr "MK"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "MR"
-msgstr ""
+msgstr "MR"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_header
@@ -297,13 +320,15 @@ msgid "Menu"
 msgstr "Меню"
 
 #. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Nejlepší autoumyvárna v Praze. Ruční mytí na úplně jiné úrovni než kdekoliv "
-"jinde. Každý detail je ošetřený."
-msgstr ""
-"Найкраща автомийка в Празі. Ручне миття на зовсім іншому рівні, ніж будь-де "
-"інде. Кожна деталь доглянута."
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_hero
+msgid "Mon - Fri 9:00 - 18:00, Sat-Sun by appointment"
+msgstr "пн - пт 9:00 - 18:00, сб-нд за домовленістю"
+
+#. module: theme_brotherswash
+#. odoo-javascript
+#: code:addons/theme_brotherswash/static/src/js/snippets.js:0
+msgid "Most popular"
+msgstr "Найпопулярніший"
 
 #. module: theme_brotherswash
 #. odoo-javascript
@@ -318,37 +343,24 @@ msgid "Note"
 msgstr "Примітка"
 
 #. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_about
-msgid "O nás"
-msgstr "Про нас"
-
-#. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "PV"
-msgstr ""
+msgstr "PV"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_about
-msgid ""
-"Perfect care for your car – shine, cleanliness and protection at the highest"
-" level. We use top technology and quality products for a perfect result."
-msgstr ""
-"Досконалий догляд за вашим авто — блиск, чистота та захист на найвищому "
-"рівні. Використовуємо передові технології та якісні продукти для ідеального "
-"результату."
+msgid "Perfect care for your car – shine, cleanliness and protection at the highest level. We use cutting-edge technology and quality products for a perfect result."
+msgstr "Досконалий догляд за вашим авто – блиск, чистота та захист найвищого рівня. Ми використовуємо передові технології та якісні засоби для ідеального результату."
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Perfektní práce, auto vypadalo jako nové. Keramická ochrana drží skvěle i po"
-" několika měsících. Jednoznačně doporučuji!"
-msgstr ""
-"Бездоганна робота, авто виглядало як нове. Керамічний захист тримається "
-"чудово навіть через кілька місяців. Однозначно рекомендую!"
+msgid "Perfect work, the car looked brand new. The ceramic coating holds up great even after several months. Highly recommend!"
+msgstr "Бездоганна робота, авто виглядало як нове. Керамічний захист тримається чудово навіть через кілька місяців. Однозначно рекомендую!"
 
 #. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
+#: code:addons/theme_brotherswash/static/src/js/snippets.js:0
 msgid "Phone"
 msgstr "Телефон"
 
@@ -360,21 +372,13 @@ msgstr "Будь ласка, заповніть ім'я, email та телефо
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_hero
-msgid ""
-"Precizní ruční práce, špičkové produkty a důraz na každý detail. Dopřejte "
-"svému vozu péči, kterou si zaslouží."
-msgstr ""
-"Точна ручна робота, найякісніші продукти та увага до кожної деталі. "
-"Подаруйте своєму автомобілю догляд, якого він заслуговує."
+msgid "Precise handwork, top-quality products and attention to every detail. Give your car the care it deserves."
+msgstr "Точна ручна робота, найякісніші продукти та увага до кожної деталі. Подаруйте своєму автомобілю догляд, якого він заслуговує."
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.bwd_homepage
-msgid ""
-"Premium car detailing in Prague 5. Hand washing, deep interior cleaning, "
-"paint correction, ceramic coatings."
-msgstr ""
-"Преміум автодетейлінг у Празі 5. Ручне миття, глибоке чищення інтер'єру, "
-"реновація лаку, керамічний захист."
+msgid "Premium car detailing in Prague 5. Hand washing, deep interior cleaning, paint restoration, ceramic coatings."
+msgstr "Преміум автодетейлінг у Празі 5. Ручне миття, глибоке чищення салону, відновлення лаку, керамічний захист."
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_hero
@@ -382,29 +386,30 @@ msgid "Premium car detailing • Prague 5"
 msgstr "Преміум автодетейлінг • Прага 5"
 
 #. module: theme_brotherswash
+#: model:theme.website.menu,name:theme_brotherswash.menu_cenik
+msgid "Price List"
+msgstr "Прайс-лист"
+
+#. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Profesionální přístup od začátku do konce. Auto vonělo a vypadalo naprosto "
-"dokonale. Vrátím se určitě znovu!"
-msgstr ""
-"Професійний підхід від початку до кінця. Авто пахло і виглядало абсолютно "
-"досконало. Обов'язково повернуся знову!"
+msgid "Professional approach from start to finish. The car smelled and looked absolutely perfect. I will definitely come back again!"
+msgstr "Професійний підхід від початку до кінця. Авто пахло і виглядало абсолютно досконало. Обов'язково повернуся знову!"
 
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "RH"
-msgstr ""
+msgstr "RH"
 
 #. module: theme_brotherswash
 #: model:theme.website.menu,name:theme_brotherswash.menu_rezervace
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_booking
-msgid "Rezervace"
+msgid "Reservation"
 msgstr "Бронювання"
 
 #. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_contact
-msgid "Rezervujte si svůj termín"
-msgstr "Забронюйте свій час"
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
+msgid "Second time I had the interior deep-cleaned here and the result always exceeds expectations. The guys are meticulous and friendly."
+msgstr "Вже вдруге залишав інтер'єр на глибоке чищення і результат завжди перевершує очікування. Хлопці точні та привітні."
 
 #. module: theme_brotherswash
 #. odoo-javascript
@@ -421,17 +426,8 @@ msgstr "Оберіть тип транспортного засобу для п�
 #. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
-msgid "Services"
-msgstr "Послуги"
-
-#. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_gallery
-msgid "Sledujte naši práci na Instagramu"
-msgstr "Слідкуйте за нашою роботою в Instagram"
-
-#. module: theme_brotherswash
 #: model:theme.website.menu,name:theme_brotherswash.menu_sluzby
-msgid "Služby"
+msgid "Services"
 msgstr "Послуги"
 
 #. module: theme_brotherswash
@@ -449,7 +445,7 @@ msgstr "Відправлення..."
 #. module: theme_brotherswash
 #: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
 msgid "TN"
-msgstr ""
+msgstr "TN"
 
 #. module: theme_brotherswash
 #. odoo-javascript
@@ -469,56 +465,29 @@ msgid "Total:"
 msgstr "Разом:"
 
 #. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Už podruhé jsem tu nechal tepovat interiér a výsledek je vždycky nad "
-"očekávání. Kluci jsou precizní a milí."
-msgstr ""
-"Вже вдруге залишав інтер'єр на глибоке чищення і результат завжди перевершує "
-"очікування. Хлопці точні та привітні."
-
-#. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
 msgid "Vehicle type"
 msgstr "Тип транспортного засобу"
 
 #. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_booking
-msgid "Vyberte si služby a zarezervujte si termín online"
-msgstr "Оберіть послуги та забронюйте час онлайн"
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_hero
+msgid "View price list"
+msgstr "Переглянути прайс-лист"
 
 #. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
-msgid ""
-"We have sent a confirmation to your email. We will contact you to confirm "
-"the appointment."
-msgstr ""
-"Ми відправили підтвердження на Ваш email. Зв'яжемося з Вами для "
-"підтвердження дати."
+msgid "We have sent a confirmation to your email. We will contact you to confirm the appointment."
+msgstr "Ми відправили підтвердження на Ваш email. Зв'яжемося з Вами для підтвердження дати."
 
 #. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_hero
-msgid "Zobrazit ceník"
-msgstr "Переглянути прайс-лист"
+#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
+msgid "What our customers say"
+msgstr "Що кажуть наші клієнти"
 
 #. module: theme_brotherswash
 #. odoo-javascript
 #: code:addons/theme_brotherswash/static/src/js/booking_form.js:0
 msgid "from"
 msgstr "від"
-
-#. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_hero
-msgid "po - pá 9:00 - 18:00, so-ne dle domluvy"
-msgstr "пн - пт 9:00 - 18:00, сб-нд за домовленістю"
-
-#. module: theme_brotherswash
-#: model_terms:theme.ir.ui.view,arch:theme_brotherswash.s_bwd_reviews
-msgid ""
-"Čištění klimatizace a kompletní interiér. Konečně žádný zápach a auto je "
-"uvnitř jako nové. Výborná komunikace."
-msgstr ""
-"Чищення кондиціонера та повний інтер'єр. Нарешті жодного запаху і авто "
-"всередині як нове. Відмінна комунікація."

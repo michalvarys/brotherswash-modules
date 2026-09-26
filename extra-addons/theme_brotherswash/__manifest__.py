@@ -2,7 +2,7 @@
     'name': 'Brothers Wash Detailing Theme',
     'description': 'Premium auto detailing website theme for Brothers Wash Detailing Praha 5.',
     'category': 'Theme/Services',
-    'version': '18.0.7.0.0',
+    'version': '18.0.7.1.0',
     'author': 'Michal Varys',
     'depends': [
         'theme_common',
@@ -13,6 +13,7 @@
         'data/ir_asset.xml',
         'data/generate_primary_template.xml',
         'data/menu.xml',
+        'data/translation_fix.xml',
 
         'views/snippets/s_bwd_hero.xml',
         'views/snippets/s_bwd_about.xml',

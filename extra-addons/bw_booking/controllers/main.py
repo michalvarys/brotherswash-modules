@@ -1,8 +1,11 @@
 import json
+import logging
 from datetime import datetime
 
 from odoo import http
 from odoo.http import request
+
+_logger = logging.getLogger(__name__)
 
 
 class BwBookingController(http.Controller):
@@ -68,6 +71,58 @@ class BwBookingController(http.Controller):
                 }
         return result
 
+    def _bw_create_booking(self, post, service_ids, tracking=None):
+        """Shared booking creation for the AJAX homepage form and the /booking page.
+
+        Creates the booking with ad attribution, the CRM lead, sends the customer
+        and owner e-mails and the server-side Meta Lead event.
+        """
+        vehicle_type_id = int(post['vehicle_type_id'])
+        Booking = request.env['bw.booking'].sudo()
+        Service = request.env['bw.service'].sudo()
+
+        lines = []
+        for svc_id in service_ids:
+            svc = Service.browse(int(svc_id))
+            if svc.exists() and svc.is_bookable:
+                price, prefix = svc.get_price_for_vehicle(vehicle_type_id)
+                lines.append((0, 0, {
+                    'service_id': svc.id,
+                    'price': price,
+                    'price_prefix': prefix,
+                }))
+        if not lines:
+            return None
+
+        vals = {
+            'customer_name': post['customer_name'].strip(),
+            'customer_email': post['customer_email'].strip(),
+            'customer_phone': post['customer_phone'].strip(),
+            'customer_note': post.get('customer_note', ''),
+            'vehicle_type_id': vehicle_type_id,
+            'vehicle_info': post.get('vehicle_info', ''),
+            'preferred_date': Booking._bw_parse_local_datetime(post.get('preferred_date')),
+            'lang': request.env.lang or 'cs_CZ',
+            'website_id': request.website.id,
+            'line_ids': lines,
+        }
+        vals.update(Booking._bw_prepare_tracking_vals(tracking, request.httprequest))
+        booking = Booking.create(vals)
+        # The lead is for the (Czech speaking) owner, whatever the visitor language
+        booking.with_context(lang='cs_CZ')._create_crm_lead()
+
+        for xmlid in ('bw_booking.mail_template_booking_pending', 'bw_booking.mail_template_booking_owner'):
+            template = request.env.ref(xmlid, raise_if_not_found=False)
+            if template:
+                try:
+                    template.sudo().send_mail(booking.id, force_send=True)
+                except Exception:
+                    # A broken SMTP must never lose the booking itself
+                    _logger.exception('Booking %s: sending %s failed', booking.id, xmlid)
+
+        booking._bw_meta_send('Lead')
+        return booking
+
     @http.route('/bw/api/booking/submit', type='json', auth='public', website=True)
     def api_booking_submit(self, **post):
         """AJAX booking submission from homepage form."""
@@ -80,55 +135,15 @@ class BwBookingController(http.Controller):
         if not service_ids:
             return {'success': False, 'error': 'no_services'}
 
-        preferred_date = False
-        if post.get('preferred_date'):
-            try:
-                preferred_date = datetime.strptime(post['preferred_date'], '%Y-%m-%dT%H:%M')
-            except ValueError:
-                pass
-
-        vehicle_type_id = int(post['vehicle_type_id'])
-        Service = request.env['bw.service'].sudo()
-
-        # Build price lookup from frontend data (if provided)
-        frontend_prices = {}
-        for item in post.get('service_data', []):
-            frontend_prices[int(item['id'])] = float(item.get('price', 0))
-
-        lines = []
-        for svc_id in service_ids:
-            svc = Service.browse(int(svc_id))
-            if svc.exists():
-                price, prefix = svc.get_price_for_vehicle(vehicle_type_id)
-                if not price and svc.id in frontend_prices:
-                    price = frontend_prices[svc.id]
-                lines.append((0, 0, {
-                    'service_id': svc.id,
-                    'price': price,
-                    'price_prefix': prefix,
-                }))
-
-        booking = request.env['bw.booking'].sudo().create({
-            'customer_name': post['customer_name'],
-            'customer_email': post['customer_email'],
-            'customer_phone': post['customer_phone'],
-            'customer_note': post.get('customer_note', ''),
-            'vehicle_type_id': vehicle_type_id,
-            'vehicle_info': post.get('vehicle_info', ''),
-            'preferred_date': preferred_date,
-            'lang': request.env.lang or 'cs_CZ',
-            'line_ids': lines,
-        })
-        booking._create_crm_lead()
-
-        template = request.env.ref('bw_booking.mail_template_booking_pending', raise_if_not_found=False)
-        if template:
-            template.sudo().send_mail(booking.id, force_send=True)
+        booking = self._bw_create_booking(post, service_ids, post.get('tracking'))
+        if not booking:
+            return {'success': False, 'error': 'no_services'}
 
         return {
             'success': True,
             'booking_id': booking.id,
             'total_price': booking.total_price,
+            'tracking': booking._bw_tracking_payload(),
         }
 
     @http.route('/booking', type='http', auth='public', website=True, sitemap=True)
@@ -159,13 +174,11 @@ class BwBookingController(http.Controller):
     @http.route('/booking/submit', type='http', auth='public', website=True, methods=['POST'], csrf=True)
     def booking_submit(self, **post):
         """Handle booking form submission."""
-        # Validate required fields
         required = ['customer_name', 'customer_email', 'customer_phone', 'vehicle_type_id']
         for field in required:
             if not post.get(field):
                 return request.redirect('/booking?error=missing_fields')
 
-        # Parse selected services
         service_ids = []
         for key in post:
             if key.startswith('service_') and post[key] == 'on':
@@ -173,53 +186,19 @@ class BwBookingController(http.Controller):
                     service_ids.append(int(key.replace('service_', '')))
                 except ValueError:
                     continue
-
         if not service_ids:
             return request.redirect('/booking?error=no_services')
 
-        # Parse preferred date
-        preferred_date = False
-        if post.get('preferred_date'):
-            try:
-                preferred_date = datetime.strptime(post['preferred_date'], '%Y-%m-%dT%H:%M')
-            except ValueError:
-                pass
+        try:
+            tracking = json.loads(post.get('bw_tracking') or '{}')
+        except ValueError:
+            tracking = {}
 
-        vehicle_type_id = int(post['vehicle_type_id'])
+        booking = self._bw_create_booking(post, service_ids, tracking)
+        if not booking:
+            return request.redirect('/booking?error=no_services')
 
-        # Build booking lines with prices
-        Booking = request.env['bw.booking'].sudo()
-        Service = request.env['bw.service'].sudo()
-
-        lines = []
-        for svc_id in service_ids:
-            svc = Service.browse(svc_id)
-            if svc.exists():
-                price, prefix = svc.get_price_for_vehicle(vehicle_type_id)
-                lines.append((0, 0, {
-                    'service_id': svc_id,
-                    'price': price,
-                    'price_prefix': prefix,
-                }))
-
-        booking = Booking.create({
-            'customer_name': post['customer_name'],
-            'customer_email': post['customer_email'],
-            'customer_phone': post['customer_phone'],
-            'customer_note': post.get('customer_note', ''),
-            'vehicle_type_id': vehicle_type_id,
-            'vehicle_info': post.get('vehicle_info', ''),
-            'preferred_date': preferred_date,
-            'lang': request.env.lang or 'cs_CZ',
-            'line_ids': lines,
+        return request.render('bw_booking.booking_thank_you', {
+            'booking': booking,
+            'bw_tracking_json': json.dumps(booking._bw_tracking_payload()),
         })
-
-        # Create CRM lead
-        booking._create_crm_lead()
-
-        # Send pending email
-        template = request.env.ref('bw_booking.mail_template_booking_pending', raise_if_not_found=False)
-        if template:
-            template.sudo().send_mail(booking.id, force_send=True)
-
-        return request.render('bw_booking.booking_thank_you', {'booking': booking})

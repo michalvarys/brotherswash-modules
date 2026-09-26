@@ -2,136 +2,180 @@
 <odoo>
     <data noupdate="0">
 
+        <!--
+            Mail bodies are QWeb (Odoo 18 renders body_html with QWeb, {{ }} and "% for" stay literal there).
+            Texts come from bw.booking._bw_mail_texts() so they follow the customer language (object.lang)
+            and are translated through the module PO files.
+        -->
+
         <!-- Email: Booking Pending (sent to customer on creation) -->
         <record id="mail_template_booking_pending" model="mail.template">
             <field name="name">BWD: Reservation - Pending confirmation</field>
             <field name="model_id" ref="model_bw_booking"/>
-            <field name="email_from">{{ (object.env.company.email or user.email) }}</field>
+            <field name="email_from">{{ object.env.company.email_formatted or user.email_formatted }}</field>
             <field name="email_to">{{ object.customer_email }}</field>
             <field name="lang">{{ object.lang or 'cs_CZ' }}</field>
-            <field name="subject">{{ object.env.company.name }} - Your reservation #{{ object.id }}</field>
-            <field name="body_html"><![CDATA[
-<div style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;">
-    <table width="100%" style="max-width:600px;margin:0 auto;background:#ffffff;">
+            <field name="auto_delete" eval="False"/>
+            <field name="subject">{{ object.env.company.name }} - {{ object._bw_mail_texts()['subject_pending'] }}</field>
+            <field name="body_html" type="html">
+<div style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;">
+    <t t-set="tx" t-value="object._bw_mail_texts()"/>
+    <t t-set="company" t-value="object.env.company"/>
+    <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;">
         <tr>
             <td style="background:#1a1a1a;padding:30px;text-align:center;">
-                <h1 style="color:#c8a961;margin:0;font-size:24px;">{{ object.env.company.name }}</h1>
+                <h1 style="color:#c8a961;margin:0;font-size:24px;" t-out="company.name"/>
             </td>
         </tr>
         <tr>
             <td style="padding:30px;">
-                <h2 style="color:#1a1a1a;margin-top:0;">Thank you for your reservation!</h2>
-                <p>Hello, <strong>{{ object.customer_name }}</strong>,</p>
-                <p>Your reservation has been successfully received and is awaiting confirmation. We will contact you to confirm the appointment.</p>
+                <h2 style="color:#1a1a1a;margin-top:0;" t-out="tx['pending_title']"/>
+                <p><t t-out="tx['hello']"/> <strong t-out="object.customer_name"/>,</p>
+                <p t-out="tx['pending_intro']"/>
 
-                <table width="100%" style="margin:20px 0;border-collapse:collapse;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0;border-collapse:collapse;">
                     <tr style="background:#f5f5f5;">
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Reservation number</td>
-                        <td style="padding:10px;border:1px solid #ddd;">BWD-{{ object.id }}</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['reservation_number']"/>
+                        <td style="padding:10px;border:1px solid #ddd;">BWD-<t t-out="object.id"/></td>
                     </tr>
                     <tr>
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Vehicle</td>
-                        <td style="padding:10px;border:1px solid #ddd;">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or 'not specified' }}</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['vehicle']"/>
+                        <td style="padding:10px;border:1px solid #ddd;"><t t-out="object.vehicle_type_id.name"/> - <t t-out="object.vehicle_info or tx['not_specified']"/></td>
                     </tr>
                     <tr style="background:#f5f5f5;">
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Preferred date</td>
-                        <td style="padding:10px;border:1px solid #ddd;">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'not specified' }}</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['preferred_date']"/>
+                        <td style="padding:10px;border:1px solid #ddd;" t-out="object._bw_preferred_date_str()"/>
                     </tr>
                     <tr>
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Total price</td>
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;">{{ object.is_price_approximate and 'from ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['total_price']"/>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;color:#a8893f;" t-out="object._bw_total_price_str()"/>
                     </tr>
                 </table>
 
-                <h3 style="color:#1a1a1a;">Selected services:</h3>
+                <h3 style="color:#1a1a1a;"><t t-out="tx['services']"/>:</h3>
                 <ul style="padding-left:20px;">
-                    % for line in object.line_ids:
-                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>
-                    % endfor
+                    <li t-foreach="object.line_ids" t-as="line"><t t-out="line.service_id.name"/> - <t t-out="object._bw_line_price_str(line)"/></li>
                 </ul>
 
-                % if object.customer_note:
-                <p><strong>Your note:</strong> {{ object.customer_note }}</p>
-                % endif
+                <p t-if="object.customer_note"><strong><t t-out="tx['your_note']"/>:</strong> <t t-out="object.customer_note"/></p>
 
-                <p style="margin-top:20px;color:#666;">Reservation status: <strong style="color:#e67e22;">Awaiting confirmation</strong></p>
+                <p style="margin-top:20px;color:#666;"><t t-out="tx['status']"/>: <strong style="color:#e67e22;" t-out="tx['awaiting']"/></p>
             </td>
         </tr>
         <tr>
             <td style="background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;">
-                <p style="margin:0;">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>
+                <p style="margin:0;"><t t-out="company.name"/> | <t t-out="object._bw_company_address()"/><t t-if="company.phone"> | <t t-out="company.phone"/></t></p>
             </td>
         </tr>
     </table>
 </div>
-            ]]></field>
+            </field>
         </record>
 
         <!-- Email: Booking Confirmed (sent to customer on confirmation) -->
         <record id="mail_template_booking_confirmed" model="mail.template">
             <field name="name">BWD: Reservation - Confirmed</field>
             <field name="model_id" ref="model_bw_booking"/>
-            <field name="email_from">{{ (object.env.company.email or user.email) }}</field>
+            <field name="email_from">{{ object.env.company.email_formatted or user.email_formatted }}</field>
             <field name="email_to">{{ object.customer_email }}</field>
             <field name="lang">{{ object.lang or 'cs_CZ' }}</field>
-            <field name="subject">Reservation confirmed - {{ object.env.company.name }} #{{ object.id }}</field>
-            <field name="body_html"><![CDATA[
-<div style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;">
-    <table width="100%" style="max-width:600px;margin:0 auto;background:#ffffff;">
+            <field name="auto_delete" eval="False"/>
+            <field name="subject">{{ object.env.company.name }} - {{ object._bw_mail_texts()['subject_confirmed'] }}</field>
+            <field name="body_html" type="html">
+<div style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;">
+    <t t-set="tx" t-value="object._bw_mail_texts()"/>
+    <t t-set="company" t-value="object.env.company"/>
+    <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;">
         <tr>
             <td style="background:#1a1a1a;padding:30px;text-align:center;">
-                <h1 style="color:#c8a961;margin:0;font-size:24px;">{{ object.env.company.name }}</h1>
+                <h1 style="color:#c8a961;margin:0;font-size:24px;" t-out="company.name"/>
             </td>
         </tr>
         <tr>
             <td style="padding:30px;">
-                <h2 style="color:#27ae60;margin-top:0;">Your reservation has been confirmed!</h2>
-                <p>Hello, <strong>{{ object.customer_name }}</strong>,</p>
-                <p>We are pleased to confirm your reservation. We look forward to seeing you at the scheduled time.</p>
+                <h2 style="color:#27ae60;margin-top:0;" t-out="tx['confirmed_title']"/>
+                <p><t t-out="tx['hello']"/> <strong t-out="object.customer_name"/>,</p>
+                <p t-out="tx['confirmed_intro']"/>
 
-                <table width="100%" style="margin:20px 0;border-collapse:collapse;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0;border-collapse:collapse;">
                     <tr style="background:#f5f5f5;">
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Reservation number</td>
-                        <td style="padding:10px;border:1px solid #ddd;">BWD-{{ object.id }}</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['reservation_number']"/>
+                        <td style="padding:10px;border:1px solid #ddd;">BWD-<t t-out="object.id"/></td>
                     </tr>
                     <tr>
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Date</td>
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;color:#27ae60;">{{ object.preferred_date and object.preferred_date.strftime('%d.%m.%Y %H:%M') or 'not specified' }}</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['date']"/>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;color:#27ae60;" t-out="object._bw_preferred_date_str()"/>
                     </tr>
                     <tr style="background:#f5f5f5;">
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Vehicle</td>
-                        <td style="padding:10px;border:1px solid #ddd;">{{ object.vehicle_type_id.name }} - {{ object.vehicle_info or '' }}</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['vehicle']"/>
+                        <td style="padding:10px;border:1px solid #ddd;"><t t-out="object.vehicle_type_id.name"/> - <t t-out="object.vehicle_info or tx['not_specified']"/></td>
                     </tr>
                     <tr>
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;">Total price</td>
-                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;color:#c8a961;">{{ object.is_price_approximate and 'from ' or '' }}{{ '%.0f' % object.total_price }},- Kč</td>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;" t-out="tx['total_price']"/>
+                        <td style="padding:10px;border:1px solid #ddd;font-weight:bold;color:#a8893f;" t-out="object._bw_total_price_str()"/>
                     </tr>
                 </table>
 
-                <h3 style="color:#1a1a1a;">Selected services:</h3>
+                <h3 style="color:#1a1a1a;"><t t-out="tx['services']"/>:</h3>
                 <ul style="padding-left:20px;">
-                    % for line in object.line_ids:
-                    <li>{{ line.service_id.name }} - {{ line.price_prefix and line.price_prefix + ' ' or '' }}{{ '%.0f' % line.price }},- Kč</li>
-                    % endfor
+                    <li t-foreach="object.line_ids" t-as="line"><t t-out="line.service_id.name"/> - <t t-out="object._bw_line_price_str(line)"/></li>
                 </ul>
 
                 <div style="margin:25px 0;padding:15px;background:#f0f9f0;border-left:4px solid #27ae60;">
-                    <p style="margin:0;"><strong>Address:</strong> {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>
-                    <p style="margin:5px 0 0;">The event has been added to your calendar.</p>
+                    <p style="margin:0;"><strong><t t-out="tx['address']"/>:</strong> <t t-out="object._bw_company_address()"/></p>
                 </div>
 
-                <p style="color:#666;">If you need to change the date, please contact us.</p>
+                <p style="color:#666;" t-out="tx['change_date']"/>
             </td>
         </tr>
         <tr>
             <td style="background:#1a1a1a;padding:20px;text-align:center;color:#888;font-size:12px;">
-                <p style="margin:0;">{{ object.env.company.name }} | {{ object.env.company.street or '' }}, {{ object.env.company.city or '' }}</p>
+                <p style="margin:0;"><t t-out="company.name"/> | <t t-out="object._bw_company_address()"/><t t-if="company.phone"> | <t t-out="company.phone"/></t></p>
             </td>
         </tr>
     </table>
 </div>
-            ]]></field>
+            </field>
         </record>
+
+        <!-- Email: new booking notification for the owner (always Czech) -->
+        <record id="mail_template_booking_owner" model="mail.template">
+            <field name="name">BWD: Reservation - New booking (owner)</field>
+            <field name="model_id" ref="model_bw_booking"/>
+            <field name="email_from">{{ object.env.company.email_formatted or user.email_formatted }}</field>
+            <field name="email_to">{{ object.env.company.email }}</field>
+            <field name="reply_to">{{ object.customer_email }}</field>
+            <field name="lang">cs_CZ</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="subject">Nová rezervace BWD-{{ object.id }}: {{ object.customer_name }} ({{ object._bw_total_price_str() }})</field>
+            <field name="body_html" type="html">
+<div style="font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;max-width:600px;">
+    <h2 style="margin-top:0;">Nová rezervace BWD-<t t-out="object.id"/></h2>
+    <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;">
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">Zákazník</td><td style="padding:6px 10px;border:1px solid #ddd;" t-out="object.customer_name"/></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">Telefon</td><td style="padding:6px 10px;border:1px solid #ddd;" t-out="object.customer_phone"/></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">E-mail</td><td style="padding:6px 10px;border:1px solid #ddd;" t-out="object.customer_email"/></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">Vozidlo</td><td style="padding:6px 10px;border:1px solid #ddd;"><t t-out="object.vehicle_type_id.name"/> - <t t-out="object.vehicle_info or 'neuvedeno'"/></td></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">Termín</td><td style="padding:6px 10px;border:1px solid #ddd;" t-out="object._bw_preferred_date_str()"/></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">Cena</td><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;" t-out="object._bw_total_price_str()"/></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">Jazyk webu</td><td style="padding:6px 10px;border:1px solid #ddd;" t-out="object.lang"/></tr>
+        <tr><td style="padding:6px 10px;border:1px solid #ddd;font-weight:bold;">Reklama</td><td style="padding:6px 10px;border:1px solid #ddd;"><t t-out="dict(object._fields['ad_platform']._description_selection(object.env)).get(object.ad_platform, '')"/><t t-if="object.campaign_id"> - <t t-out="object.campaign_id.name"/></t></td></tr>
+    </table>
+    <h3>Služby</h3>
+    <ul>
+        <li t-foreach="object.line_ids" t-as="line"><t t-out="line.service_id.name"/> - <t t-out="object._bw_line_price_str(line)"/></li>
+    </ul>
+    <p t-if="object.customer_note"><strong>Poznámka:</strong> <t t-out="object.customer_note"/></p>
+    <p style="margin-top:24px;">
+        <a t-att-href="'%s/odoo/action-bw_booking.action_bw_booking/%s' % (object.get_base_url(), object.id)"
+           style="background:#c8a961;color:#1a1a1a;padding:10px 18px;text-decoration:none;font-weight:bold;border-radius:4px;">Otevřít rezervaci v Odoo</a>
+    </p>
+</div>
+            </field>
+        </record>
+
+        <!-- Old templates carried whole-body cs/uk translations with the broken {{ }} syntax: keep en_US only -->
+        <function model="bw.booking" name="_bw_reset_mail_template_translations"/>
 
     </data>
 </odoo>

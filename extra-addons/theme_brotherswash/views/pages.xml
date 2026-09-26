@@ -8,8 +8,8 @@
     <t t-call="website.layout">
         <t t-set="no_header" t-value="True"/>
         <t t-set="no_footer" t-value="True"/>
-        <t t-set="additional_title">Brothers Wash Detailing | Prémiový auto detailing Praha 5</t>
-        <t t-set="meta_description">Prémiový auto detailing v Praze 5. Ruční mytí, hloubkové čištění interiéru, renovace laku, keramické ochrany.</t>
+        <t t-set="additional_title">Brothers Wash Detailing | Premium Car Detailing Prague 5</t>
+        <t t-set="meta_description">Premium car detailing in Prague 5. Hand washing, deep interior cleaning, paint restoration, ceramic coatings.</t>
 
         <!-- JSON-LD: LocalBusiness (built from company record) -->
         <t t-set="bwd_co" t-value="request.env.company.sudo()"/>

@@ -116,7 +116,7 @@ publicWidget.registry.BwdContactCompany = publicWidget.Widget.extend({
         var html = '';
         if (co.street || co.city) {
             var query = encodeURIComponent((co.street || '') + ', ' + (co.zip || '') + ' ' + (co.city || ''));
-            html += '<div class="bwd-contact__item"><div><strong>' + _t("Adresa") + '</strong><br/>'
+            html += '<div class="bwd-contact__item"><div><strong>' + _t("Address") + '</strong><br/>'
                 + '<a href="https://maps.google.com/?q=' + query + '" target="_blank" rel="noopener">';
             if (co.street) html += escapeHtml(co.street) + '<br/>';
             if (co.zip) html += escapeHtml(co.zip) + ' ';
@@ -124,7 +124,7 @@ publicWidget.registry.BwdContactCompany = publicWidget.Widget.extend({
             html += '</a></div></div>';
         }
         if (co.phone) {
-            html += '<div class="bwd-contact__item"><div><strong>' + _t("Telefon") + '</strong><br/>'
+            html += '<div class="bwd-contact__item"><div><strong>' + _t("Phone") + '</strong><br/>'
                 + '<a href="tel:' + escapeHtml(co.phone_clean) + '">' + escapeHtml(co.phone) + '</a></div></div>';
         }
         if (co.email) {
@@ -202,7 +202,7 @@ publicWidget.registry.BwdServiceCatalog = publicWidget.Widget.extend({
         }.bind(this));
 
         if (type === 'extra') {
-            html += '<div class="bwd-surcharge bwd-reveal">' + _t("Příplatek za znečištění \u2013 od 25%") + '</div>';
+            html += '<div class="bwd-surcharge bwd-reveal">' + _t("Dirt surcharge \u2013 from 25%") + '</div>';
         }
 
         this.el.innerHTML = html;
@@ -215,7 +215,7 @@ publicWidget.registry.BwdServiceCatalog = publicWidget.Widget.extend({
             var cls = 'bwd-card bwd-reveal' + (svc.is_highlighted ? ' bwd-card--featured' : '');
             html += '<div class="col-12 col-md-6 col-lg-3"><div class="' + cls + '">';
             if (svc.is_highlighted) {
-                html += '<div class="bwd-card__badge">' + _t("Nejoblíbenější") + '</div>';
+                html += '<div class="bwd-card__badge">' + _t("Most popular") + '</div>';
             }
             html += '<div class="bwd-card__header">';
             html += '<span class="bwd-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></span>';

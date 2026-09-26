@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- CRM tags set on booking leads that came from an ad click -->
+        <record id="crm_tag_google_ads" model="crm.tag">
+            <field name="name">Google Ads</field>
+            <field name="color">4</field>
+        </record>
+        <record id="crm_tag_meta_ads" model="crm.tag">
+            <field name="name">Meta Ads</field>
+            <field name="color">10</field>
+        </record>
+
+        <record id="lost_reason_no_show" model="crm.lost.reason">
+            <field name="name">Zákazník nedorazil</field>
+        </record>
+
+    </data>
+</odoo>

@@ -10,10 +10,13 @@
                 <header>
                     <button name="action_confirm" type="object" string="Potvrdit rezervaci"
                             class="btn-primary" invisible="state != 'pending'"/>
-                    <button name="action_done" type="object" string="Dokončeno"
-                            class="btn-success" invisible="state != 'confirmed'"/>
+                    <button name="action_done" type="object" string="Zákazník přišel (dokončeno)"
+                            class="btn-success" invisible="state not in ('pending', 'confirmed')"/>
+                    <button name="action_no_show" type="object" string="Nedorazil"
+                            invisible="state not in ('pending', 'confirmed')"
+                            confirm="Označit, že zákazník nedorazil? CRM příležitost se uzavře jako ztracená."/>
                     <button name="action_cancel" type="object" string="Zrušit"
-                            class="btn-danger" invisible="state in ('done', 'cancelled')"
+                            class="btn-danger" invisible="state in ('done', 'no_show', 'cancelled')"
                             confirm="Opravdu chcete zrušit tuto rezervaci?"/>
                     <field name="state" widget="statusbar" statusbar_visible="pending,confirmed,done"/>
                 </header>
@@ -60,6 +63,30 @@
                                 <field name="calendar_event_id"/>
                             </group>
                         </page>
+                        <page string="Reklama" name="ad_attribution">
+                            <group>
+                                <group string="Odkud zákazník přišel">
+                                    <field name="ad_platform"/>
+                                    <field name="source_id"/>
+                                    <field name="medium_id"/>
+                                    <field name="campaign_id"/>
+                                    <field name="landing_url" widget="url"/>
+                                    <field name="referrer"/>
+                                    <field name="lang"/>
+                                </group>
+                                <group string="Identifikátory kliknutí">
+                                    <field name="gclid"/>
+                                    <field name="gbraid" invisible="not gbraid"/>
+                                    <field name="wbraid" invisible="not wbraid"/>
+                                    <field name="fbclid"/>
+                                    <field name="fbc"/>
+                                    <field name="fbp"/>
+                                    <field name="tracking_event_id"/>
+                                    <field name="meta_lead_sent"/>
+                                    <field name="meta_purchase_sent"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
                 <chatter/>
@@ -72,18 +99,21 @@
         <field name="name">bw.booking.list</field>
         <field name="model">bw.booking</field>
         <field name="arch" type="xml">
-            <list decoration-warning="state == 'pending'" decoration-success="state == 'confirmed'" decoration-muted="state == 'cancelled'">
+            <list decoration-warning="state == 'pending'" decoration-success="state == 'confirmed'" decoration-muted="state in ('cancelled', 'no_show')">
                 <field name="name"/>
                 <field name="customer_name"/>
                 <field name="customer_phone"/>
                 <field name="vehicle_type_id"/>
                 <field name="preferred_date"/>
                 <field name="total_price" widget="monetary"/>
+                <field name="ad_platform" optional="show"/>
+                <field name="campaign_id" optional="hide"/>
+                <field name="gclid" optional="hide"/>
                 <field name="state" widget="badge"
                        decoration-warning="state == 'pending'"
                        decoration-success="state == 'confirmed'"
                        decoration-info="state == 'done'"
-                       decoration-danger="state == 'cancelled'"/>
+                       decoration-danger="state in ('cancelled', 'no_show')"/>
             </list>
         </field>
     </record>
@@ -138,11 +168,16 @@
                 <filter name="filter_pending" string="Čeká na potvrzení" domain="[('state', '=', 'pending')]"/>
                 <filter name="filter_confirmed" string="Potvrzeno" domain="[('state', '=', 'confirmed')]"/>
                 <filter name="filter_done" string="Dokončeno" domain="[('state', '=', 'done')]"/>
+                <filter name="filter_no_show" string="Nedorazil" domain="[('state', '=', 'no_show')]"/>
+                <separator/>
+                <filter name="filter_from_ads" string="Z reklamy" domain="[('ad_platform', 'in', ('google', 'meta'))]"/>
                 <separator/>
                 <filter name="filter_today" string="Dnes" domain="[('preferred_date', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('preferred_date', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=1), datetime.time(0,0,0)))]"/>
                 <filter name="filter_week" string="Tento týden" domain="[('preferred_date', '&gt;=', (context_today() - relativedelta(weekday=0)).strftime('%%Y-%%m-%%d')), ('preferred_date', '&lt;', (context_today() + relativedelta(weeks=1, weekday=0)).strftime('%%Y-%%m-%%d'))]"/>
                 <group expand="0" string="Seskupit podle">
                     <filter name="group_state" string="Stav" context="{'group_by': 'state'}"/>
+                    <filter name="group_ad_platform" string="Reklama" context="{'group_by': 'ad_platform'}"/>
+                    <filter name="group_campaign" string="Kampaň" context="{'group_by': 'campaign_id'}"/>
                     <filter name="group_vehicle" string="Typ vozidla" context="{'group_by': 'vehicle_type_id'}"/>
                     <filter name="group_date" string="Datum" context="{'group_by': 'preferred_date:week'}"/>
                 </group>

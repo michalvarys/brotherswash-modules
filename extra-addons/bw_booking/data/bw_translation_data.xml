@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Runs on every upgrade; only touches texts that are still the original Czech source -->
+    <function model="bw.data.translations" name="_bw_fix_data_translations"/>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Tracking glue for the booking conversions.
+        - Meta Pixel base code: module facebook_pixel (Settings > Website > Facebook Pixel ID)
+        - GTM container: module website_google_tag
+        - GA4 (gtag.js): Odoo core field google_analytics_key
+        - Google Ads tag: here, bw_google_ads_id (added to the same gtag.js)
+    -->
+    <template id="website_tracking_layout" inherit_id="website.layout" name="BWD Booking Tracking">
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+            <div t-if="website" id="bw_tracking_config" class="d-none" t-att-data-config="json.dumps(website._bw_tracking_config())"></div>
+        </xpath>
+        <!-- GA4 already loaded gtag.js: just add the Google Ads tag -->
+        <xpath expr="//script[@id='tracking_code_config']" position="after">
+            <script t-if="website.bw_google_ads_id" id="bw_google_ads_config">
+                gtag('config', '<t t-esc="website.bw_google_ads_id"/>');
+            </script>
+        </xpath>
+        <!-- No GA4 configured: load gtag.js for Google Ads alone -->
+        <xpath expr="//div[@id='wrapwrap']" position="after">
+            <t t-if="website and website.bw_google_ads_id and not website.google_analytics_key and not editable">
+                <script t-attf-src="https://www.googletagmanager.com/gtag/js?id={{ website.bw_google_ads_id }}" async="async"></script>
+                <script id="bw_google_ads_config">
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '<t t-esc="website.bw_google_ads_id"/>');
+                </script>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

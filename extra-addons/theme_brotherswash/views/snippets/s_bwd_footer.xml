@@ -5,7 +5,7 @@
     <footer class="bwd-footer"
             data-snippet="s_bwd_footer" data-name="BWD Footer">
         <div class="container text-center">
-            <p>Dopřejte svému vozu nadstandardní péči na úrovni prémiového detailingu.</p>
+            <p>Give your car exceptional care at the level of premium detailing.</p>
             <p class="bwd-footer__copy" data-bwd-company="copyright"/>
         </div>
     </footer>

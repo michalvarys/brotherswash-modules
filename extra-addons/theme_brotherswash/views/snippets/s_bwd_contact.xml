@@ -5,9 +5,9 @@
     <section class="bwd-contact o_cc o_colored_level" id="bwd-contact"
              data-snippet="s_bwd_contact" data-name="BWD Contact">
         <div class="container">
-            <h2 class="bwd-section-title bwd-reveal">Kontakt</h2>
+            <h2 class="bwd-section-title bwd-reveal">Contact</h2>
             <div class="bwd-section-line"/>
-            <p class="bwd-section-subtitle bwd-reveal">Rezervujte si svůj termín</p>
+            <p class="bwd-section-subtitle bwd-reveal">Book your appointment</p>
             <div class="row g-4">
                 <div class="col-12 col-md-6">
                     <div class="bwd-contact__info bwd-reveal" data-bwd-company="contact-info"/>

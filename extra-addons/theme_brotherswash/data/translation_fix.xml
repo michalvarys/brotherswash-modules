@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Runs on every upgrade; hand-edited menu labels are left alone -->
+    <function model="theme.brotherswash.translations" name="_bwd_fix_menu_translations"/>
+</odoo>

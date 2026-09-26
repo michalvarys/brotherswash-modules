@@ -426,8 +426,17 @@ publicWidget.registry.BwdBookingForm = publicWidget.Widget.extend({
             customer_note: document.getElementById('bwdNote').value,
             service_ids: Array.from(this.selectedServices),
             service_data: serviceData,
+            tracking: window.bwTracking ? window.bwTracking.getAttribution() : {},
         }).then(function (result) {
             if (result && result.success) {
+                // Conversion for Meta Pixel / GA4 / Google Ads / GTM (bw_booking tracking.js)
+                if (window.bwTracking) {
+                    try {
+                        window.bwTracking.bookingSubmitted(result.tracking);
+                    } catch (e) {
+                        console.warn(e);
+                    }
+                }
                 self.el.querySelector('#bwdStep3').style.display = 'none';
                 self.el.querySelector('#bwdWizardIndicator').style.display = 'none';
                 document.getElementById('bwdBookingSuccess').style.display = 'block';
