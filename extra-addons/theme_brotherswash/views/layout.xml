@@ -50,7 +50,7 @@
                                 </button>
                                 <div class="bwd-lang-selector__dropdown">
                                     <t t-foreach="bwd_languages" t-as="lg">
-                                        <a t-attf-class="bwd-lang-selector__item #{'bwd-lang-selector__item--active' if lg.code == request.env.lang else ''}" t-att-href="url_localized(lang_code=lg.code, prefetch_langs=True, force_default_lang=True)" t-att-data-lang="lg.code">
+                                        <a t-attf-class="bwd-lang-selector__item #{'bwd-lang-selector__item--active' if lg.code == request.env.lang else ''}" t-attf-href="/website/lang/{{ lg.url_code }}?r={{ url_for(request.httprequest.path, lang_code=lg.code) }}" t-att-data-lang="lg.code">
                                             <t t-if="lg.flag_image_url">
                                                 <img class="bwd-lang-selector__item-flag" t-att-src="lg.flag_image_url + '?height=20'" t-att-alt="lg.name"/>
                                             </t>
