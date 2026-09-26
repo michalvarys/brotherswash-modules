@@ -8,6 +8,7 @@
     'depends': [
         'website',
         'crm',
+        'website_crm',
         'calendar',
         'mail',
         'utm',

@@ -345,6 +345,14 @@ class BwBooking(models.Model):
                     rec._bw_stage_notify()
 
     @api.model
+    def _bw_fix_lead_owners(self):
+        for rec in self.search([('lead_id', '!=', False)]):
+            lead = rec.lead_id.with_context(active_test=False)
+            if not lead.user_id:
+                team, user = rec._bw_lead_owner()
+                lead.with_context(mail_auto_subscribe_no_notify=True).write({'team_id': lead.team_id.id or team.id, 'user_id': user.id})
+
+    @api.model
     def _bw_tag_booking_partners(self):
         tag = self.env.ref('bw_booking.partner_category_booking', raise_if_not_found=False)
         partners = self.search([('partner_id', '!=', False)]).partner_id.filtered(lambda p: tag not in p.category_id)
@@ -435,6 +443,17 @@ class BwBooking(models.Model):
             rows.append(f"Referrer: {self.referrer}")
         return '\n'.join(rows)
 
+    def _bw_lead_owner(self):
+        """Sales team + salesperson of the booking lead.
+
+        Without a salesperson the lead is hidden by the default "My pipeline" filter of CRM.
+        Website settings (Contact form: Sales team / Salesperson) win, then the team leader, then the admin.
+        """
+        website = (self.website_id or self.env['website'].get_current_website()).sudo()
+        team = website.crm_default_team_id or self.env['crm.team'].sudo().search([], limit=1)
+        user = website.crm_default_user_id or team.user_id or self.env.ref('base.user_admin', raise_if_not_found=False)
+        return team, user or self.env['res.users']
+
     def _create_crm_lead(self):
         """Create CRM lead for new booking (carries the ad attribution)."""
         self.ensure_one()
@@ -459,6 +478,7 @@ class BwBooking(models.Model):
         if self.customer_note:
             description += f"\nPoznámka: {self.customer_note}"
 
+        team, user = self._bw_lead_owner()
         lead_vals = {
             'name': f"Rezervace: {self.customer_name} — {self.vehicle_type_id.name}",
             'partner_id': self.partner_id.id,
@@ -467,7 +487,8 @@ class BwBooking(models.Model):
             'description': plaintext2html(description),
             'expected_revenue': self.total_price,
             'type': 'opportunity',
-            'user_id': False,
+            'team_id': team.id,
+            'user_id': user.id,
             'source_id': self.source_id.id,
             'medium_id': self.medium_id.id,
             'campaign_id': self.campaign_id.id,
@@ -479,7 +500,8 @@ class BwBooking(models.Model):
         tag = tag and self.env.ref(tag, raise_if_not_found=False)
         if tag:
             lead_vals['tag_ids'] = [(4, tag.id)]
-        self.lead_id = self.env['crm.lead'].create(lead_vals)
+        # no "you have been assigned" notification: the owner already gets our booking e-mail
+        self.lead_id = self.env['crm.lead'].with_context(mail_auto_subscribe_no_notify=True).create(lead_vals)
 
     def _create_calendar_event(self):
         """Create calendar event with invitation on confirm."""
