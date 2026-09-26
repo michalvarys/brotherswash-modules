@@ -12,6 +12,11 @@
             <field name="color">10</field>
         </record>
 
+        <!-- Contacts created from website bookings -->
+        <record id="partner_category_booking" model="res.partner.category">
+            <field name="name">Rezervace z webu</field>
+        </record>
+
         <record id="lost_reason_no_show" model="crm.lost.reason">
             <field name="name">Zákazník nedorazil</field>
         </record>

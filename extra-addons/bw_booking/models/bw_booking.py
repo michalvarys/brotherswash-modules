@@ -345,6 +345,13 @@ class BwBooking(models.Model):
                     rec._bw_stage_notify()
 
     @api.model
+    def _bw_tag_booking_partners(self):
+        tag = self.env.ref('bw_booking.partner_category_booking', raise_if_not_found=False)
+        partners = self.search([('partner_id', '!=', False)]).partner_id.filtered(lambda p: tag not in p.category_id)
+        if tag and partners:
+            partners.write({'category_id': [(4, tag.id)]})
+
+    @api.model
     def _bw_assign_stages(self):
         Stage = self.env['bw.booking.stage']
         sent_before = {
@@ -405,6 +412,10 @@ class BwBooking(models.Model):
             })
         elif not partner.phone and not partner.mobile and self.customer_phone:
             partner.phone = self.customer_phone
+        # tag: easy filter in Contacts ("Rezervace z webu")
+        tag = self.env.ref('bw_booking.partner_category_booking', raise_if_not_found=False)
+        if tag and tag not in partner.category_id:
+            partner.category_id = [(4, tag.id)]
         self.partner_id = partner
 
     def _bw_attribution_text(self):

@@ -37,4 +37,5 @@
 
     <!-- Bookings created before the board existed: put them into the column of their state -->
     <function model="bw.booking" name="_bw_assign_stages"/>
+    <function model="bw.booking" name="_bw_tag_booking_partners"/>
 </odoo>
